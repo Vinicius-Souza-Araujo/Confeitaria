@@ -1,0 +1,41 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+
+button{
+    border: solid #ffff 1px;
+    font-family: 'Inter';
+    border-radius: 8px;
+    padding: 10px;
+    margin: 6px;
+}
+
+
+button:hover{
+   background-color: #E283A1;
+   color: #ffff;
+}
+
+
+.botaoSummit{
+    border: solid #ffff 1px;
+    font-family: 'Inter';
+    border-radius: 8px;
+    padding: 10px;
+    margin: 6px;
+    background-color: #FEB4CB;
+    color: #ffff;
+}
+
+.botaoRosa{
+    background-color: #FEB4CB;
+    color: #ffff;
+}
+
+.botaoAzul{
+    background-color: #D1D5FA;
+    color: #5C6996;
+}
+
+.botaoCiano{
+    background-color: #A9DEE2;
+    color: #5C6996;
+}
