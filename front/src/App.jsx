@@ -1,14 +1,14 @@
 import { useState } from 'react'
 import './App.css'
 
-import Login from "./components/paginas/login"
+import PrincipalAdmin from "./components/paginas/principalAdmin"
+import Tabela from './components/componetesGenericos/tabela/tabela'
 
 function App() {
-  
+ 
   return (
     <>
-     <Login></Login>
-      
+      <PrincipalAdmin></PrincipalAdmin>
     </>
   )
 }
