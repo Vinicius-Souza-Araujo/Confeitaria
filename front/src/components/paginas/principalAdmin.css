@@ -1,0 +1,28 @@
+*{
+    background-color: #F4F4F4;
+}
+
+.input-pesquisa{
+    margin: auto;
+    padding: 10px;
+    background-color: #F4F4F4;
+    border: 2px solid #DD7C9A;
+    border-radius: 20px;
+    width: 50%;
+}
+
+
+
+.logo{
+    display: block;
+    margin: auto;
+    padding: 20px;
+    width: 4%;
+}
+
+.botaoCiano{
+    position: absolute;
+    margin: 80px;
+    right: 20px;
+    bottom: 20px;
+}

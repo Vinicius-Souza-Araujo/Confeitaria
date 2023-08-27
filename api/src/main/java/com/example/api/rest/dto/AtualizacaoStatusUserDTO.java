@@ -10,4 +10,8 @@ import lombok.Setter;
 public class AtualizacaoStatusUserDTO {
     @NotEmpty(message = "Campo novoStatus é obrigatório.")
     private String novoStatus;
+
+
+
+
 }
