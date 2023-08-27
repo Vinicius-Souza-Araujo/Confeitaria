@@ -45,4 +45,13 @@ public class User{
     @Column(name = "status")
     @NotNull(message = "Campo status é obrigatório")
     private StatusUser status;
+
+    public User(String nome, String email, String senha, String cpf, GrupoUser grupo) {
+        this.nome = nome;
+        this.email = email;
+        this.senha =  senha;
+        this.cpf = cpf;
+        this.grupo = grupo;
+    }
+
 }

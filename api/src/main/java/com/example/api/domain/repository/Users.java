@@ -12,7 +12,7 @@ import java.util.Optional;
 public interface Users extends JpaRepository<User, Integer> {
 
 
+    boolean existsByEmail(String email);
 
-
-
+    boolean existsByCpf(String cpf);
 }
