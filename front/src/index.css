@@ -6,6 +6,14 @@ p {
   font-size: 1rem;
 }
 
+button{
+  border: solid #ffff 1px;
+  font-family: 'Inter';
+  border-radius: 8px;
+  padding: 10px;
+  margin: 6px;
+}
+
 /* CATEGORIA DE TITULO */
 h1, h2, h3{
   font-family: 'Inter';
@@ -75,7 +83,6 @@ h1, h2, h3{
 input{
   display: block;
   font-family: 'Inter';
-  background: transparent;
   align-items: center;
   border: none;
   border-bottom: solid 1px #FEB4CB;
@@ -90,8 +97,26 @@ label, input{
   margin-bottom: 20px;
 }
 
+label{
+  font-family: Inter;
+}
+
 .input_linha{
  width: 20rem;
  align-items: center;
 }
 
+.botaoSummit{
+  border: solid #ffff 1px;
+  font-family: 'Inter';
+  border-radius: 8px;
+  padding: 10px;
+  margin: 6px;
+  background-color: #FEB4CB;
+  color: #ffff;
+}
+
+.botaoCiano{
+  background-color: #A9DEE2;
+  color: #528c90;
+}

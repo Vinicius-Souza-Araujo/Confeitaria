@@ -12,4 +12,8 @@ public class AtualizacaoStatusUserDTO {
     @NotEmpty(message = "Campo novoStatus é obrigatório.")
     @Pattern(regexp = "ATIVADO|DESATIVADO", message = "Grupo invalido. Valores aceitos são: ATIVADO, DESATIVADO")
     private String novoStatus;
+
+
+
+
 }
