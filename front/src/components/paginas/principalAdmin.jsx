@@ -16,7 +16,7 @@ function PrincipalAdmin() {
     const [openModal, setOpenModal] = useState(false)
 
   return (
-    <>
+    <div className='estrutura-principal-admin'>
 
         <img src="./logo.png" alt="Logo do site"  className='logo'/>
 
@@ -29,7 +29,7 @@ function PrincipalAdmin() {
             <Form></Form>
         </Modal>
         
-    </>
+    </div>
 
   )
 }

@@ -1,15 +1,22 @@
-import { useState } from 'react'
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import React from 'react';
 import './App.css'
 
-import PrincipalAdmin from "./components/paginas/principalAdmin"
-import Tabela from './components/componetesGenericos/tabela/tabela'
+import PrincipalAdmin from "./components/paginas/PrincipalAdmin"
+import Login from './components/paginas/Login'
 
 function App() {
  
   return (
-    <>
-      <PrincipalAdmin></PrincipalAdmin>
-    </>
+    <div>
+      
+      <BrowserRouter>
+          <Routes>
+            <Route path='/*' element={<Login />}/>
+            <Route path='/administrador' element={<PrincipalAdmin />}/>
+          </Routes>
+      </BrowserRouter> 
+    </div>
   )
 }
 

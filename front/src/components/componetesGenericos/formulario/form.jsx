@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import { IMaskInput } from "react-imask";
 import './form.css'
 
@@ -10,7 +10,7 @@ function Form() {
   }
 
   return (
-    <div>
+    <div className='formulario-form'>
         <form onSubmit={handleSummit}>
             <input type="text" name="nome" id="nome" placeholder='Digite seu nome' required/>
             <input type="email" name="email" id="email" placeholder='Digite seu email' required/>
