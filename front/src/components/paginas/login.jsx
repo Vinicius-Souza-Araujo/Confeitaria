@@ -1,10 +1,10 @@
 import React from 'react'
 import { BotaoAzul, BotaoSummit } from '../componetesGenericos/botoes/botoes'
-import '../paginas/login.css'
+import './login.css'
 
 const Login = () => {
   return (
-    <>
+
         <div className='estrutura-form'>
 
             <div className='bem-vindo'>
@@ -22,7 +22,7 @@ const Login = () => {
             </div>
 
             <div className='formulario'>
-                <img className="logo" src="/public/logo.png" alt="logo do site" />
+                <img className="logo_login" src="/public/logo.png" alt="logo do site" />
 
                 <div className='campos-formulario'>
 
@@ -30,12 +30,12 @@ const Login = () => {
 
                         <div className='username'>
                             <label className='subtitulo_branco' htmlFor="login"> Login </label>
-                            <input className='input_linha' type="email" name="login" id="login" required />
+                            <input className='input_linha input-personalizado' placeholder='Digite seu e-mail' type="email" name="login" id="login" required />
                         </div>
 
                         <div className='password'>
                             <label className="subtitulo_branco" htmlFor="senha" > Senha </label>
-                            <input className="input_linha" type="password" name="senha" id="senha" required/>
+                            <input className="input_linha input-personalizado" type="password" name="senha" id="senha" placeholder='Digite sua senha' required/>
                         </div>
 
                         <div className='botoes-login'>
@@ -50,9 +50,6 @@ const Login = () => {
             </div>
 
         </div>
-       
-
-    </>
 
   )
 }

@@ -3,9 +3,6 @@
     padding: 0;
 }
 
-body{
-    background-color: #5C6996;
-}
 
 .estrutura-form{
     display: flex;
@@ -20,6 +17,7 @@ body{
 }
 
 .formulario{
+    background-color: #5C6996;
     width: 50%;
     display: flex;
     gap: 2rem;
@@ -29,8 +27,17 @@ body{
 }
 
 
-.logo{
+.logo_login{
     max-width: 3rem;
+}
+
+.input-personalizado{
+    color: #f2f2f2;
+}
+
+.input-personalizado::placeholder{
+    margin: 10px;
+    color: #283358;
 }
 
 .botoes-login{
@@ -60,16 +67,16 @@ body{
     margin: 60px;
 }
 
-input{
+/* input{
     color: #ffff;
-}
+} */
 
 .decorativo-donut{
     display: block;
     margin-left: auto;
     margin-right: auto;
     max-width: 24rem;
-    
+
 }
 
 @media screen and (max-width: 700px){
@@ -86,9 +93,9 @@ input{
         margin-top: 6px;
         padding: 4px;
     }
-    input{
+    /* input{
         color: #ffff;
-    }
+    } */
 
     .donut{
         width: 100rem;

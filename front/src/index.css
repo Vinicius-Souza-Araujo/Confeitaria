@@ -1,6 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Licorice&display=swap');
 
+*{
+  padding: 0;
+  margin: 0;
+  box-shadow: none;
+}
+
 p {
   font-family: 'Inter', 'Arial';
   font-size: 1rem;
@@ -82,6 +88,7 @@ h1, h2, h3{
 
 input{
   display: block;
+  background: transparent;
   font-family: 'Inter';
   align-items: center;
   border: none;

@@ -12,7 +12,9 @@
   "dependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-input-mask": "^2.0.4"
+    "react-imask": "^7.1.3",
+    "react-input-mask": "^2.0.4",
+    "react-router-dom": "^6.15.0"
   },
   "devDependencies": {
     "@types/react": "^18.2.15",

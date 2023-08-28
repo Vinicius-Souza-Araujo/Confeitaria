@@ -1,6 +1,4 @@
-*{
-    background-color: #F4F4F4;
-}
+
 
 .input-pesquisa{
     margin: auto;
@@ -11,6 +9,10 @@
     width: 50%;
 }
 
+.estrutura-principal-admin{
+    background-color: #F4F4F4;
+    height: 100vh;
+}
 
 
 .logo{
