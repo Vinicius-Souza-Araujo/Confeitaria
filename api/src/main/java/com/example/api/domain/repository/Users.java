@@ -24,5 +24,7 @@ public interface Users extends JpaRepository<User, Integer> {
 //    @Query("SELECT * FROM usuarios WHERE nome = :name")
 //    List<ListarUserDTO> findByName(String name);
 
+    List<User> findByNome (String nome);
+
     UserDetails findByEmail(String email);
 }
