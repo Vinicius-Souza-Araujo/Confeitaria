@@ -6,7 +6,7 @@ export const UserContext = React.createContext();
 
 
 export const UserStorage = ({children}) => {
-    const [data, setData] = React.useState({email:null, grupo:null});
+    const [data, setData] = React.useState({email:null, grupo:null, token:null});
     const [login, setLogin] = React.useState(null);
     const [loading, setLoading] = React.useState(false);
     const [error, setError] = React.useState(null);
@@ -20,9 +20,8 @@ export const UserStorage = ({children}) => {
             const tokenRes = await fetch(url, options);
             if (!tokenRes.ok) throw new Error('Acesso negado, verifique suas credenciais!');
             const json = await tokenRes.json();
-            console.log(json);
             window.localStorage.setItem('token', json.token);
-            setData({email:json.email, grupo:json.grupo});
+            setData({email:json.email, grupo:json.grupo, token:json.token});
             setLogin(true);
             navigate('/administrador');
         } catch(err){

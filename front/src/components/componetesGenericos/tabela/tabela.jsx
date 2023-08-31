@@ -15,12 +15,17 @@ const Tabela = ({nomeTabela, colunas, conteudos}) => {
             </thead>
         
             <tbody>
-                {conteudos.map((conteudo, index) => (
-                    <tr key={index}>
-                        {conteudo.map((item, itemIndex) => (
-                            <td key={itemIndex}>{item}</td>
-                        ))}
+                {conteudos.map((conteudo) => (
+                        
+                    <tr key={conteudo.id}>
+                        <td>{conteudo.id}</td>
+                        <td>{conteudo.nome}</td>
+                        <td>{conteudo.email}</td>
+                        <td>{conteudo.cpf}</td>
+                        <td>{conteudo.grupo}</td>
+                        <td>{conteudo.status}</td>
                     </tr>
+              
                 ))}
             </tbody>
         </table>

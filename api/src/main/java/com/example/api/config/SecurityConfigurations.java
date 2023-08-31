@@ -38,8 +38,7 @@ public class SecurityConfigurations {
                         .requestMatchers(HttpMethod.POST,"/api/users/cadastrar").hasRole("ADM")
                         .requestMatchers(HttpMethod.PATCH,"/api/users/atualizar/**").hasRole("ADM")
                         .requestMatchers(HttpMethod.PATCH,"/api/users/atualizar/status/**").hasRole("ADM")
-                        .requestMatchers(HttpMethod.PATCH,"/api/users/atualizar/senha/**").hasRole("ADM")
-
+                        .requestMatchers(HttpMethod.PATCH,"/api/users/atualizar/senha/**").hasRole("ADM")git 
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
