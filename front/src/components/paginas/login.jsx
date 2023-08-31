@@ -1,8 +1,24 @@
-import React from 'react'
-import { BotaoAzul, BotaoSummit } from '../componetesGenericos/botoes/botoes'
-import './login.css'
+import React from 'react';
+import { BotaoAzul, BotaoSummit } from '../componetesGenericos/botoes/botoes';
+import { UserContext } from '../../UserContext';
+import Error from '../../Helper/Error';
+import './login.css';
 
 const Login = () => {
+
+    const{userLogin, error, loading} = React.useContext(UserContext);
+
+     const [email, setEmail] = React.useState('');
+     const [senha, setSenha] = React.useState('');
+
+
+     async function handleSubmit(event){
+         event.preventDefault(); //Impede o recarregamento da página ao execultar a função.
+
+            userLogin(email,senha);
+
+     }
+    
   return (
 
         <div className='estrutura-form'>
@@ -26,24 +42,30 @@ const Login = () => {
 
                 <div className='campos-formulario'>
 
-                    <form>
+                    <form onSubmit={handleSubmit}>
 
                         <div className='username'>
                             <label className='subtitulo_branco' htmlFor="login"> Login </label>
-                            <input className='input_linha input-personalizado' placeholder='Digite seu e-mail' type="email" name="login" id="login" required />
+                            <input onChange={(event) => setEmail(event.target.value)} className='input_linha input-personalizado' placeholder='Digite seu e-mail' type="email" name="login" id="login" required />
                         </div>
 
                         <div className='password'>
                             <label className="subtitulo_branco" htmlFor="senha" > Senha </label>
-                            <input className="input_linha input-personalizado" type="password" name="senha" id="senha" placeholder='Digite sua senha' required/>
+                            <input onChange={(event) => setSenha(event.target.value)} className="input_linha input-personalizado" type="password" name="senha" id="senha" placeholder='Digite sua senha' required/>
                         </div>
 
                         <div className='botoes-login'>
                             <BotaoAzul texto="Cadastrar"></BotaoAzul>
-                            <BotaoSummit id="confirmar" texto="Confirmar"></BotaoSummit>
+
+                            {
+                               loading ? <BotaoSummit id="confirmar" disabled texto="Carregando..."></BotaoSummit> :
+                               <BotaoSummit id="confirmar" texto="Confirmar"></BotaoSummit>
+                            }
+
                         </div>
 
-                    </form>
+                    </form >
+                    <Error error={error} />
 
                 </div>
                

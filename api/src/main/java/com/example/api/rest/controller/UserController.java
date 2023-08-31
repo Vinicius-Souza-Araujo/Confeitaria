@@ -27,6 +27,7 @@ import java.util.Optional;
 @RequestMapping("/api/users")
 public class UserController {
 
+
     @Autowired
     private AuthenticationManager authenticationManager;
 
@@ -103,7 +104,7 @@ public class UserController {
         }
 
         var token = tokenService.generateToken((User)auth.getPrincipal());
-        return ResponseEntity.ok( new LoginResponseDTO(token));
+        return ResponseEntity.ok( new LoginResponseDTO(token, user.getEmail(), user.getGrupo()));
     }
 
     @PostMapping("/cadastrar")
