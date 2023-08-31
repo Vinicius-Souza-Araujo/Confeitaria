@@ -137,4 +137,15 @@ public class UserController {
 
             return ResponseEntity.status(HttpStatus.CREATED).body("Usuário criado com sucesso.");
         }
+        @GetMapping("/listar")
+        @ResponseStatus(HttpStatus.OK)
+        public List<ListarUserDTO> listUser () {
+        return repository.findAll().stream().map(ListarUserDTO::new).toList();
+        }
+
+        @GetMapping("/listar/{nome}")
+        public List<ListarUserDTO> listarUsuarioPeloNome(@PathVariable String nome){
+            return repository.findByNome(nome).stream().map(ListarUserDTO::new).toList();
+        }
+
 }
