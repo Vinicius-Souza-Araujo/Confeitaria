@@ -25,6 +25,20 @@ export function GET_USERS(token, filtro){
     };
 }
 
+export function POST_USER(body, token){
+    return{
+        url:API_URL+'/users/cadastrar',
+        options:{ 
+            method:'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + token,
+            },
+            body:JSON.stringify(body),
+        }, 
+    };
+}
+
 export function PATCH_STATUS(body, token, id){
     return{
         url:API_URL+'/users/atualizar/status/'+id,
