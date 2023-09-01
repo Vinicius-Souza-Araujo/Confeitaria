@@ -7,10 +7,13 @@ import Form from '../componetesGenericos/formulario/form';
 import Modal from '../componetesGenericos/Modal/modal';
 import './principalAdmin.css'
 import '../componetesGenericos/tabela/tabela.css'
+import Header from '../header/Header';
+
 
 function PrincipalAdmin() {
     // Exemplo para os dados vindo do backend, remover quando o backend estiver conectado
     const user = React.useContext(UserContext);
+    
     const colunas = ["Nome", "E-mail", "Status", "Grupo", "Alterar", "Hab/Des"];
     const [dataUser,setDataUser] = useState([]);
     const [filtro, setFiltro] = useState('')
@@ -46,11 +49,15 @@ function PrincipalAdmin() {
       getUsers();
   };
 
+   
+
   
     const [openModal, setOpenModal] = useState(false)
 
   return (
     <div className='estrutura-principal-admin'>
+
+        <Header />
 
         <img src="./logo.png" alt="Logo do site"  className='logo'/>
 

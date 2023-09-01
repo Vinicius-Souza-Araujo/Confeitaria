@@ -4,6 +4,7 @@ import com.example.api.domain.entity.User;
 import com.example.api.domain.enums.GrupoUser;
 import com.example.api.domain.enums.StatusUser;
 import com.example.api.domain.repository.Users;
+import com.example.api.exception.Response;
 import com.example.api.exception.UserNaoEncontradoException;
 import com.example.api.rest.dto.*;
 import com.example.api.service.TokenServiceImpl;
@@ -21,7 +22,6 @@ import org.springframework.web.bind.annotation.*;
 
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/users")
@@ -38,6 +38,8 @@ public class UserController {
     public UserController(Users repository) {
         this.repository = repository;
     }
+
+
 
     @PatchMapping("atualizar/status/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
@@ -109,16 +111,17 @@ public class UserController {
 
     @PostMapping("/cadastrar")
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<String> cadastrarUsuario(@RequestBody @Valid CadastrarUserDTO dto){
+    public ResponseEntity<Response> cadastrarUsuario(@RequestBody @Valid CadastrarUserDTO dto){
 
             boolean emailExistente = repository.existsByEmail(dto.getEmail());
             boolean cpfExistente = repository.existsByCpf(dto.getCpf());
 
             if(emailExistente){
-                return ResponseEntity.status(HttpStatus.CONFLICT).body("E-mail já existe.");
+                return ResponseEntity.status(HttpStatus.CONFLICT).body(new Response(HttpStatus.CONFLICT, "E-mail já existe."));
             }
             if(cpfExistente){
-                return ResponseEntity.status(HttpStatus.CONFLICT).body("Cpf já existe.");
+                return ResponseEntity.status(HttpStatus.CONFLICT).body(new Response(HttpStatus.CONFLICT, "Cpf já existe."));
+
             }
 
         String encryptedPassword = new BCryptPasswordEncoder().encode(dto.getSenha());
@@ -135,17 +138,19 @@ public class UserController {
             novoUsuario.setStatus(StatusUser.ATIVADO);
             repository.save(novoUsuario);
 
-            return ResponseEntity.status(HttpStatus.CREATED).body("Usuário criado com sucesso.");
-        }
-        @GetMapping("/listar")
-        @ResponseStatus(HttpStatus.OK)
-        public List<ListarUserDTO> listUser () {
-        return repository.findAll().stream().map(ListarUserDTO::new).toList();
-        }
+        return ResponseEntity.status(HttpStatus.CREATED).body(new Response(HttpStatus.CREATED, "Usuário criado com sucesso."));
 
-        @GetMapping("/listar/{nome}")
-        public List<ListarUserDTO> listarUsuarioPeloNome(@PathVariable String nome){
-            return repository.findByNome(nome).stream().map(ListarUserDTO::new).toList();
+
+
         }
+    @GetMapping()
+    public List<User> find(User filtro){
+
+        ExampleMatcher matcher = ExampleMatcher.matching()
+                .withIgnoreCase()
+                .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING);
+        Example example = Example.of(filtro, matcher);
+        return repository.findAll(example);
+    }
 
 }

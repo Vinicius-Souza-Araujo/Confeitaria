@@ -31,9 +31,20 @@ export const UserStorage = ({children}) => {
             setLoading(false);
         }
     }
+
+    const userLogout = React.useCallback(async function () {
+        setData(null);
+        setError(null);
+        setLoading(false);
+        setLogin(null);
+        window.localStorage.removeItem('token');
+        navigate('/');
+    }, []);
+
+    
     
     return (
-        <UserContext.Provider value={{userLogin, data, error, loading, login }}>
+        <UserContext.Provider value={{userLogin, userLogout, data, error, loading, login }}>
             {children}
         </UserContext.Provider>
       )
