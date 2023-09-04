@@ -1,12 +1,31 @@
-create database confeitaria default character set utf8 collate utf8_general_ci;
+create database;
 use confeitaria;
 
-create table usuarios(id int(3) not null auto_increment,
-nome varchar(30) not null,
-role enum("ADM", "Estoquista", "Cliente") not null,
-email varchar(255) not null,
-cpf varchar(11) not null,
-senha varchar(30) not null,
-status varchar(50) not null,
-unique key cpf (cpf),
-primary key(id)) engine=InnoDB DEFAULT CHARSET=utf8;
+CREATE TABLE usuarios (
+    ID int(11) AUTO_INCREMENT PRIMARY KEY,
+    nome varchar(255),
+    grupo enum('ADM', 'ESTOQUISTA'),
+    email varchar(255),
+    cpf varchar(11),
+    senha varchar(255),
+    status varchar(50)
+);
+
+
+CREATE TABLE produtos (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(255) NOT NULL,
+    status ENUM('ATIVADO', 'DESATIVADO') NOT NULL,
+    avaliacao DECIMAL(3,1) NOT NULL,
+    quantidade INT NOT NULL,
+    valor DECIMAL(10,2) NOT NULL
+);
+
+
+CREATE TABLE imagens_produto (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    id_produto INT NOT NULL,
+    nome VARCHAR(255) NOT NULL,
+    flag BOOLEAN NOT NULL,
+    FOREIGN KEY (id_produto) REFERENCES produtos(id)
+);

@@ -33,10 +33,10 @@ public class Produto {
 
     @Column(name = "avaliacao")
     @NotEmpty(message = "Campo avaliacao é obrigatório.")
-    @Min(value = 1, message = "A avaliação deve ser no mínimo 1.")
-    @Max(value = 5, message = "A avaliação deve ser no máximo 5.")
-    @Digits(integer = 1, fraction = 0, message = "A avaliação deve ter no máximo 1 dígito.")
-    private Integer avaliacao;
+    @DecimalMin(value = "0.0", message = "A avaliação deve ser no mínimo 0.0.")
+    @DecimalMax(value = "5.0", message = "A avaliação deve ser no máximo 5.0.")
+    @Digits(integer = 1, fraction = 1, message = "A avaliação deve ter no máximo 1 dígito antes da vírgula e 1 dígito após a vírgula.")
+    private BigDecimal avaliacao;
 
 
     @Column(name = "quantidade")
