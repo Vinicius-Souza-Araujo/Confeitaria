@@ -1,7 +1,7 @@
 package com.example.api.domain.entity;
 
 import com.example.api.domain.enums.GrupoUser;
-import com.example.api.domain.enums.StatusUser;
+import com.example.api.domain.enums.Status;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -50,7 +50,7 @@ public class User implements UserDetails{
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
     @NotNull(message = "Campo status é obrigatório")
-    private StatusUser status;
+    private Status status;
 
     public User(String nome, String email, String senha, String cpf, GrupoUser grupo) {
         this.nome = nome;

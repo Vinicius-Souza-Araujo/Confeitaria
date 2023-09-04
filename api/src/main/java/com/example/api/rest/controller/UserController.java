@@ -2,7 +2,7 @@ package com.example.api.rest.controller;
 
 import com.example.api.domain.entity.User;
 import com.example.api.domain.enums.GrupoUser;
-import com.example.api.domain.enums.StatusUser;
+import com.example.api.domain.enums.Status;
 import com.example.api.domain.repository.Users;
 import com.example.api.exception.Response;
 import com.example.api.exception.UserNaoEncontradoException;
@@ -49,7 +49,7 @@ public class UserController {
         repository
                 .findById(id)
                 .map(user ->{
-                    user.setStatus(StatusUser.valueOf(novoStatus));
+                    user.setStatus(Status.valueOf(novoStatus));
                     return repository.save(user);
                 }).orElseThrow(() -> new UserNaoEncontradoException());
 
@@ -101,7 +101,7 @@ public class UserController {
 
         User user = (User) auth.getPrincipal();
 
-        if (user.getStatus() == StatusUser.DESATIVADO) {
+        if (user.getStatus() == Status.DESATIVADO) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("O usuário está inativo.");
         }
 
@@ -135,7 +135,7 @@ public class UserController {
                     grupo
             );
 
-            novoUsuario.setStatus(StatusUser.ATIVADO);
+            novoUsuario.setStatus(Status.ATIVADO);
             repository.save(novoUsuario);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(new Response(HttpStatus.CREATED, "Usuário criado com sucesso."));
