@@ -1,6 +1,5 @@
 package com.example.api.rest.dto;
 
-import com.example.api.domain.enums.StatusUser;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Pattern;
 import lombok.Getter;
