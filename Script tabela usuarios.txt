@@ -1,4 +1,4 @@
-create database;
+create database confeitaria;
 use confeitaria;
 
 CREATE TABLE usuarios (

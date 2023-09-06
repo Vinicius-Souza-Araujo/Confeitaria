@@ -19,29 +19,29 @@ function Form() {
 
   async function handleSummit(event) {
     event.preventDefault();
-    
-    if(senha != confirmarSenha){
+
+    if (senha != confirmarSenha) {
       setError('Senhas não coincidem.');
       return;
     }
-    else{
+    else {
       setError('');
     }
 
-    if(!cpf.isValid(cpfUsuario)){
+    if (!cpf.isValid(cpfUsuario)) {
       setError('CPF inválido.');
       return;
     }
-    else{
+    else {
       setError('');
     }
 
-    const {url, options} = POST_USER({
+    const { url, options } = POST_USER({
       nome: nome,
       email: email,
       senha: senha,
-      cpf : cpfUsuario,
-      grupo :grupo
+      cpf: cpfUsuario,
+      grupo: grupo
     }, user.data.token);
 
     const response = await fetch(url, options);
@@ -56,25 +56,22 @@ function Form() {
       setError('');
 
       console.log('Limpando nome:', nome);
-  console.log('Limpando email:', email);
-  console.log('Limpando cpfUsuario:', cpfUsuario);
-  console.log('Limpando grupo:', grupo);
-  console.log('Limpando senha:', senha);
-  console.log('Limpando confirmarSenha:', confirmarSenha);
-  console.log('Limpando erro:', error);
-  
-  } else {
-    try {
-      const data = await response.json();
-      setError(data.message);
-    } catch (error) {
-      setError('Ocorreu um erro ao processar a solicitação.');
+      console.log('Limpando email:', email);
+      console.log('Limpando cpfUsuario:', cpfUsuario);
+      console.log('Limpando grupo:', grupo);
+      console.log('Limpando senha:', senha);
+      console.log('Limpando confirmarSenha:', confirmarSenha);
+      console.log('Limpando erro:', error);
+
+    } else {
+      try {
+        const data = await response.json();
+        setError(data.message);
+      } catch (error) {
+        setError('Ocorreu um erro ao processar a solicitação.');
+      }
     }
   }
-
-  }
-
- 
 
   const handleCpfChange = (event) => {
     const cpfValue = event.target.value.replace(/\D/g, '');
@@ -83,21 +80,21 @@ function Form() {
 
   return (
     <div className='formulario-form'>
-        <form onSubmit={handleSummit}>
-            <input value={nome} onChange={(event) => setNome(event.target.value)} type="text" name="nome" id="nome" placeholder='Digite seu nome' required/>
-            <input value={email} onChange={(event) => setEmail(event.target.value)} type="email" name="email" id="email" placeholder='Digite seu email' required/>
-            <IMaskInput value={cpfUsuario} onChange={handleCpfChange} mask="000.000.000-00" placeholder="Digite o seu CPF"/>
-            <select value={grupo} onChange={e => setGrupo(e.target.value)}   name="grupo" id="grupo">
-              <option value="" disabled> Selecione uma opção</option>
-              <option value="ADM">Administrador</option>
-              <option value="ESTOQUISTA" >Estoquista</option>
-            </select>
-            
-            <input value={senha} onChange={(event) => setSenha(event.target.value)} type="password" name="senha" id="senha" placeholder='Informe a senha' required/>            
-            <input value={confirmarSenha} onChange={(event) => setConfirmarSenha(event.target.value)}  type="password" name="confir-senha" id="confir-senha" placeholder='Confirme a senha' required/>
-            <button  className='botaoSummit' value="Confirma">Confirma</button>    
-        </form>
-        <Error error={error} />
+      <form onSubmit={handleSummit}>
+        <input value={nome} onChange={(event) => setNome(event.target.value)} type="text" name="nome" id="nome" placeholder='Digite seu nome' required />
+        <input value={email} onChange={(event) => setEmail(event.target.value)} type="email" name="email" id="email" placeholder='Digite seu email' required />
+        <IMaskInput value={cpfUsuario} onChange={handleCpfChange} mask="000.000.000-00" placeholder="Digite o seu CPF" />
+        <select value={grupo} onChange={e => setGrupo(e.target.value)} name="grupo" id="grupo">
+          <option value="" disabled> Selecione uma opção</option>
+          <option value="ADM">Administrador</option>
+          <option value="ESTOQUISTA" >Estoquista</option>
+        </select>
+
+        <input value={senha} onChange={(event) => setSenha(event.target.value)} type="password" name="senha" id="senha" placeholder='Informe a senha' required />
+        <input value={confirmarSenha} onChange={(event) => setConfirmarSenha(event.target.value)} type="password" name="confir-senha" id="confir-senha" placeholder='Confirme a senha' required />
+        <button className='botaoSummit' value="Confirma">Confirma</button>
+      </form>
+      <Error error={error} />
     </div>
   )
 }

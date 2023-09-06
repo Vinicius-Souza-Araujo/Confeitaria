@@ -35,7 +35,7 @@ public class SecurityConfigurations {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers(HttpMethod.POST,"/api/users/login").permitAll()
-                        .requestMatchers(HttpMethod.POST,"/api/users/cadastrar").hasRole("ADM")
+                        .requestMatchers(HttpMethod.POST,"/api/users/cadastrar").permitAll()
                         .requestMatchers(HttpMethod.PATCH,"/api/users/atualizar/**").hasRole("ADM")
                         .requestMatchers(HttpMethod.PATCH,"/api/users/atualizar/status/**").hasRole("ADM")
                         .requestMatchers(HttpMethod.PATCH,"/api/users/atualizar/senha/**").hasRole("ADM")
@@ -60,7 +60,7 @@ public class SecurityConfigurations {
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("http://127.0.0.1:5173"));
+        configuration.setAllowedOrigins(Arrays.asList("http://localhost:5173"));
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
         configuration.setExposedHeaders(Arrays.asList("Authorization", "content-type"));
         configuration.setAllowedHeaders(Arrays.asList("Authorization", "content-type"));

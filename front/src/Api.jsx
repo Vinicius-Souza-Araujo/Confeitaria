@@ -53,3 +53,35 @@ export function PATCH_STATUS(body, token, id){
     };
 }
 
+export function DELETE_USER(token, id) {
+    return{
+        url:API_URL+'/users/'+id,
+        options: {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + token,
+            },
+        },
+    };
+}
+
+export function UPDATE_USER(token, userData) {
+    const { id, nome, cpf, grupo, status } = userData;
+    return {
+        url: API_URL + '/users/' + id,
+        options: {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + token,
+            },
+            body: JSON.stringify({
+                nome,
+                cpf,
+                grupo,
+                status,
+            }),
+        },
+    };
+}
