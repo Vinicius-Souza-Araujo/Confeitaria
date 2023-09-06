@@ -139,9 +139,6 @@ public class UserController {
             repository.save(novoUsuario);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(new Response(HttpStatus.CREATED, "Usuário criado com sucesso."));
-
-
-
         }
     @GetMapping()
     public List<User> find(User filtro){

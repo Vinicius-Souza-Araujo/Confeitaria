@@ -40,6 +40,8 @@ public class SecurityConfigurations {
                         .requestMatchers(HttpMethod.PATCH,"/api/users/atualizar/status/**").hasRole("ADM")
                         .requestMatchers(HttpMethod.PATCH,"/api/users/atualizar/senha/**").hasRole("ADM")
                         .requestMatchers(HttpMethod.GET,"/api/users/**").hasRole("ADM")
+                        .requestMatchers(HttpMethod.GET,"/api/produtos/**").permitAll()
+                        .requestMatchers(HttpMethod.PUT,"/api/produtos/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)

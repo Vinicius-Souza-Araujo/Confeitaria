@@ -2,6 +2,7 @@ package com.example.api.domain.entity;
 
 
 import com.example.api.domain.enums.Status;
+import com.example.api.rest.dto.DadosAtualizacaoProduto;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
@@ -32,7 +33,7 @@ public class Produto {
     private Status status;
 
     @Column(name = "avaliacao")
-    @NotEmpty(message = "Campo avaliacao é obrigatório.")
+    @NotNull(message = "Campo avaliacao é obrigatório.")
     @DecimalMin(value = "0.0", message = "A avaliação deve ser no mínimo 0.0.")
     @DecimalMax(value = "5.0", message = "A avaliação deve ser no máximo 5.0.")
     @Digits(integer = 1, fraction = 1, message = "A avaliação deve ter no máximo 1 dígito antes da vírgula e 1 dígito após a vírgula.")
@@ -40,7 +41,7 @@ public class Produto {
 
 
     @Column(name = "quantidade")
-    @NotEmpty(message = "Campo aquantidade é obrigatório.")
+    @NotNull(message = "Campo aquantidade é obrigatório.")
     @Min(value = 0, message = "A quantidade não pode ser negativa.")
     private Integer quantidade;
 
@@ -50,4 +51,21 @@ public class Produto {
     private BigDecimal valor;
 
 
+    public void atualizarInformacoes(DadosAtualizacaoProduto dados) {
+        if(dados.nome() != null)
+            this.nome = dados.nome();
+
+        if(dados.status() != null)
+            this.status = dados.status();
+
+        if(dados.avaliacao() != null)
+            this.avaliacao = dados.avaliacao();
+
+        if(dados.quantidade() != null)
+            this.quantidade = dados.quantidade();
+
+        if(dados.valor() != null)
+            this.valor = dados.valor();
+
+    }
 }
