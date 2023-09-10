@@ -54,14 +54,6 @@ function Form() {
       setSenha('');
       setConfirmarSenha('');
       setError('');
-
-      console.log('Limpando nome:', nome);
-  console.log('Limpando email:', email);
-  console.log('Limpando cpfUsuario:', cpfUsuario);
-  console.log('Limpando grupo:', grupo);
-  console.log('Limpando senha:', senha);
-  console.log('Limpando confirmarSenha:', confirmarSenha);
-  console.log('Limpando erro:', error);
   
   } else {
     try {

@@ -1,8 +1,8 @@
 import React from 'react';
-import { BotaoAzul, BotaoSummit } from '../componetesGenericos/botoes/botoes';
-import { UserContext } from '../../UserContext';
-import Error from '../../Helper/Error';
-import './login.css';
+import { BotaoAzul, BotaoSummit } from '../../componetesGenericos/botoes/botoes';
+import { UserContext } from '../../../UserContext';
+import Error from '../../../Helper/Error';
+import '../Login/login.css';
 
 const Login = () => {
 

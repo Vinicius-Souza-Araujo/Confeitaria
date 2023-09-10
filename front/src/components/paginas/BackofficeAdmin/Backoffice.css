@@ -1,0 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+
+.estrutura-back{
+    background-image: url('/src/assets/Backoffice.png');
+    background-size: cover; 
+    background-repeat: no-repeat; 
+    background-attachment: fixed;
+}
+
+.base-botoes{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.icon-back{
+    width: 10%;
+}
+
+.botao-back{
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+    color: #E283A1;
+    font-family: 'Inter';
+    font-size: 24px;
+    padding: 12px;
+    width: 40%;
+    background-color: #F4F4F4;;
+}

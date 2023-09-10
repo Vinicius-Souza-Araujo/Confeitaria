@@ -3,8 +3,9 @@ import React from 'react';
 import './App.css';
 import {UserStorage} from './UserContext';
 import {ProtectedRouteAdm} from './Helper/ProtectedRouteAdm';
-import PrincipalAdmin from './components/paginas/PrincipalAdmin';
-import Login from './components/paginas/Login';
+import PrincipalAdmin from './components/paginas/PrincipalAdmin/principalAdmin';
+import { Backoffice } from './components/paginas/BackofficeAdmin/Backoffice';
+import Login from '../src/components/paginas/Login/login'
 
 function App() {
  
@@ -14,7 +15,8 @@ function App() {
         <UserStorage>
           <Routes>
             <Route path='/*' element={<Login />}/>
-            <Route path='/administrador' element={<ProtectedRouteAdm><PrincipalAdmin/></ProtectedRouteAdm>}/>
+            <Route path='/administrador' element={<ProtectedRouteAdm><Backoffice/></ProtectedRouteAdm>}/>
+            <Route path='/UsuariosAdmin' element={<ProtectedRouteAdm><PrincipalAdmin/></ProtectedRouteAdm>}/>
           </Routes>
         </UserStorage>
       </BrowserRouter> 
