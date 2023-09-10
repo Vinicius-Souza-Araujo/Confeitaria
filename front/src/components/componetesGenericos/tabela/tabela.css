@@ -3,40 +3,22 @@
 
 table{
     background-color: #FFFDFD;
-    border-radius: 10px;
-    border-collapse: collapse;
-    width: 80%;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 20px;
+    text-align: center;
 }
 
-.estruturaTabela{
-    background-color: #FFFDFD;
-    margin: 20px;
-    width: 80%;
-    padding: 20px;
-    border-radius: 20px;
-    margin-left: auto;
-    margin-right: auto;
-}
 
 th, td {
     background-color: #FFFDFD;
+    text-align:center; 
     padding: 8px;
-    text-align: left; 
     font-family: Inter;
     
  }
 
+
 th{
+    
     color: #B4B4B4;
     font-weight: 600;
-}
-
-caption{
-    background-color: #FFFDFD;
-    color: #FEB4CB;
-    font-family: Bebas Neue;
-    margin: 10px;
-    font-size: 2rem;
 }

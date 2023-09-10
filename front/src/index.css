@@ -2,9 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Licorice&display=swap');
 
 *{
-  padding: 0;
-  margin: 0;
-  box-shadow: none;
+  background: transparent;
 }
 
 p {
@@ -126,4 +124,14 @@ label{
 .botaoCiano{
   background-color: #A9DEE2;
   color: #528c90;
+}
+
+.botaoRosa{
+  background-color: #FEB4CB;
+  color: #a8556f;
+}
+
+.botaoAzul{
+  background-color: #D1D5FA;
+  color: #5C6996;
 }
