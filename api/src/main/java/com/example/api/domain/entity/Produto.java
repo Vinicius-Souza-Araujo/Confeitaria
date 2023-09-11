@@ -10,6 +10,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -49,6 +50,17 @@ public class Produto {
     @NotNull(message = "Campo valor é obrigatório.")
     @DecimalMin(value = "0.00", inclusive = true, message = "O valor não pode ser negativo.")
     private BigDecimal valor;
+
+    @OneToMany(mappedBy = "produto", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ImagemProduto> imagens;
+
+
+    public Produto(String nome, BigDecimal avaliacao, Integer quantidade, BigDecimal valor) {
+        this.nome = nome;
+        this.avaliacao = avaliacao;
+        this.quantidade = quantidade;
+        this.valor = valor;
+    }
 
 
     public void atualizarInformacoes(DadosAtualizacaoProduto dados) {

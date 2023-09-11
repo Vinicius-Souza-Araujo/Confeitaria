@@ -2,6 +2,7 @@ package com.example.api.rest.controller;
 
 import com.example.api.exception.UserNaoEncontradoException;
 import com.example.api.rest.ApiErrors;
+import org.apache.tomcat.util.http.fileupload.impl.SizeLimitExceededException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -29,5 +30,11 @@ public class AplicationControllerAdvice {
     public ApiErrors handlePedidoNotFoundException(UserNaoEncontradoException ex){
         String mensagemErro = ex.getMessage();
         return new ApiErrors(mensagemErro);
+    }
+
+    @ExceptionHandler(SizeLimitExceededException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ApiErrors handleSizeLimitExceededException(SizeLimitExceededException ex) {
+        return new ApiErrors("Uma imagem excedeu o limite máximo de 10 MB.");
     }
 }
