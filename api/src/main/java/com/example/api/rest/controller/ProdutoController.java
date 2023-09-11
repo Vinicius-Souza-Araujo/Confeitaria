@@ -3,13 +3,18 @@ package com.example.api.rest.controller;
 
 import com.example.api.domain.entity.Produto;
 import com.example.api.domain.entity.User;
+import com.example.api.domain.enums.Status;
 import com.example.api.domain.repository.Produtos;
 import com.example.api.domain.repository.Users;
+import com.example.api.exception.Response;
+import com.example.api.rest.dto.CadastrarProdutoDTO;
 import com.example.api.rest.dto.DadosAtualizacaoProduto;
 import com.example.api.rest.dto.DadosAtualizacaoProduto;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.*;
 import org.springframework.data.querydsl.QPageRequest;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
@@ -44,6 +49,22 @@ public class ProdutoController {
     public void atualizar (@RequestBody @Valid DadosAtualizacaoProduto dados){
         var produto = repository.getReferenceById(dados.id());
         produto.atualizarInformacoes(dados);
+    }
+
+    @PostMapping("/cadastrar")
+    public ResponseEntity<Response> criarProduto(@RequestBody @Valid CadastrarProdutoDTO dto) {
+
+        Produto novoProduto = new Produto(
+                dto.getNome(),
+                dto.getAvaliacao(),
+                dto.getQuantidade(),
+                dto.getValor()
+        );
+
+        novoProduto.setStatus(Status.ATIVADO);
+        repository.save(novoProduto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(new Response(HttpStatus.CREATED, "Produto criado com sucesso."));
+
     }
 
 }
