@@ -3,7 +3,7 @@ import React from 'react';
 import './App.css';
 import {UserStorage} from './UserContext';
 import {ProtectedRouteAdm} from './Helper/ProtectedRouteAdm';
-import PrincipalAdmin from './components/paginas/PrincipalAdmin';
+import PrincipalAdmin from './components/paginas/principalAdmin';
 import Login from './components/paginas/Login';
 
 function App() {

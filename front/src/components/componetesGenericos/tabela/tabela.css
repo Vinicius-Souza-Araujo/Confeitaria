@@ -11,6 +11,7 @@ table{
 }
 
 .estruturaTabela{
+    border: 2px solid #FEB4CB;
     background-color: #FFFDFD;
     margin: 20px;
     width: 80%;

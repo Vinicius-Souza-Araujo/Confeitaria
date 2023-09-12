@@ -1,4 +1,4 @@
-.backgroud{
+.backgroud {
     position: 'fixed';
     top: 0;
     bottom: 0;
@@ -7,17 +7,19 @@
     z-index: 1000;
 }
 
-.estrutura_Modal{
+.estrutura_Modal {
     position: fixed;
     top: 50%;
     left: 50%;
-    transform: translate(-50%,-50%);
+    transform: translate(-50%, -50%);
     padding: 150px;
     background-color: white;
     border-radius: 10px;
+    border: 2px solid #DD7C9A;
+    border-radius: 20px;
 }
 
-.botao{
+.botao {
     position: absolute;
     margin: 40px;
     right: 10px;
