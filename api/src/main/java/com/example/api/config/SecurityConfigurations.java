@@ -42,6 +42,7 @@ public class SecurityConfigurations {
                         .requestMatchers(HttpMethod.GET,"/api/users/**").hasRole("ADM")
                         .requestMatchers(HttpMethod.GET,"/api/produtos/**").permitAll()
                         .requestMatchers(HttpMethod.PUT,"/api/produtos/**").permitAll()
+                        .requestMatchers(HttpMethod.PATCH,"/api/produtos/atualizarEstoque/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)

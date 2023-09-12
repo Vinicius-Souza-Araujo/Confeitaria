@@ -1,19 +1,32 @@
 package com.example.api.rest.controller;
 
 
-import com.example.api.domain.entity.Produto;
-import com.example.api.domain.entity.User;
-import com.example.api.domain.repository.Produtos;
-import com.example.api.domain.repository.Users;
-import com.example.api.rest.dto.DadosAtualizacaoProduto;
-import com.example.api.rest.dto.DadosAtualizacaoProduto;
-import jakarta.validation.Valid;
-import org.springframework.data.domain.*;
-import org.springframework.data.querydsl.QPageRequest;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
+import com.example.api.domain.entity.Produto;
+import com.example.api.domain.repository.Produtos;
+import com.example.api.exception.ProdutoNaoEncontradoException;
+import com.example.api.exception.Response;
+import com.example.api.rest.dto.AtualizaQuantidadeProdutoDTO;
+import com.example.api.rest.dto.DadosAtualizacaoProduto;
+
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api/produtos/")
@@ -46,4 +59,17 @@ public class ProdutoController {
         produto.atualizarInformacoes(dados);
     }
 
+    @PatchMapping("atualizarEstoque/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @Transactional
+    public void updateQuantidade(@PathVariable Integer id, @RequestBody @Valid AtualizaQuantidadeProdutoDTO dto){
+
+    	repository.findById(id).map(
+    			produto -> {
+    				produto.setQuantidade(dto.getQuantidade());
+    				return repository.save(produto);
+    			}
+    			).orElseThrow(()-> new ProdutoNaoEncontradoException());
+    	
+    }
 }

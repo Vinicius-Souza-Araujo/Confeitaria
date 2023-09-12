@@ -1,15 +1,17 @@
 package com.example.api.rest.controller;
 
-import com.example.api.exception.UserNaoEncontradoException;
-import com.example.api.rest.ApiErrors;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import java.util.List;
-import java.util.stream.Collectors;
+import com.example.api.exception.ProdutoNaoEncontradoException;
+import com.example.api.exception.UserNaoEncontradoException;
+import com.example.api.rest.ApiErrors;
 
 @RestControllerAdvice
 public class AplicationControllerAdvice {
@@ -27,6 +29,13 @@ public class AplicationControllerAdvice {
     @ExceptionHandler(UserNaoEncontradoException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public ApiErrors handlePedidoNotFoundException(UserNaoEncontradoException ex){
+        String mensagemErro = ex.getMessage();
+        return new ApiErrors(mensagemErro);
+    }
+    
+    @ExceptionHandler(ProdutoNaoEncontradoException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ApiErrors handlePedidoNotFoundException(ProdutoNaoEncontradoException ex){
         String mensagemErro = ex.getMessage();
         return new ApiErrors(mensagemErro);
     }
