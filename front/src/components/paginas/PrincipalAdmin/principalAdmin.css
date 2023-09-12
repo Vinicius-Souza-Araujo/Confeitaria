@@ -8,7 +8,11 @@
     border-radius: 20px;
     width: 50%;
 }
-
+.estrutura-tabela{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 .estrutura-principal-admin{
     background-color: #F4F4F4;
     width: 100%;
