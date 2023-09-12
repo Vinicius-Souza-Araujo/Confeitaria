@@ -1,11 +1,26 @@
 package com.example.api.rest.controller;
 
 
+<<<<<<< HEAD
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+=======
+import com.example.api.domain.entity.Produto;
+import com.example.api.domain.entity.User;
+import com.example.api.domain.enums.Status;
+import com.example.api.domain.repository.Produtos;
+import com.example.api.domain.repository.Users;
+import com.example.api.exception.Response;
+import com.example.api.rest.dto.CadastrarProdutoDTO;
+import com.example.api.rest.dto.DadosAtualizacaoProduto;
+import com.example.api.rest.dto.DadosAtualizacaoProduto;
+import jakarta.validation.Valid;
+import org.springframework.data.domain.*;
+import org.springframework.data.querydsl.QPageRequest;
+>>>>>>> 123f1143f597ade9350e5ab0867e6c73279c198c
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
@@ -59,6 +74,7 @@ public class ProdutoController {
         produto.atualizarInformacoes(dados);
     }
 
+<<<<<<< HEAD
     @PatchMapping("atualizarEstoque/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @Transactional
@@ -72,4 +88,22 @@ public class ProdutoController {
     			).orElseThrow(()-> new ProdutoNaoEncontradoException());
     	
     }
+=======
+    @PostMapping("/cadastrar")
+    public ResponseEntity<Response> criarProduto(@RequestBody @Valid CadastrarProdutoDTO dto) {
+
+        Produto novoProduto = new Produto(
+                dto.getNome(),
+                dto.getAvaliacao(),
+                dto.getQuantidade(),
+                dto.getValor()
+        );
+
+        novoProduto.setStatus(Status.ATIVADO);
+        repository.save(novoProduto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(new Response(HttpStatus.CREATED, "Produto criado com sucesso."));
+
+    }
+
+>>>>>>> 123f1143f597ade9350e5ab0867e6c73279c198c
 }

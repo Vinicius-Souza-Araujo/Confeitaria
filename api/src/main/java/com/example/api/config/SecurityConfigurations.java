@@ -41,8 +41,15 @@ public class SecurityConfigurations {
                         .requestMatchers(HttpMethod.PATCH,"/api/users/atualizar/senha/**").hasRole("ADM")
                         .requestMatchers(HttpMethod.GET,"/api/users/**").hasRole("ADM")
                         .requestMatchers(HttpMethod.GET,"/api/produtos/**").permitAll()
+<<<<<<< HEAD
                         .requestMatchers(HttpMethod.PUT,"/api/produtos/**").permitAll()
                         .requestMatchers(HttpMethod.PATCH,"/api/produtos/atualizarEstoque/**").permitAll()
+=======
+                        .requestMatchers(HttpMethod.POST,"/api/produtos/cadastrar").hasRole("ADM")
+                        .requestMatchers(HttpMethod.PUT,"/api/produtos/**").hasRole("ADM")
+                        .requestMatchers(HttpMethod.GET,"/api/imagens/acessar/**").permitAll()
+                        .requestMatchers(HttpMethod.POST,"/api/imagens/upload").hasRole("ADM")
+>>>>>>> 123f1143f597ade9350e5ab0867e6c73279c198c
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
