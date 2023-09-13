@@ -21,3 +21,19 @@
   .backgroud{
     background-color: #a8556f;
   }
+
+  .input-pesquisa{
+    background: transparent;
+    margin-top: 30px;
+  }
+
+  .estrutura-tab-PA{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .botoes-PA{
+    display: flex;
+    justify-content: space-around;
+  }

@@ -81,7 +81,7 @@ export function PATCH_STATUS(body, token, id){
 
 export function PUT_PRODUTOS(body, token){
     return{
-        url:API_URL+'/produtos/?atualizar',
+        url:API_URL+'/produtos/',
         options:{ 
             method:'PUT',
             headers: {

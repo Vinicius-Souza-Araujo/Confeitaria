@@ -5,6 +5,7 @@ import { GET_PRODUTOS, PUT_PRODUTOS, GET_PRODUTOS_SEM_FILTRO } from '../../../Ap
 import Header from '../../header/Header';
 import Modal from '../../componetesGenericos/Modal/modal';
 import { FormProduc } from '../../componetesGenericos/FormAlterarProd/formProduc';
+import { Estrelas } from '../../componetesGenericos/Estrelas/Estrelas';
 import './ProdutosAdmin.css'
 
 export const ProdutosAdmin = () => {
@@ -13,6 +14,9 @@ export const ProdutosAdmin = () => {
     const [paginacao, setPaginacao] = useState(0);
     const [itemBusca, setItemBusca] = useState('');
     const [openModal, setOpenModal] = useState(false);
+    const [openModalCad, setOpenModalCad] = useState(false);
+    const [conteudo, setConteudo] = useState([]);
+    const [limitePagina, setLimitePaginas] = useState('')
    
     React.useEffect(() => {  
         getProdutos();
@@ -25,6 +29,8 @@ export const ProdutosAdmin = () => {
         
         if (response.ok) {
             const dataProduto = await response.json();
+            console.log(dataProduto.totalPages);
+            setLimitePaginas(Number(dataProduto.totalPages) - 1);
             setProduto(dataProduto.content);
         } else {
             console.error('Erro ao procurar dados do produto');
@@ -54,57 +60,77 @@ export const ProdutosAdmin = () => {
         }
       };
     // -------------------------------------------------------------------------------------
-    
+
     // ALTERAR DADOS - STATUS
     async function handleAlterarStatus(novoStatus, conteudo){
        
         conteudo.status = novoStatus;
-        console.log('JSON: '+ conteudo.id)
         if(novoStatus === 'ATIVADO') { novoStatus = 'DESATIVADO'}
         else if (novoStatus === 'DESATIVADO'){ novoStatus = 'ATIVADO'}
-        const {url, options} = PUT_PRODUTOS(dataProduto, user.data.token);
+        const {url, options} = PUT_PRODUTOS({
+            id: conteudo.id,
+            nome: conteudo.nome,
+            status: novoStatus,
+            quantidade: conteudo.quantidade,
+            avaliacao: conteudo.avaliacao,
+            valor: conteudo.valor   
+        }, user.data.token);
         const response = await fetch(url, options);
-        console.log(response)
         getProdutos();
     }
 
     // PAGINACAO ------------------------------------------------------------
-    async function handleProximo(){
-       if(dataProduto.length != 0){
-            console.log('|| PAGI NEXT:' + paginacao);
-            setPaginacao(Number(paginacao) + Number(1));
-            getProdutos();
+    async function handleProximo() {
+        if (dataProduto.length !== 0 && paginacao !== limitePagina) {
+          setPaginacao(Number(paginacao) + 1);
         }
-    }
-
-    async function handleAnterior(){
-        if(Number(paginacao) >= 0){
-            console.log( '|| PAGI ANTERIOR:' + paginacao);
-            setPaginacao(Number(paginacao) - Number(1));
-            getProdutos();
-        } else if (paginacao < 0){
-            setPaginacao(0);
+        getProdutos();
+      }
+      
+      async function handleAnterior() {
+        const anterior = Number(paginacao) - 1;
+        if (anterior < 0) {
+          setPaginacao(0);
+        } else {
+          setPaginacao(anterior);
         }
-        
-    }
+        getProdutos();
+      }
     // ------------------------------------------------------------------------------
 
     return (
         <div className='backgroud-pa'>
             <Modal className='teste'isOpen={openModal} setModalOpen={() => setOpenModal(!openModal)}>
-                <FormProduc></FormProduc>                
+                <FormProduc 
+                nome={conteudo.nome} 
+                quantidade={conteudo.quantidade} 
+                status={conteudo.status}
+                valor={conteudo.valor} 
+                avaliacao={conteudo.avaliacao}
+                id={conteudo.id}></FormProduc>                
             </Modal>
+
+            <Modal></Modal>
             
             {!openModal && (
                 <div >
+                    
                     <Header />
-                    <input 
+                    <Estrelas></Estrelas>
+                    <div htmlFor="">
+                        {/* <img src="\src\assets\lupa.svg" alt=""/> */}
+                        <input 
                         onChange={(event) => setItemBusca(event.target.value)}
                         onKeyDown={handleKeyDown}  
-                        className="input-pesquisa" 
+                        className="input-pesquisa"
+                        placeholder='Buscar' 
                         type="search" 
                         name="pesquisar" 
                         id="pesquisar"  />
+
+                    </div>
+                    
+                    <button>Adicionar</button>
 
                     <div className='estrutura-tab-PA'>
                         <table>
@@ -123,8 +149,7 @@ export const ProdutosAdmin = () => {
 
                             <tbody>
                                 {dataProduto.map((conteudo) => (
-                                    <tr key={conteudo.id}>
-                                        
+                                    <tr key={conteudo.id}>                                        
                                         <td>{conteudo.id}</td>
                                         <td>{conteudo.nome}</td>
                                         <td>{(conteudo.valor || 0).toLocaleString('pt-BR', {
@@ -135,14 +160,20 @@ export const ProdutosAdmin = () => {
                                         <td>{conteudo.avaliacao}</td>
                                         <td>{conteudo.quantidade}</td>
                                         <td><button className='botaoAzulPA'>Abrir</button></td>
-                                        <td ><button className='botaoRosaPA' onClick={() => setOpenModal(true)}>Alterar</button></td>
+                                        <td ><button className='botaoRosaPA' onClick={() => {
+                                            setConteudo(conteudo) 
+                                            setOpenModal(true)
+                                            }}>Alterar</button></td>
                                     </tr>
                                 ))}
                             </tbody>
                         </table>
-
-                        <button className="botaoAzulPA" onClick={() => handleAnterior()}>Anterior</button>
-                        <button className="botaoAzulPA" onClick={() => handleProximo()}>Próximo</button>
+                        
+                        <div className='botoes-PA'>
+                            <button className="botaoAzulPA" onClick={() => handleAnterior()}>Anterior</button>
+                            <button className="botaoAzulPA" onClick={() => handleProximo()}>Próximo</button>
+                        </div>
+                       
                     </div>
                 </div>
             )}

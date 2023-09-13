@@ -1,51 +1,71 @@
 import React from 'react'
 import { useState } from 'react'
-import Alerta from './Alerta';
-import Modal from 'react-bootstrap/Modal';
-import Button from 'react-bootstrap/Button';
+import { PUT_PRODUTOS } from '../../../Api';
+import { UserContext } from '../../../UserContext';
 
 
 export const FormProduc = (props) => {
-    const [openModalForm, setOpenModalForm] = useState(false);
-    const [nome, setNome] = useState('');
+    
+    const [nome, setNome] = useState(props.nome);
     const [quantidade, setQuantidade] = useState(props.quantidade);
-    const [show, setShow] = useState(false);
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+    const [status, setStatus] = useState(props.status);
+    const [valor, setValor] = useState(props.valor);
+    const [avaliacao, setAvaliacao] = useState(props.avaliacao);
+    const [id, setId] = useState(props.id);
+
+    const user = React.useContext(UserContext);
+    
+
+    async function putProduto(){
+        const {url, options} = PUT_PRODUTOS({
+            id: id,
+            nome: nome,
+            status: status,
+            quantidade: quantidade,
+            avaliacao: avaliacao,
+            valor: valor   
+        }, user.data.token);
+        const response = await fetch(url, options);    
+    }
+
+    function handleEnviar(event){
+        event.preventDefault();
+        putProduto();
+    }
 
   return (
     <div> 
             
-            <form>
-                <input type="text" name="nome" id="nome" placeholder='Nome' onChange={(event) => setNome(event.target.value)} value={nome}/>
-                <input type="number" name="quantidade" id="quantidade" placeholder='Quantidade'/>
+            <form onSubmit={handleEnviar}>
+                <label htmlFor="nome">
+                     Nome
+                    <input type="text" name="nome" id="nome" placeholder='Nome' onChange={(event) => setNome(event.target.value)} value={nome} required/>
+                </label>
+                
+                <label htmlFor="quantidade">
+                    Quantidade
+                    <input type="number" name="quantidade" id="quantidade" placeholder='Quantidade' onChange={(event) => setQuantidade(event.target.value)} value={quantidade} required/>
+                </label>
 
-                <select name="status" id="status">
+               <label htmlFor="valor">
+                    Valor
+                    <input type="number" name="valor" id="valor" onChange={(event) => setValor(event.target.value)} value={valor} required/>
+               </label>
+
+               <label htmlFor="avaliacao">
+                    Avaliação
+                    <input type="number" name="avaliacao" id="avaliacao" onChange={(event) => setAvaliacao(event.target.value)} value={avaliacao} required/>
+               </label>
+               
+                <select name="status" id="status" onChange={(event) => setStatus(event.target.value)} value={status} required>
                     <option value="" disabled> Selecione uma opção</option>
-                    <option value=""> Desativado </option>
-                    <option value=""> Ativado </option>
+                    <option value="DESATIVADO">DESATIVADO</option>
+                    <option value="ATIVADO">ATIVADO</option>
                 </select>
-          
-            </form>
 
-            <button variant="primary" onClick={handleShow} >Enviar</button>
-    
-            <Modal show={show} onHide={handleClose} animation={false}>
-                <Modal.Header closeButton>
-                <Modal.Title>Modal heading</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>Woohoo, you are reading this text in a modal!</Modal.Body>
-                <Modal.Footer>
-                <Button variant="secondary" onClick={handleClose}>
-                    Close
-                </Button>
-                <Button variant="primary" onClick={handleClose}>
-                    Save Changes
-                </Button>
-                </Modal.Footer>
-            </Modal>
-           
-        
+                <button className='botaoRosa' type="submit" >Enviar</button>
+          
+            </form>        
     </div>
   )
 }
