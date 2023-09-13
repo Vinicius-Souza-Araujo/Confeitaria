@@ -1,5 +1,5 @@
 .backgroud{
-    position: 'fixed';
+    position: fixed;
     top: 0;
     bottom: 0;
     left: 0;
@@ -15,6 +15,7 @@
     padding: 150px;
     background-color: #fff;
     border-radius: 10px;
+    
 }
 
 .botao{

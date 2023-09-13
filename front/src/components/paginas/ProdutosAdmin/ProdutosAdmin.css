@@ -1,0 +1,39 @@
+.botaoCianoPA{
+    background-color: #A9DEE2;
+    color: #528c90;
+  }
+  
+  .botaoRosaPA{
+    background-color: #FEB4CB;
+    color: #a8556f;
+  }
+  
+  .botaoAzulPA{
+    background-color: #D1D5FA;
+    color: #5C6996;
+  }
+  
+  .botaoCinzaPA{
+    background-color: #bebebe;
+    color: #1c1c1e;
+  }
+
+  .backgroud{
+    background-color: #a8556f;
+  }
+
+  .input-pesquisa{
+    background: transparent;
+    margin-top: 30px;
+  }
+
+  .estrutura-tab-PA{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .botoes-PA{
+    display: flex;
+    justify-content: space-around;
+  }

@@ -13,7 +13,8 @@ function PrincipalAdmin() {
     // Exemplo para os dados vindo do backend, remover quando o backend estiver conectado
     const user = React.useContext(UserContext);
     const [dataUser,setDataUser] = useState([]);
-    const [filtro, setFiltro] = useState('')
+    const [filtro, setFiltro] = useState('');
+    const [openModal, setOpenModal] = useState(false);
     
     React.useEffect(() => {  
       getUsers();
@@ -47,64 +48,66 @@ function PrincipalAdmin() {
   };
 
    
-
-  
-    const [openModal, setOpenModal] = useState(false)
-
   return (
     <div className='estrutura-principal-admin'>
+    <Modal isOpen={openModal} setModalOpen={() => setOpenModal(!openModal)}><Form></Form></Modal>
 
-        <Header />
+       
+        {!openModal && (
+            <div>
+                <Header />
+                 <img src="./logo.png" alt="Logo do site"  className='logo'/>
+                 <input onChange={(event) => setFiltro(event.target.value)}
+                  onKeyDown={handleKeyDown}  
+                  className="input-pesquisa" 
+                  type="search" 
+                  name="pesquisar" 
+                  id="pesquisar" />
 
-        <img src="./logo.png" alt="Logo do site"  className='logo'/>
+                <div className='titulo-back'>
+                    <h3 className='titulo-PA'>Usuários cadastrados</h3>
+                    <button className='botaoCiano botaoCianoPA' onClick={() => setOpenModal(true)}>Adicionar</button>
+                </div>
 
-        <input onChange={(event) => setFiltro(event.target.value)}
-              onKeyDown={handleKeyDown}  
-              className="input-pesquisa" 
-              type="search" 
-              name="pesquisar" 
-              id="pesquisar" 
-         />
+                <div className='estrutura-tabela'>
+                <table>
 
-        <div className='titulo-back'>
-        <h3 className='titulo-PA'>Usuários cadastrados</h3>
-            <button className='botaoCiano botaoCianoPA' onClick={() => setOpenModal(true)}>Adicionar</button>
-            <Modal isOpen={openModal} setModalOpen={() => setOpenModal(!openModal)}><Form></Form></Modal>
-        </div>
+                    <thead>
 
-        <div className='tabela-admin'>
-        <table>
-            
-            <thead>
-                
-                <tr>
-                    <th>ID</th>
-                    <th>Nome</th>
-                    <th>E-mail</th>
-                    <th>CPF</th>
-                    <th>Grupo</th>
-                    <th>Status</th>
-                    <th>Alterar</th>
-                </tr>
-            </thead>
-            
-            <tbody>
-                {dataUser.map((conteudo) => (
-                        
-                    <tr key={conteudo.id}>
-                        <td>{conteudo.id}</td>
-                        <td>{conteudo.nome}</td>
-                        <td>{conteudo.email}</td>
-                        <td>{conteudo.cpf}</td>
-                        <td>{conteudo.grupo}</td>
-                        <td><button className='botaoAzul' onClick={() => handleStatusClick(conteudo.id, conteudo.status)}>{conteudo.status}</button></td>
-                        <td><button className='botaoRosa'>Alterar</button></td>
-                    </tr>
-              
-                ))}
-            </tbody> 
-        </table>  
-        </div>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nome</th>
+                            <th>E-mail</th>
+                            <th>CPF</th>
+                            <th>Grupo</th>
+                            <th>Status</th>
+                            <th>Alterar</th>
+                        </tr>
+                    </thead>
+
+                <tbody>
+                    {dataUser.map((conteudo) => (
+
+                        <tr key={conteudo.id}>
+                            <td>{conteudo.id}</td>
+                            <td>{conteudo.nome}</td>
+                            <td>{conteudo.email}</td>
+                            <td>{conteudo.cpf}</td>
+                            <td>{conteudo.grupo}</td>
+                            <td><button className='botaoAzul' onClick={() => handleStatusClick(conteudo.id, conteudo.status)}>{conteudo.status}</button></td>
+                            <td><button className='botaoRosa'>Alterar</button></td>
+                        </tr>
+
+                    ))}
+                </tbody>
+                </table>
+
+                </div>
+                 
+              </div>
+
+        )}
+       
     </div>
 
   )

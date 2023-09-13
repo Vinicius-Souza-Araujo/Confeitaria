@@ -91,7 +91,12 @@ input{
   align-items: center;
   border: none;
   border-bottom: solid 1px #FEB4CB;
-  box-shadow: none;  
+  box-shadow: none;
+  width: 100%;  
+}
+
+button{
+  background-color: #bebebe;
 }
 
 input:focus{
@@ -134,4 +139,18 @@ label{
 .botaoAzul{
   background-color: #D1D5FA;
   color: #5C6996;
+}
+
+.botaoCinza{
+  background-color: #bebebe;
+  color: #1c1c1e;
+}
+
+select{
+  margin-top: 2px;
+  margin-bottom: 2px;
+  border: 1px solid #FEB4CB;
+  border-radius: 6px;
+  padding: 6px;
+  width: 100%;
 }

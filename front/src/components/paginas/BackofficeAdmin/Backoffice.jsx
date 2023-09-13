@@ -19,7 +19,7 @@ export const Backoffice = () => {
       if (botao === 'usuarios'){
         navigate('/UsuariosAdmin');
       } else if (botao === 'produtos'){
-        console.log(botao);
+        navigate('/ProdutosAdmin');
       } else {
         console.log(botao);
       }
