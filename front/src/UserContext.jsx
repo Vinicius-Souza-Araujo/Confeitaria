@@ -23,7 +23,12 @@ export const UserStorage = ({children}) => {
             window.localStorage.setItem('token', json.token);
             setData({email:json.email, grupo:json.grupo, token:json.token});
             setLogin(true);
-            navigate('/administrador');
+            if(json.grupo == 'ADM') {
+                navigate('/administrador');
+            } else if (json.grupo == 'ESTOQUISTA'){
+                navigate('/estoquista');
+            }
+           
         } catch(err){
             setError(err.message);
             setLoading(false); 
