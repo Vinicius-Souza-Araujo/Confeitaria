@@ -65,6 +65,20 @@ export function POST_USER(body, token){
     };
 }
 
+export function POST_PRODUTO(body, token){
+    return{
+        url:API_URL+'/produtos/cadastrar',
+        options:{ 
+            method:'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + token,
+            },
+            body:JSON.stringify(body),
+        } 
+    };
+}
+
 export function PATCH_STATUS(body, token, id){
     return{
         url:API_URL+'/users/atualizar/status/'+id,
@@ -78,6 +92,8 @@ export function PATCH_STATUS(body, token, id){
         }, 
     };
 }
+
+
 
 export function PUT_PRODUTOS(body, token){
     return{

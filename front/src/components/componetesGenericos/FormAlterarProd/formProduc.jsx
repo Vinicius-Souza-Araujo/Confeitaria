@@ -2,6 +2,7 @@ import React from 'react'
 import { useState } from 'react'
 import { PUT_PRODUTOS } from '../../../Api';
 import { UserContext } from '../../../UserContext';
+import { Estrelas } from '../../componetesGenericos/Estrelas/Estrelas';
 
 
 export const FormProduc = (props) => {
@@ -54,7 +55,7 @@ export const FormProduc = (props) => {
 
                <label htmlFor="avaliacao">
                     Avaliação
-                    <input type="number" name="avaliacao" id="avaliacao" onChange={(event) => setAvaliacao(event.target.value)} value={avaliacao} required/>
+                    <Estrelas onChange={(novaAvaliacao) => setAvaliacao(novaAvaliacao)} valor={avaliacao}/>
                </label>
                
                 <select name="status" id="status" onChange={(event) => setStatus(event.target.value)} value={status} required>

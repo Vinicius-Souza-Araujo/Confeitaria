@@ -5,7 +5,7 @@ import { GET_PRODUTOS, PUT_PRODUTOS, GET_PRODUTOS_SEM_FILTRO } from '../../../Ap
 import Header from '../../header/Header';
 import Modal from '../../componetesGenericos/Modal/modal';
 import { FormProduc } from '../../componetesGenericos/FormAlterarProd/formProduc';
-import { Estrelas } from '../../componetesGenericos/Estrelas/Estrelas';
+import { FormCadastarProd } from '../../componetesGenericos/FormCadastrarProd/FormCadastarProd';
 import './ProdutosAdmin.css'
 
 export const ProdutosAdmin = () => {
@@ -29,7 +29,6 @@ export const ProdutosAdmin = () => {
         
         if (response.ok) {
             const dataProduto = await response.json();
-            console.log(dataProduto.totalPages);
             setLimitePaginas(Number(dataProduto.totalPages) - 1);
             setProduto(dataProduto.content);
         } else {
@@ -54,7 +53,6 @@ export const ProdutosAdmin = () => {
 
 
     const handleKeyDown = (event) => {
-        console.log('ITEM BUSCA'+itemBusca)
         if (event.key === 'Enter') {
             getProdutos_sem_filtro();
         }
@@ -110,13 +108,15 @@ export const ProdutosAdmin = () => {
                 id={conteudo.id}></FormProduc>                
             </Modal>
 
-            <Modal></Modal>
+            <Modal isOpen={openModalCad} setModalOpen={() => setOpenModalCad(!openModalCad)}>
+                    <FormCadastarProd></FormCadastarProd>
+            </Modal>
             
             {!openModal && (
                 <div >
                     
                     <Header />
-                    <Estrelas></Estrelas>
+                    
                     <div htmlFor="">
                         {/* <img src="\src\assets\lupa.svg" alt=""/> */}
                         <input 
@@ -130,7 +130,7 @@ export const ProdutosAdmin = () => {
 
                     </div>
                     
-                    <button>Adicionar</button>
+                    <button className='botaoRosaPA' onClick={() => {setOpenModalCad(true)}}>Adicionar</button>
 
                     <div className='estrutura-tab-PA'>
                         <table>
