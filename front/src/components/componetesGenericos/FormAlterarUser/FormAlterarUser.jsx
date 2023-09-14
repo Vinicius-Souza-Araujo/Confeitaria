@@ -14,8 +14,8 @@ export const FormAlterarUser = (props) => {
   const [nome, setNome] = React.useState(props.nome);
   const [cpfUsuario, setCpfUsuario] = React.useState(props.cpfUsuario);
   const [grupo, setGrupo] = React.useState(props.grupo);
-  const [senha, setSenha] = React.useState(props.senha);
-  const [confirmarSenha, setConfirmarSenha] = React.useState(props.senha);
+  const [senha, setSenha] = React.useState('');
+  const [confirmarSenha, setConfirmarSenha] = React.useState('');
   const [id, seId] = React.useState(props.id);
   const [error, setError] = React.useState('');
   const [show, setShow] = useState(false);

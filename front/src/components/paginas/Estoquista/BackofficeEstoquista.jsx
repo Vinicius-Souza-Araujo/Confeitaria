@@ -8,7 +8,6 @@ import { useState } from 'react'
 export const BackofficeEstoquista = () => {
 
     const user = React.useContext(UserContext);
-    const [dataUser,setDataUser] = useState([]);
     const [filtro, setFiltro] = useState('');
 
     const navigate = useNavigate();
@@ -17,7 +16,7 @@ export const BackofficeEstoquista = () => {
     const handleClick = (botao) => {
       
       if (botao === 'produtos'){
-        navigate('/ProdutosAdmin');
+        navigate('/ProdutoEstoque');
       } 
       
     }
