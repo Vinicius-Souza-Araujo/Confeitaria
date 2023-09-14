@@ -82,8 +82,12 @@ h1, h2, h3{
   color: #ffff;
 }
 
-/* CATEGORIA DE INPUTS */
+.alerta{
+  font-family: 'Inter';
+  margin-top: 10px;
+}
 
+/* CATEGORIA DE INPUTS */
 input{
   display: block;
   background: transparent;
@@ -91,8 +95,7 @@ input{
   align-items: center;
   border: none;
   border-bottom: solid 1px #FEB4CB;
-  box-shadow: none;
-  width: 100%;  
+  box-shadow: none;  
 }
 
 button{
@@ -123,7 +126,7 @@ label{
   padding: 10px;
   margin: 6px;
   background-color: #FEB4CB;
-  color: #ffff;
+  color: #d16565;
 }
 
 .botaoCiano{

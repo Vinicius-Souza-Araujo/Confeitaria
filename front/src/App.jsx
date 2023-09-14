@@ -6,6 +6,7 @@ import {ProtectedRouteAdm} from './Helper/ProtectedRouteAdm';
 import PrincipalAdmin from './components/paginas/PrincipalAdmin/principalAdmin';
 import { ProdutosAdmin } from './components/paginas/ProdutosAdmin/ProdutosAdmin';
 import { Backoffice } from './components/paginas/BackofficeAdmin/Backoffice';
+import {Home} from './components/paginas/Home/Home'
 import Login from '../src/components/paginas/Login/login'
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
             <Route path='/administrador' element={<ProtectedRouteAdm><Backoffice/></ProtectedRouteAdm>}/>
             <Route path='/UsuariosAdmin' element={<ProtectedRouteAdm><PrincipalAdmin/></ProtectedRouteAdm>}/>
             <Route path='/ProdutosAdmin' element={<ProtectedRouteAdm><ProdutosAdmin/></ProtectedRouteAdm>}/>
+            <Route path='/home' element={<Home></Home>}/>
           </Routes>
         </UserStorage>
       </BrowserRouter> 

@@ -7,6 +7,7 @@ import Modal from '../../componetesGenericos/Modal/modal';
 import './principalAdmin.css'
 import '../../componetesGenericos/tabela/tabela'
 import Header from '../../header/Header';
+import { FormAlterarUser } from '../../componetesGenericos/FormAlterarUser/FormAlterarUser';
 
 
 function PrincipalAdmin() {
@@ -15,6 +16,8 @@ function PrincipalAdmin() {
     const [dataUser,setDataUser] = useState([]);
     const [filtro, setFiltro] = useState('');
     const [openModal, setOpenModal] = useState(false);
+    const [openModalAlt, setOpenModalAlt] = useState(false);
+    const [conteudo, setConteudo] = useState([]);
     
     React.useEffect(() => {  
       getUsers();
@@ -51,7 +54,15 @@ function PrincipalAdmin() {
   return (
     <div className='estrutura-principal-admin'>
     <Modal isOpen={openModal} setModalOpen={() => setOpenModal(!openModal)}><Form></Form></Modal>
-
+    <Modal isOpen={openModalAlt} setModalOpen={() => setOpenModalAlt(!openModalAlt)}>
+        <FormAlterarUser 
+                         nome={conteudo.nome} 
+                         senha={conteudo.senha}
+                         cpfUsuario={conteudo.cpf}
+                         grupo={conteudo.grupo}
+                         id={conteudo.id}
+                         ></FormAlterarUser>
+    </Modal>
        
         {!openModal && (
             <div>
@@ -95,7 +106,9 @@ function PrincipalAdmin() {
                             <td>{conteudo.cpf}</td>
                             <td>{conteudo.grupo}</td>
                             <td><button className='botaoAzul' onClick={() => handleStatusClick(conteudo.id, conteudo.status)}>{conteudo.status}</button></td>
-                            <td><button className='botaoRosa'>Alterar</button></td>
+                            <td><button className='botaoRosa' onClick={() => {setOpenModalAlt(true) 
+                                                                              setConteudo(conteudo) }}>
+                                                                                Alterar</button></td>
                         </tr>
 
                     ))}
