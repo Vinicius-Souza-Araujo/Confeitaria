@@ -3,12 +3,11 @@ import { useNavigate } from 'react-router-dom';
 import { GET_USERS} from '../../../Api';
 import { UserContext } from '../../../UserContext';
 import { useState } from 'react'
-import './Backoffice.css'
 
-export const Backoffice = () => {
+
+export const BackofficeEstoquista = () => {
 
     const user = React.useContext(UserContext);
-    const [dataUser,setDataUser] = useState([]);
     const [filtro, setFiltro] = useState('');
 
     const navigate = useNavigate();
@@ -17,7 +16,7 @@ export const Backoffice = () => {
     const handleClick = (botao) => {
       
       if (botao === 'produtos'){
-        navigate('/ProdutosAdmin');
+        navigate('/ProdutoEstoque');
       } 
       
     }

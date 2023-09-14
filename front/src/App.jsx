@@ -4,10 +4,12 @@ import './App.css';
 import {UserStorage} from './UserContext';
 import {ProtectedRouteAdm} from './Helper/ProtectedRouteAdm';
 import PrincipalAdmin from './components/paginas/PrincipalAdmin/principalAdmin';
-import { ProdutosAdmin } from './components/paginas/ProdutosAdmin/ProdutosAdmin';
 import { Backoffice } from './components/paginas/BackofficeAdmin/Backoffice';
 import {Home} from './components/paginas/Home/Home'
 import Login from '../src/components/paginas/Login/login'
+import { ProdutosAdmin } from './components/paginas/ProdutosAdmin/ProdutosAdmin';
+import { BackofficeEstoquista } from './components/paginas/Estoquista/BackofficeEstoquista';
+import { ProdutoEstoquista } from './components/paginas/Estoquista/ProdutoEstoquista';
 
 function App() {
  
@@ -20,6 +22,8 @@ function App() {
             <Route path='/administrador' element={<ProtectedRouteAdm><Backoffice/></ProtectedRouteAdm>}/>
             <Route path='/UsuariosAdmin' element={<ProtectedRouteAdm><PrincipalAdmin/></ProtectedRouteAdm>}/>
             <Route path='/ProdutosAdmin' element={<ProtectedRouteAdm><ProdutosAdmin/></ProtectedRouteAdm>}/>
+            <Route path='/estoquista' element={<BackofficeEstoquista></BackofficeEstoquista>}/>
+            <Route path='/ProdutoEstoque' element={<ProdutoEstoquista></ProdutoEstoquista>}/>
             <Route path='/home' element={<Home></Home>}/>
           </Routes>
         </UserStorage>

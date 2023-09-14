@@ -40,10 +40,20 @@ export function GET_PRODUTOS_SEM_FILTRO(token, itemBusca){
 }
 
 
-export function GET_PRODUTOS_ATIVADOS(token){
+export function GET_PRODUTOS_ATIVADOS(){
     return{
         
         url: API_URL+'/produtos/?page&status=ATIVADO',
+        options:{
+            method:'GET'
+        }
+    }
+}
+
+export function GET_PRODUTOS_ESTOQUE(page){
+    return{
+        
+        url: API_URL+'/produtos/?page='+page,
         options:{
             method:'GET'
         }
@@ -104,6 +114,19 @@ export function PATCH_STATUS(body, token, id){
     };
 }
 
+
+export function PATCH_ESTOQUE(body, id){
+    return{
+        url:API_URL+'/produtos/atualizarEstoque/'+id,
+        options:{ 
+            method:'PATCH',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body:JSON.stringify(body),
+        }, 
+    };
+}
 
 export function PATCH_USER(body, token, id){
     return{

@@ -20,6 +20,7 @@ export const FormProduc = (props) => {
     
 
     async function putProduto(){
+      console.log('Isso é o ID'+ id)
         const {url, options} = PUT_PRODUTOS({
             id: id,
             nome: nome,

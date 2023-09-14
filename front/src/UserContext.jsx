@@ -21,9 +21,15 @@ export const UserStorage = ({children}) => {
             if (!tokenRes.ok) throw new Error('Acesso negado, verifique suas credenciais!');
             const json = await tokenRes.json();
             window.localStorage.setItem('token', json.token);
-            setData({email:json.email, grupo:json.grupo, token:json.token});
+            setData({email: json.email, grupo:json.grupo, token:json.token});
+            console.log(data)
             setLogin(true);
-            navigate('/administrador');
+            if(json.grupo == 'ADM') {
+                navigate('/administrador');
+            } else if (json.grupo == 'ESTOQUISTA'){
+                navigate('/estoquista');
+            }
+           
         } catch(err){
             setError(err.message);
             setLoading(false); 
