@@ -79,8 +79,6 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.CONFLICT).body("Cpf já existe.");
         }
 
-
-
         repository
                 .findById(id)
                 .map(user ->{

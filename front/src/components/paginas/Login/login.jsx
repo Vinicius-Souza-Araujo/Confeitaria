@@ -55,8 +55,6 @@ const Login = () => {
                         </div>
 
                         <div className='botoes-login'>
-                            <BotaoAzul texto="Cadastrar"></BotaoAzul>
-
                             {
                                loading ? <BotaoSummit id="confirmar" disabled texto="Carregando..."></BotaoSummit> :
                                <BotaoSummit id="confirmar" texto="Confirmar"></BotaoSummit>

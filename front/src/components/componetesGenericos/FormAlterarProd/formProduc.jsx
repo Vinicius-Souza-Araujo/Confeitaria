@@ -3,6 +3,8 @@ import { useState } from 'react'
 import { PUT_PRODUTOS } from '../../../Api';
 import { UserContext } from '../../../UserContext';
 import { Estrelas } from '../../componetesGenericos/Estrelas/Estrelas';
+import Alert from 'react-bootstrap/Alert';
+import Button from 'react-bootstrap/Button';
 
 
 export const FormProduc = (props) => {
@@ -13,7 +15,7 @@ export const FormProduc = (props) => {
     const [valor, setValor] = useState(props.valor);
     const [avaliacao, setAvaliacao] = useState(props.avaliacao);
     const [id, setId] = useState(props.id);
-
+    const [show, setShow] = useState(false);
     const user = React.useContext(UserContext);
     
 
@@ -32,6 +34,7 @@ export const FormProduc = (props) => {
     function handleEnviar(event){
         event.preventDefault();
         putProduto();
+        setShow(false);
     }
 
   return (
@@ -64,7 +67,18 @@ export const FormProduc = (props) => {
                     <option value="ATIVADO">ATIVADO</option>
                 </select>
 
-                <button className='botaoRosa' type="submit" >Enviar</button>
+                <Alert show={show} variant="success" className='alerta'>
+                <Alert.Heading className='tituto-modal'>Deseja confirmar a alteração?</Alert.Heading>
+        
+                <div className="d-flex justify-content-end">
+                  <Button className='botaoAzul' onClick={() => setShow(false)} variant="outline-success">
+                    Não
+                  </Button>
+
+                  <Button className='botaoSummit' type='summit' onClick={handleEnviar}>Sim</Button>
+                </div>
+              </Alert>{!show && <Button onClick={() => setShow(true)}>Enviar</Button>}
+         
           
             </form>        
     </div>

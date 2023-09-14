@@ -39,6 +39,17 @@ export function GET_PRODUTOS_SEM_FILTRO(token, itemBusca){
     }
 }
 
+
+export function GET_PRODUTOS_ATIVADOS(token){
+    return{
+        
+        url: API_URL+'/produtos/?page&status=ATIVADO',
+        options:{
+            method:'GET'
+        }
+    }
+}
+
 export function GET_USERS(token, filtro){
     return{
         url:API_URL+'/users?nome='+filtro,
@@ -94,6 +105,19 @@ export function PATCH_STATUS(body, token, id){
 }
 
 
+export function PATCH_USER(body, token, id){
+    return{
+        url:API_URL+'/users/atualizar/'+id,
+        options:{ 
+            method:'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + token,
+            },
+            body:JSON.stringify(body),
+        }, 
+    };
+}
 
 export function PUT_PRODUTOS(body, token){
     return{

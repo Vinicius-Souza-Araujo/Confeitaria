@@ -1,0 +1,20 @@
+.estrutura-produtos{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px;
+    gap: 20px;
+    text-align: center;
+}
+
+.card{
+    background-color:  #FEB4CB;
+    padding: 20px;
+    border-radius: 20px;
+    border: 1px solid #ffff;
+}
+
+.tituloCARD{
+    font-size: 16px;
+    text-shadow: 10px;
+}

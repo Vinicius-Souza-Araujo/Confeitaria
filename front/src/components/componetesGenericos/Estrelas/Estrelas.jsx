@@ -7,11 +7,11 @@ const labels = {
     0: 'Péssimo',
     0.5: 'teste',
     1: 'Ruim',
-    1.5: 'teste',
+    1.5: 'Razoavelmente ruim',
     2: 'Regular',
     2.5: 'teste',
     3: 'Bom',
-    3.5: 'teste',
+    3.5: 'Razoavelmente Bom',
     4: 'Ótimo',
     4.5: 'test',
     5: 'Excelente'
