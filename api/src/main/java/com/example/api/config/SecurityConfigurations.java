@@ -50,6 +50,8 @@ public class SecurityConfigurations {
                         .requestMatchers(HttpMethod.GET,"/api/imagens/acessar/**").permitAll()
                         .requestMatchers(HttpMethod.POST,"/api/imagens/upload").hasRole("ADM")
 
+                        .requestMatchers(HttpMethod.GET,"/api/endereco/consulta").permitAll()
+
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
