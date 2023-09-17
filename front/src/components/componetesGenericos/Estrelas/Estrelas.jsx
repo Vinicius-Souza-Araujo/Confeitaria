@@ -5,15 +5,15 @@ import { Star } from '@mui/icons-material';
 
 const labels = {
     0: 'Péssimo',
-    0.5: 'teste',
+    0.5: 'Muito ruim',
     1: 'Ruim',
     1.5: 'Razoavelmente ruim',
     2: 'Regular',
-    2.5: 'teste',
+    2.5: 'Razoavelmente Bom',
     3: 'Bom',
-    3.5: 'Razoavelmente Bom',
+    3.5: 'Muito Bom',
     4: 'Ótimo',
-    4.5: 'test',
+    4.5: 'Ótimo ++',
     5: 'Excelente'
 };
 
