@@ -2,14 +2,12 @@ import React from 'react'
 import { GET_USERS, PATCH_STATUS } from '../../../Api';
 import { UserContext } from '../../../UserContext';
 import { useState } from 'react'
-import Form from '../../componetesGenericos/formulario/form';
+import Form from '../../componetesGenericos/Formulários/formulario/form';
 import Modal from '../../componetesGenericos/Modal/modal';
 import './principalAdmin.css'
 import '../../componetesGenericos/tabela/tabela'
 import Header from '../../header/Header';
-import { FormAlterarUser } from '../../componetesGenericos/FormAlterarUser/FormAlterarUser';
-
-
+import {FormAlterarUser} from '../../componetesGenericos/Formulários/FormAlterarUser/FormAlterarUser'
 function PrincipalAdmin() {
     // Exemplo para os dados vindo do backend, remover quando o backend estiver conectado
     const user = React.useContext(UserContext);

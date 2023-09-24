@@ -1,10 +1,10 @@
 import React from 'react';
 import { IMaskInput } from "react-imask";
 import './form.css';
-import { POST_USER } from '../../../Api';
-import Error from '../../../Helper/Error';
+import { POST_USER } from '../../../../Api';
+import Error from '../../../../Helper/Error';
 import { cpf } from 'cpf-cnpj-validator';
-import { UserContext } from '../../../UserContext';
+import { UserContext } from '../../../../UserContext';
 
 function Form() {
 

@@ -142,6 +142,20 @@ export function PATCH_USER(body, token, id){
     };
 }
 
+export function PATCH_SENHA(body, token, id){
+    return{
+        url:API_URL+'/users/atualizar/senha/'+id,
+        options:{ 
+            method:'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + token,
+            },
+            body:JSON.stringify(body),
+        }, 
+    };
+}
+
 export function PUT_PRODUTOS(body, token){
     return{
         url:API_URL+'/produtos/',
@@ -156,4 +170,16 @@ export function PUT_PRODUTOS(body, token){
     }
 }
 
+export function POST_UPLOAD_IMAGEM(formData, token){
+    return{
+        url: API_URL + '/imagens/upload',
+        options: {
+            method: 'POST',
+            headers: {
+              'Authorization': 'Bearer ' + token,
+            },
+            body: formData,
+           },
+    };
+}
 

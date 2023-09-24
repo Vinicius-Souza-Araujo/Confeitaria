@@ -2,9 +2,9 @@ import React from 'react'
 import { useState } from 'react'
 import { IMaskInput } from "react-imask";
 import { cpf } from 'cpf-cnpj-validator';
-import { UserContext } from '../../../UserContext';
-import Error from '../../../Helper/Error';
-import { PATCH_USER } from '../../../Api';
+import { UserContext } from '../../../../UserContext';
+import Error from '../../../../Helper/Error';
+import { PATCH_USER, PATCH_SENHA } from '../../../../Api';
 import Alert from 'react-bootstrap/Alert';
 import Button from 'react-bootstrap/Button';
 
@@ -20,6 +20,8 @@ export const FormAlterarUser = (props) => {
   const [error, setError] = React.useState('');
   const [show, setShow] = useState(false);
 
+
+
     const handleCpfChange = (event) => {
         const cpfValue = event.target.value.replace(/\D/g, '');
         setCpfUsuario(cpfValue);
@@ -27,13 +29,13 @@ export const FormAlterarUser = (props) => {
     
     async function handleSummit(event) {
         event.preventDefault();
-    
-    if(senha != confirmarSenha){
-      setError('Senhas não coincidem.');
-      return;
-    }
-    else{
-      setError('');
+      
+      if(senha != confirmarSenha){
+        setError('Senhas não coincidem.');
+        return;
+      }
+      else{
+        setError('');
     }
 
     if(!cpf.isValid(cpfUsuario)){
@@ -49,13 +51,21 @@ export const FormAlterarUser = (props) => {
     const {url, options} = PATCH_USER ({
       id: id,
       nome: nome,
-      senha: senha,
       cpf : cpfUsuario,
       grupo :grupo
     }, user.data.token, id);
+    AlterarSenha()
 
     const response = await fetch(url, options, id);
     setShow(false)
+}
+
+async function AlterarSenha(){
+  const {url, options} = PATCH_SENHA ({
+    novaSenha: senha
+  }, user.data.token, id)
+
+  const response = await fetch(url, options, id);
 }
 
   return (
