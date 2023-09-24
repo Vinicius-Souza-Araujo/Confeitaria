@@ -4,8 +4,8 @@ import { UserContext } from '../../../UserContext';
 import { GET_PRODUTOS, PUT_PRODUTOS, GET_PRODUTOS_SEM_FILTRO } from '../../../Api';
 import Header from '../../header/Header';
 import Modal from '../../componetesGenericos/Modal/modal';
-import { FormProduc } from '../../componetesGenericos/FormAlterarProd/formProduc';
-import { FormCadastarProd } from '../../componetesGenericos/FormCadastrarProd/FormCadastarProd';
+import { FormProduc } from '../../componetesGenericos/Formulários/FormAlterarProd/formProduc';
+import { FormCadastarProd } from '../../componetesGenericos/Formulários/FormCadastrarProd/FormCadastarProd';
 import './ProdutosAdmin.css'
 
 export const ProdutosAdmin = () => {

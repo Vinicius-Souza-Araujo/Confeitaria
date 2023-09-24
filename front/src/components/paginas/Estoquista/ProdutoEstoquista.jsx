@@ -4,8 +4,7 @@ import { UserContext } from '../../../UserContext';
 import { GET_PRODUTOS_ESTOQUE } from '../../../Api';
 import Header from '../../header/Header';
 import Modal from '../../componetesGenericos/Modal/modal';
-import { FormProduc } from '../../componetesGenericos/FormAlterarProd/formProduc';
-import { FormAlterarEstoque } from '../../componetesGenericos/FormAlterarEstoque/FormAlterarEstoque';
+import {FormAlterarEstoque} from '../../componetesGenericos/Formulários/FormAlterarEstoque/FormAlterarEstoque'
 import '../ProdutosAdmin/ProdutosAdmin.css'
 
 
