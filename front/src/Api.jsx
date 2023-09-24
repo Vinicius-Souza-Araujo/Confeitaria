@@ -13,28 +13,23 @@ export function TOKEN_POST(body){
     };
 }
 
-export function GET_PRODUTOS(token, paginacao){
+export function GET_PRODUTOS(paginacao){
     return{
         
         url: API_URL+'/produtos/?page='+paginacao,
         options:{
-            method:'GET',
-            headers:{
-                'Authorization': 'Bearer ' + token,
-            }
+            method:'GET'
+            
         }
     }
 }
 
-export function GET_PRODUTOS_SEM_FILTRO(token, itemBusca){
+export function GET_PRODUTOS_SEM_FILTRO(itemBusca){
     return{
         
         url: API_URL+'/produtos/?page&nome='+itemBusca,
         options:{
-            method:'GET',
-            headers:{
-                'Authorization': 'Bearer ' + token,
-            }
+            method:'GET'
         }
     }
 }

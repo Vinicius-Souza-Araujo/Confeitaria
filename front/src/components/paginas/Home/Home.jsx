@@ -1,45 +1,103 @@
 import React from 'react'
-import { GET_PRODUTOS_ATIVADOS } from '../../../Api';
-import { useState, useEffect } from 'react';
+import HeaderHome from '../../header/HeaderHome'
 import { UserContext } from '../../../UserContext';
-import './Home.css'
+import Cards from '../../componetesGenericos/cards/Cards';
+import { GET_PRODUTOS, GET_PRODUTOS_SEM_FILTRO } from '../../../Api';
+import './Home.css';
 
 
-export const Home = () => {
 
-  const [dataProduto,setProduto] = useState([]);
-  const user = React.useContext(UserContext);
+const Home = () => {
+   
+    const [filtro, setFiltro] = React.useState(0);
+    const [inputBuscarValor, setInputBuscarValor] = React.useState("");
+    const [dataProdutos, setDataProdutos] = React.useState([]);
+    const cores = ['#e9c1d1', '#f5e391', '#bae9e7'];
 
-  React.useEffect(() => {  
-    getProdutos();
-  }, []);
-  
-  async function getProdutos(){
 
-    const {url, options} = GET_PRODUTOS_ATIVADOS();
-    const response = await fetch(url, options);
-    
-    if (response.ok) {
-        const dataProduto = await response.json();
-        setProduto(dataProduto.content);
-    } else {
-        console.error('Erro ao procurar dados do produto');
+    React.useEffect(() => {
+      getProdutos();
+    }, [filtro]);
+
+    async function getProdutos() {
+        const { url, options } = GET_PRODUTOS(filtro);
+        const response = await fetch(url, options);
+
+        if (response.ok) {
+            const responseData = await response.json();
+            const produtos = responseData.content; 
+            setDataProdutos(produtos);
+        } else {
+            console.error('Erro ao obter dados dos produtos');
+        }
     }
-    
-}
-  return (
-    <div className='estrutura-produtos'>
-         {dataProduto.map((conteudo) => (
-            <div key={conteudo.id} >
 
-              <div className='card'>
-                <p className='tituloCARD'>{conteudo.nome}</p>
-                <p>{(conteudo.valor || 0).toLocaleString('pt-BR', {style: 'currency', currency: 'BRL',})}</p>
-                <p>QTD: {conteudo.quantidade}</p>
-              </div>
-      
-            </div>
-         ))}
+
+    async function getProdutosSemFiltro() {
+        const { url, options } = GET_PRODUTOS_SEM_FILTRO(inputBuscarValor);
+        const response = await fetch(url, options);
+
+        if (response.ok) {
+            const responseData = await response.json();
+            const produtos = responseData.content; 
+            setDataProdutos(produtos);
+        } else {
+            console.error('Erro ao obter dados dos produtos');
+        }
+    }
+
+    
+    const aumentarFiltro = () => {
+        
+        setFiltro(filtro + 1);
+    
+    };
+
+    
+    const diminuirFiltro = () => {
+        
+            setFiltro(filtro - 1);
+       
+    };
+  return (
+    <div >
+        <HeaderHome />
+        <h1 className='titulo-principal'>Produtos</h1>
+
+        <div className='box-input-buscar'>
+            <input onChange={(event) => setInputBuscarValor(event.target.value)} className='input-buscar' placeholder='Buscar...'/>
+            <button onClick={getProdutosSemFiltro}>Buscar</button>
+        </div>
+        
+
+        
+
+        <div className='div-produtos'>
+        {dataProdutos.length === 0 ? (
+                <h1>Nenhum produto encontrado</h1>
+            ) :(
+        dataProdutos.map((conteudo, index) => {
+          const imagemTrue = conteudo.imagens.find((imagem) => imagem.flag === true);
+        
+          const imgNome = imagemTrue ? imagemTrue.nome : '';
+          const backgroundColor = cores[index % cores.length];
+          
+
+        
+          return (
+            
+            <Cards cor={backgroundColor} key={conteudo.id} titulo={conteudo.nome} imgNome={imgNome} />
+          );
+        })
+        )}
+        </div>
+
+        <div className='buttons-de-paginacao'>
+        {filtro != 0 ? <button className='botao-anterior' onClick={diminuirFiltro}>Anterior</button> : <button className='botao-anterior' disabled onClick={diminuirFiltro}>Anterior</button>}
+        {dataProdutos.length === 10 ? <button className='botao-proximo' onClick={aumentarFiltro}>Próximo</button> : <button className='botao-proximo' disabled onClick={aumentarFiltro}>Próximo</button>}
+        </div>
     </div>
   )
 }
+
+export default Home
