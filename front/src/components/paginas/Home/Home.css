@@ -1,20 +1,53 @@
-.estrutura-produtos{
+.box-input-buscar{
     display: flex;
     justify-content: center;
+    align-items: end;
+    margin-bottom: 4rem;
+    gap: 10px;
+
+}
+
+.input-buscar{
+    width: 250px;
+
+}
+
+.div-produtos{
+    display: flex;
     align-items: center;
-    margin: 20px;
-    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+    
+
+}
+
+.titulo-principal{
     text-align: center;
+    margin-top: 4rem;
+    margin-bottom: 2rem;
+    color: #271511;;
 }
 
-.card{
-    background-color:  #FEB4CB;
-    padding: 20px;
-    border-radius: 20px;
-    border: 1px solid #ffff;
+.botao-anterior {
+    
+    margin-left: 40px; 
+    margin-bottom: 10px; 
+    background-color: #271511;
+    color: #FFFFFF;
+    border: none;
 }
 
-.tituloCARD{
-    font-size: 16px;
-    text-shadow: 10px;
+.botao-proximo {
+    
+    margin-right: 40px; 
+    margin-bottom: 10px; 
+    background-color: #271511;
+    color: #FFFFFF;
+    border: none;
+}
+
+.buttons-de-paginacao{
+    display: flex;
+    justify-content: space-between;
+    
 }
