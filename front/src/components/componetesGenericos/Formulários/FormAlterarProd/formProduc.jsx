@@ -50,6 +50,10 @@ export const FormProduc = (props) => {
     }
     
 
+    const handleReturn = () => {
+      navigate("/ProdutosAdmin");
+    };
+
     function handleEnviar(event){
         event.preventDefault();
         if (novaImagem) {
@@ -57,6 +61,8 @@ export const FormProduc = (props) => {
         }
         putProduto();
         setShow(false);
+        
+          
     }
 
     async function handleAlterarImagem () {
@@ -125,12 +131,12 @@ export const FormProduc = (props) => {
                     onChange={(event) => handleImageChange(event, imagem.nome, imagem.flag)}
                   />
 
-                  <Form.Check className='switch-form'
+                  {/* <Form.Check className='switch-form'
                       type="switch"
                       id="custom-switch"
                       label="Principal"
                       custom
-                  />
+                  /> */}
                 </div>
                 
                 </form>
