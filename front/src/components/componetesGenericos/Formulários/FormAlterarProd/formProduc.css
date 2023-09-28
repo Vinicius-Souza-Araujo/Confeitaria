@@ -1,0 +1,37 @@
+.icon-alterar{
+    background: #FEB4CB;;
+    padding: 10px;
+}
+
+.estrutura_imagem{
+    margin: 10px;
+}
+
+.sub-container-imagem{
+    display: flex;
+    gap: 100px;
+    border: transparent;
+    align-items: center;
+}
+
+.img-card-form{
+    width: 20%;
+    height: 20%;
+}
+
+.dados-textuais{
+    display: block;
+    margin: 10px;
+}
+
+
+.switch-form{
+    display: flex;
+    align-items: center;
+    
+}
+
+.dados-textuais{
+    display: flex;
+    align-items: baseline;
+}
