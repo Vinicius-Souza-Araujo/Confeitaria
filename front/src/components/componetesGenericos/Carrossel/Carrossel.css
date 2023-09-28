@@ -1,0 +1,19 @@
+/* Carrossel.css */
+
+.carousel-image {
+  display: flex;
+  justify-content: center;
+  width: 60%;
+  height: 60%;
+  object-fit: cover; 
+}
+
+.estrutura{
+  width: 80%;
+  margin: 10px;
+}
+
+.estrutura-carrosel{
+  width: 10%;
+  height: 60vh;
+}

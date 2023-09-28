@@ -7,7 +7,7 @@ import { Carrossel } from '../Carrossel/Carrossel';
 import { useNavigate } from 'react-router-dom';
 import './Visualizar.css'
 
-export const Visualizar = ({ paginaOrigem }) => {
+export const VisualizarProd = () => {
   const { id } = useParams();
   const [dataProduto, setProduto] = useState([]);
   const [imagens, setImagens] = useState([]);
@@ -31,7 +31,7 @@ export const Visualizar = ({ paginaOrigem }) => {
   };
 
   const handleReturn = () => {
-    navigate("/home");
+    navigate("/ProdutosAdmin");
   };
 
   return (

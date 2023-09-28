@@ -1,6 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import React from 'react';
-import './App.css';
 import {UserStorage} from './UserContext';
 import {ProtectedRouteAdm} from './Helper/ProtectedRouteAdm';
 import PrincipalAdmin from './components/paginas/PrincipalAdmin/principalAdmin';
@@ -10,6 +9,9 @@ import Login from '../src/components/paginas/Login/login';
 import { ProdutosAdmin } from './components/paginas/ProdutosAdmin/ProdutosAdmin';
 import { BackofficeEstoquista } from './components/paginas/Estoquista/BackofficeEstoquista';
 import { ProdutoEstoquista } from './components/paginas/Estoquista/ProdutoEstoquista';
+import { Visualizar } from './components/componetesGenericos/Visualizacao/Visualizar';
+import { VisualizarProd } from './components/componetesGenericos/Visualizacao/VisualizarProd';
+import './App.css';
 
 function App() {
  
@@ -25,6 +27,8 @@ function App() {
             <Route path='/estoquista' element={<BackofficeEstoquista></BackofficeEstoquista>}/>
             <Route path='/ProdutoEstoque' element={<ProdutoEstoquista></ProdutoEstoquista>}/>
             <Route path='/home' element={<Home/>}/>
+            <Route path="/visualizar/:id" element={<Visualizar />} />
+            <Route path="/visualizarProd/:id" element={<VisualizarProd />} />
           </Routes>
         </UserStorage>
       </BrowserRouter> 
