@@ -12,7 +12,6 @@
     transition: transform 0.3s ease;
 }
 
-
 .box-card:hover{
     transform: scale(1.08);
 }

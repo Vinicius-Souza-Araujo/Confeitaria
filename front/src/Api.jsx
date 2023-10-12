@@ -45,15 +45,6 @@ export function GET_PRODUTOS_ATIVADOS(){
     }
 }
 
-export function GET_PRODUTOS_ID(id){
-    return{
-        url: API_URL+'/produtos/?page&id='+id,
-        options:{
-            method:'GET'
-        }
-    }
-}
-
 export function GET_PRODUTOS_ESTOQUE(page){
     return{
         
@@ -173,24 +164,6 @@ export function PUT_PRODUTOS(body, token){
         }, 
     }
 }
-
-
-export function PUT_IMAGEM(id, nomeImagem, novaImagem, token) {
-    const formData = new FormData();
-    formData.append('file', novaImagem);
-  
-    return {
-      url: `${API_URL}/imagens/atualizar/${id}/${nomeImagem}`,
-      options: {
-        method: 'PUT',
-        headers: {
-          'Authorization': 'Bearer ' + token,
-        },
-        body: formData,
-      },
-    };
-  }
-  
 
 export function POST_UPLOAD_IMAGEM(formData, token){
     return{

@@ -1,8 +1,10 @@
 package com.example.api.rest.controller;
 
+import com.example.api.domain.entity.Endereco;
 import com.example.api.domain.entity.User;
 import com.example.api.domain.enums.GrupoUser;
 import com.example.api.domain.enums.Status;
+import com.example.api.domain.repository.EnderecoRepository;
 import com.example.api.domain.repository.Users;
 import com.example.api.exception.Response;
 import com.example.api.exception.UserNaoEncontradoException;
@@ -21,6 +23,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @RestController
@@ -34,6 +38,8 @@ public class UserController {
     @Autowired
     private TokenServiceImpl tokenService;
 
+    @Autowired
+    private EnderecoRepository enderecoRepository;
     private Users repository;
     public UserController(Users repository) {
         this.repository = repository;
@@ -138,6 +144,51 @@ public class UserController {
 
         return ResponseEntity.status(HttpStatus.CREATED).body(new Response(HttpStatus.CREATED, "Usuário criado com sucesso."));
         }
+
+    @PostMapping("/cadastrarCliente")
+    @ResponseStatus(HttpStatus.CREATED)
+    public ResponseEntity<Response> cadastrarCliente(@RequestBody @Valid UserDTO cliente){
+
+        boolean emailExistente = repository.existsByEmail(cliente.getEmail());
+        boolean cpfExistente = repository.existsByCpf(cliente.getCpf());
+
+        if(emailExistente){
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(new Response(HttpStatus.CONFLICT, "E-mail já existe."));
+        }
+        if(cpfExistente){
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(new Response(HttpStatus.CONFLICT, "Cpf já existe."));
+
+        }
+
+        String encryptedPassword = new BCryptPasswordEncoder().encode(cliente.getSenha());
+
+        Endereco enderecoNovoCliente = new Endereco(
+                cliente.getEndereco()
+        );
+
+        LocalDate dataNascimento = LocalDate.parse(cliente.getDataNascimento(), DateTimeFormatter.ISO_DATE);
+
+        User novoCliente = new User(
+                cliente.getNome(),
+                cliente.getEmail(),
+                encryptedPassword,
+                cliente.getCpf(),
+                cliente.getGenero(),
+                dataNascimento
+        );
+
+        enderecoNovoCliente.setCliente(novoCliente);
+
+//        cliente.setEndereco(enderecoNovoCliente);
+//        novoCliente.setEndereco((List<Endereco>) cliente.getEndereco());
+
+        novoCliente.setStatus(Status.ATIVADO);
+        novoCliente.setGrupo(GrupoUser.CLIENTE);
+        repository.save(novoCliente);
+        enderecoRepository.save(enderecoNovoCliente);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(new Response(HttpStatus.CREATED, "Usuário criado com sucesso."));
+    }
     @GetMapping()
     public List<User> find(User filtro){
 

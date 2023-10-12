@@ -102,7 +102,7 @@ export const FormCadastarProd = () => {
 
   return (
     <div>
-             <form onSubmit={handleEnviar} encType="multipart/form-data">
+             <form onSubmit={handleEnviar}>
                 <label htmlFor="nome">
                      Nome
                     <input value={nome} onChange={(event) => setNome(event.target.value)} type="text" name="nome" id="nome" required/>
