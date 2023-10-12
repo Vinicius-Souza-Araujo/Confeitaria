@@ -56,6 +56,7 @@ public class User implements UserDetails{
     @NotNull(message = "Campo status é obrigatório")
     private Status status;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "genero")
     private Generos genero;
 

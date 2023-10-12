@@ -2,8 +2,10 @@ package com.example.api.rest.controller;
 
 import com.example.api.domain.entity.Endereco;
 import com.example.api.domain.entity.User;
+import com.example.api.domain.enums.Generos;
 import com.example.api.domain.enums.GrupoUser;
 import com.example.api.domain.enums.Status;
+import com.example.api.domain.enums.StatusEndereco;
 import com.example.api.domain.repository.EnderecoRepository;
 import com.example.api.domain.repository.Users;
 import com.example.api.exception.Response;
@@ -148,7 +150,6 @@ public class UserController {
     @PostMapping("/cadastrarCliente")
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<Response> cadastrarCliente(@RequestBody @Valid UserDTO cliente){
-
         boolean emailExistente = repository.existsByEmail(cliente.getEmail());
         boolean cpfExistente = repository.existsByCpf(cliente.getCpf());
 
@@ -162,25 +163,26 @@ public class UserController {
 
         String encryptedPassword = new BCryptPasswordEncoder().encode(cliente.getSenha());
 
+
         Endereco enderecoNovoCliente = new Endereco(
                 cliente.getEndereco()
         );
 
         LocalDate dataNascimento = LocalDate.parse(cliente.getDataNascimento(), DateTimeFormatter.ISO_DATE);
+        Generos genero = Generos.valueOf(cliente.getGenero());
+
 
         User novoCliente = new User(
                 cliente.getNome(),
                 cliente.getEmail(),
                 encryptedPassword,
                 cliente.getCpf(),
-                cliente.getGenero(),
+                genero,
                 dataNascimento
         );
 
+        enderecoNovoCliente.setStatusEndereco(cliente.getEndereco().getStatusEndereco());
         enderecoNovoCliente.setCliente(novoCliente);
-
-//        cliente.setEndereco(enderecoNovoCliente);
-//        novoCliente.setEndereco((List<Endereco>) cliente.getEndereco());
 
         novoCliente.setStatus(Status.ATIVADO);
         novoCliente.setGrupo(GrupoUser.CLIENTE);

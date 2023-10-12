@@ -1,10 +1,10 @@
 package com.example.api.domain.entity;
 
 
+import com.example.api.domain.enums.StatusEndereco;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-
 @Getter
 @Setter
 @Entity
@@ -27,16 +27,20 @@ public class Endereco {
 
     @Column
     private String bairro;
-
+    @Column
     private String localidade;
-
+    @Column
     private String uf;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status_endereco")
+    private StatusEndereco statusEndereco;
 
     @ManyToOne
     @JoinColumn(name = "fk_cliente_id", nullable = false)
     private User cliente;
 
-
+    //SPRING NECESSITA DE UM CONSTRUTOR VAZIO NÃO TIRAR
     @Deprecated
     public Endereco(){}
 
