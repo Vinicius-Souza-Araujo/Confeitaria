@@ -4,11 +4,13 @@ use confeitaria;
 CREATE TABLE usuarios (
     ID int(11) AUTO_INCREMENT PRIMARY KEY,
     nome varchar(255),
-    grupo enum('ADM', 'ESTOQUISTA'),
+    grupo enum('ADM', 'ESTOQUISTA', 'CLIENTE'),
     email varchar(255),
     cpf varchar(11),
     senha varchar(255),
-    status varchar(50)
+    status varchar(50),
+    data_nascimento DATE,
+    genero ENUM("MASC", "FEM", "OUTROS")
 );
 
 
@@ -28,4 +30,17 @@ CREATE TABLE imagens_produto (
     nome VARCHAR(255) NOT NULL,
     flag BOOLEAN NOT NULL,
     FOREIGN KEY (id_produto) REFERENCES produtos(id)
+);
+
+CREATE TABLE enderecos (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    logradouro VARCHAR(255) NOT NULL,
+    bairro VARCHAR(255) NOT NULL,
+    complemento VARCHAR(255),
+    localidade VARCHAR(255) NOT NULL,
+    cep VARCHAR(9) NOT NULL,
+    uf VARCHAR(2) NOT NULL,
+    fk_cliente_id INT,
+    foreign key (fk_cliente_id) references usuarios(id),
+    status_endereco ENUM('ATIVADO', 'DESATIVADO', 'PRINCIPAL') NOT NULL ; 
 );
