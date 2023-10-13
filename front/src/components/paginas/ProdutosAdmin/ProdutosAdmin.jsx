@@ -1,6 +1,7 @@
 import React from 'react'
 import { useState } from 'react';
 import { UserContext } from '../../../UserContext';
+import { useNavigate } from 'react-router-dom';
 import { GET_PRODUTOS, PUT_PRODUTOS, GET_PRODUTOS_SEM_FILTRO } from '../../../Api';
 import Header from '../../header/Header';
 import Modal from '../../componetesGenericos/Modal/modal';
@@ -16,7 +17,8 @@ export const ProdutosAdmin = () => {
     const [openModal, setOpenModal] = useState(false);
     const [openModalCad, setOpenModalCad] = useState(false);
     const [conteudo, setConteudo] = useState([]);
-    const [limitePagina, setLimitePaginas] = useState('')
+    const [limitePagina, setLimitePaginas] = useState('');
+    const navigate = useNavigate();
    
     React.useEffect(() => {  
         getProdutos();
@@ -24,7 +26,7 @@ export const ProdutosAdmin = () => {
 
     // BUSCA DOS PRODUTOS ----------------------------------------------------------------
     async function getProdutos(){
-        const {url, options} = GET_PRODUTOS(user.data.token, paginacao);
+        const {url, options} = GET_PRODUTOS(paginacao);
         const response = await fetch(url, options);
         
         if (response.ok) {
@@ -74,6 +76,7 @@ export const ProdutosAdmin = () => {
             valor: conteudo.valor   
         }, user.data.token);
         const response = await fetch(url, options);
+        console.log('entrooo')
         getProdutos();
     }
 
@@ -105,6 +108,7 @@ export const ProdutosAdmin = () => {
                 status={conteudo.status}
                 valor={conteudo.valor} 
                 avaliacao={conteudo.avaliacao}
+                imagens={conteudo.imagens}
                 id={conteudo.id}></FormProduc>                
             </Modal>
 
@@ -159,7 +163,7 @@ export const ProdutosAdmin = () => {
                                         <td><button onClick={() => handleAlterarStatus(conteudo.status, conteudo)} className='botaoCiano'>{conteudo.status}</button></td>
                                         <td>{conteudo.avaliacao}</td>
                                         <td>{conteudo.quantidade}</td>
-                                        <td><button className='botaoAzulPA'>Abrir</button></td>
+                                        <td><button onClick={() => navigate(`/visualizarProd/${conteudo.id}`)} className='botaoAzulPA'>Abrir</button></td>
                                         <td ><button className='botaoRosaPA' onClick={() => {
                                             setConteudo(conteudo) 
                                             setOpenModal(true)

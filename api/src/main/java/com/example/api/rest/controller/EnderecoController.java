@@ -20,6 +20,4 @@ public class EnderecoController {
     public ResponseEntity consultaCep(@RequestBody EnderecoRequest enderecoRequest){
         return ResponseEntity.ok(enderecoService.executa(enderecoRequest));
     }
-
-    @GetMapping("")
 }

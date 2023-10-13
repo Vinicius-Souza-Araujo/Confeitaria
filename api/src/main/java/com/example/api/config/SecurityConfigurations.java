@@ -40,7 +40,6 @@ public class SecurityConfigurations {
                         .requestMatchers(HttpMethod.PATCH,"/api/users/atualizar/status/**").hasRole("ADM")
                         .requestMatchers(HttpMethod.PATCH,"/api/users/atualizar/senha/**").hasRole("ADM")
                         .requestMatchers(HttpMethod.GET,"/api/users/**").hasRole("ADM")
-                        .requestMatchers(HttpMethod.POST,"/api/users/cadastrarCliente").permitAll()
                         .requestMatchers(HttpMethod.GET,"/api/produtos/**").permitAll()
 
                         .requestMatchers(HttpMethod.PUT,"/api/produtos/**").permitAll()

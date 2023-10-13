@@ -77,16 +77,11 @@ const Home = () => {
                 <h1>Nenhum produto encontrado</h1>
             ) :(
         dataProdutos.map((conteudo, index) => {
-          const imagemTrue = conteudo.imagens.find((imagem) => imagem.flag === true);
-        
+          const imagemTrue = conteudo.imagens.find((imagem) => imagem.flag === false);
           const imgNome = imagemTrue ? imagemTrue.nome : '';
           const backgroundColor = cores[index % cores.length];
-          
-
-        
           return (
-            
-            <Cards cor={backgroundColor} key={conteudo.id} titulo={conteudo.nome} imgNome={imgNome} />
+            <Cards cor={backgroundColor} key={conteudo.id} id={conteudo.id} titulo={conteudo.nome} imgNome={imgNome} />
           );
         })
         )}
