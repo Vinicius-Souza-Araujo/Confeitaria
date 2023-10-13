@@ -163,7 +163,7 @@ export const ProdutosAdmin = () => {
                                         <td><button onClick={() => handleAlterarStatus(conteudo.status, conteudo)} className='botaoCiano'>{conteudo.status}</button></td>
                                         <td>{conteudo.avaliacao}</td>
                                         <td>{conteudo.quantidade}</td>
-                                        <td><button onClick={() => navigate(`/visualizar/${conteudo.id}`)} className='botaoAzulPA'>Abrir</button></td>
+                                        <td><button onClick={() => navigate(`/visualizarProd/${conteudo.id}`)} className='botaoAzulPA'>Abrir</button></td>
                                         <td ><button className='botaoRosaPA' onClick={() => {
                                             setConteudo(conteudo) 
                                             setOpenModal(true)
