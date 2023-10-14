@@ -6,9 +6,9 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface Users extends JpaRepository<User, Integer> {
-
 
     boolean existsByEmail(String email);
 
@@ -16,8 +16,6 @@ public interface Users extends JpaRepository<User, Integer> {
 
     @Query("SELECT u.cpf FROM User u WHERE u.id = :id")
     String findCpfById(Integer id);
-//    @Query("SELECT * FROM usuarios WHERE nome = :name")
-//    List<ListarUserDTO> findByName(String name);
 
     List<User> findByNome (String nome);
 
