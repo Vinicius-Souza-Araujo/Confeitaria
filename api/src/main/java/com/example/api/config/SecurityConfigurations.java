@@ -37,10 +37,15 @@ public class SecurityConfigurations {
                         .requestMatchers(HttpMethod.POST,"/api/users/login").permitAll()
                         .requestMatchers(HttpMethod.POST,"/api/users/cadastrar").hasRole("ADM")
                         .requestMatchers(HttpMethod.PATCH,"/api/users/atualizar/**").hasRole("ADM")
+                        .requestMatchers(HttpMethod.PATCH,"/api/users/atualizarCliente/**").permitAll()
                         .requestMatchers(HttpMethod.PATCH,"/api/users/atualizar/status/**").hasRole("ADM")
                         .requestMatchers(HttpMethod.PATCH,"/api/users/atualizar/senha/**").hasRole("ADM")
                         .requestMatchers(HttpMethod.GET,"/api/users/**").hasRole("ADM")
+                        .requestMatchers(HttpMethod.POST,"/api/users/cadastrarCliente").permitAll()
+                        .requestMatchers(HttpMethod.GET,"/api/users/enderecoCliente").permitAll()
                         .requestMatchers(HttpMethod.GET,"/api/produtos/**").permitAll()
+
+                        .requestMatchers(HttpMethod.GET,"/api/endereco/enderecosCliente/**").permitAll()
 
                         .requestMatchers(HttpMethod.PUT,"/api/produtos/**").permitAll()
                         .requestMatchers(HttpMethod.PATCH,"/api/produtos/atualizarEstoque/**").permitAll()
@@ -51,6 +56,7 @@ public class SecurityConfigurations {
                         .requestMatchers(HttpMethod.POST,"/api/imagens/upload").hasRole("ADM")
 
                         .requestMatchers(HttpMethod.GET,"/api/endereco/consulta").permitAll()
+                        .requestMatchers(HttpMethod.POST,"/api/endereco/cadastrar").permitAll()
 
                         .anyRequest().authenticated()
                 )

@@ -1,5 +1,6 @@
 package com.example.api.domain.entity;
 
+import com.example.api.domain.enums.Generos;
 import com.example.api.domain.enums.GrupoUser;
 import com.example.api.domain.enums.Status;
 import jakarta.persistence.*;
@@ -12,7 +13,10 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 @NoArgsConstructor
@@ -51,6 +55,27 @@ public class User implements UserDetails{
     @Column(name = "status")
     @NotNull(message = "Campo status é obrigatório")
     private Status status;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "genero")
+    private Generos genero;
+
+    @Column(name ="data_nascimento")
+    private LocalDate dataNascimento;
+
+    @Column(name ="endereco")
+    @OneToMany(mappedBy = "cliente")
+    private List<Endereco> endereco = new ArrayList<>();
+
+    public User(String nome, String email, String senha, String cpf, Generos genero, LocalDate dataNascimento){
+        this.nome = nome;
+        this.email = email;
+        this.senha =  senha;
+        this.cpf = cpf;
+        this.genero = genero;
+        this.dataNascimento = dataNascimento;
+
+    }
 
     public User(String nome, String email, String senha, String cpf, GrupoUser grupo) {
         this.nome = nome;
