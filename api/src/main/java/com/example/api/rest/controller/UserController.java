@@ -204,7 +204,7 @@ public class UserController {
                 dataNascimento
         );
 
-        enderecoNovoCliente.setStatusEndereco(cliente.getEndereco().getStatusEndereco());
+        enderecoNovoCliente.setStatusEndereco(StatusEndereco.ATIVADO);
         enderecoNovoCliente.setCliente(novoCliente);
 
         novoCliente.setStatus(Status.ATIVADO);
