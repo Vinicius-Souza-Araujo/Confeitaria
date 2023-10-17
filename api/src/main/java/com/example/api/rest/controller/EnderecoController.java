@@ -3,21 +3,18 @@ package com.example.api.rest.controller;
 import com.example.api.domain.entity.Endereco;
 import com.example.api.domain.entity.User;
 import com.example.api.domain.enums.GrupoUser;
-import com.example.api.domain.enums.Status;
 import com.example.api.domain.enums.StatusEndereco;
 import com.example.api.domain.repository.EnderecoRepository;
 import com.example.api.domain.repository.Users;
 import com.example.api.exception.Response;
-import com.example.api.rest.dto.CadastrarUserDTO;
-import com.example.api.rest.dto.EnderecoRequest;
-import com.example.api.rest.dto.NovoEnderecoDTO;
+import com.example.api.exception.UserNaoEncontradoException;
+import com.example.api.rest.dto.*;
 import com.example.api.service.EnderecoService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,8 +26,7 @@ import java.util.Optional;
 @RequestMapping("/api/endereco")
 public class EnderecoController {
 
-    @Autowired
-    private EnderecoRepository enderecoRepository;
+    private final EnderecoRepository enderecoRepository;
     @Autowired
     private Users userRepository;
 
@@ -38,9 +34,28 @@ public class EnderecoController {
 
     @GetMapping("/consulta")
     public ResponseEntity consultaCep(@RequestBody EnderecoRequest enderecoRequest){
-        System.out.println("aaaaaaaa");
         return ResponseEntity.ok(enderecoService.executa(enderecoRequest));
     }
+
+
+    // url aceitas = http://localhost:8080/api/endereco?id=5 (volta só o id) ou http://localhost:8080/api/endereco (pega toso enderecos)
+    @GetMapping()
+    public List<EnderecoDTO> listEndereco(@RequestParam(required = false) Long id){
+        if (id != null){
+            return enderecoRepository.findById(id).stream().map(EnderecoDTO::new).toList();
+        }
+        return enderecoRepository.findAll().stream().map(EnderecoDTO::new).toList();
+    }
+
+//    @GetMapping("/{id}")
+//    public List<EnderecoDTO> listEnderecosCliente(@PathVariable Integer id){
+//        List<Endereco> enderecos = enderecoRepository.findByUserId(id);
+//            return enderecoRepository.findByUserId(id).stream().map(EnderecoDTO::new).toList();
+////
+////
+////        return enderecoRepository.findAll().stream().map(EnderecoDTO::new).toList();
+//    }
+
 
     @PostMapping("/cadastrar")
     @ResponseStatus(HttpStatus.CREATED)
@@ -62,6 +77,26 @@ public class EnderecoController {
         enderecoRepository.save(novoEndereco);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(new Response(HttpStatus.CREATED, "Endereço cadastrado com sucesso."));
+    }
+
+    @PatchMapping("/atualizar/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @Transactional
+    public ResponseEntity<String> update(@PathVariable Long id, @RequestBody @Valid EnderecoDTO dto){
+
+        enderecoRepository
+                .findById(id)
+                .map(endereco ->{
+                    endereco.setCep(dto.cep());
+                    endereco.setLogradouro(dto.logradouro());
+                    endereco.setBairro(dto.bairro());
+                    endereco.setLocalidade(dto.localidade());
+                    endereco.setUf(dto.uf());
+                    endereco.setStatusEndereco(dto.statusEndereco());
+                    return enderecoRepository.save(endereco);
+                }).orElseThrow(() -> new UserNaoEncontradoException());
+
+        return ResponseEntity.status(HttpStatus.OK).body("Usuário atualizado com sucesso.");
     }
 
 

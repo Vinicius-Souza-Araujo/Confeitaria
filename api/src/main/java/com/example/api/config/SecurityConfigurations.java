@@ -40,12 +40,15 @@ public class SecurityConfigurations {
                         .requestMatchers(HttpMethod.PATCH,"/api/users/atualizarCliente/**").permitAll()
                         .requestMatchers(HttpMethod.PATCH,"/api/users/atualizar/status/**").hasRole("ADM")
                         .requestMatchers(HttpMethod.PATCH,"/api/users/atualizar/senha/**").hasRole("ADM")
-                        .requestMatchers(HttpMethod.GET,"/api/users/**").hasRole("ADM")
+                        .requestMatchers(HttpMethod.GET,"/api/users/**").permitAll()
                         .requestMatchers(HttpMethod.POST,"/api/users/cadastrarCliente").permitAll()
                         .requestMatchers(HttpMethod.GET,"/api/users/enderecoCliente").permitAll()
                         .requestMatchers(HttpMethod.GET,"/api/produtos/**").permitAll()
 
                         .requestMatchers(HttpMethod.GET,"/api/endereco/enderecosCliente/**").permitAll()
+                        .requestMatchers(HttpMethod.GET,"/api/endereco").permitAll()
+                        .requestMatchers(HttpMethod.GET,"/api/endereco/**").permitAll()
+                        .requestMatchers(HttpMethod.PATCH,"/api/endereco/atualizar/{id}").permitAll()
 
                         .requestMatchers(HttpMethod.PUT,"/api/produtos/**").permitAll()
                         .requestMatchers(HttpMethod.PATCH,"/api/produtos/atualizarEstoque/**").permitAll()

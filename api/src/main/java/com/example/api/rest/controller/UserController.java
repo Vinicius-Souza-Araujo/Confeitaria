@@ -221,6 +221,7 @@ public class UserController {
         ExampleMatcher matcher = ExampleMatcher.matching()
                 .withIgnoreCase()
                 .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING);
+
         Example example = Example.of(filtro, matcher);
         return repository.findAll(example);
     }
