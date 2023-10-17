@@ -20,6 +20,6 @@ public class CadastrarUserDTO {
     @Size(min = 11, max = 11, message = "CPF deve conter exatamente 11 caracteres.")
     private String cpf;
     @NotNull(message = "Campo grupo é Obrigatorio")
-    @Pattern(regexp = "ADM|ESTOQUISTA", message = "Grupo invalido. Valores aceitos são: ADM, ESTOQUISTA")
+    @Pattern(regexp = "ADM|ESTOQUISTA|CLIENTE", message = "Grupo invalido. Valores aceitos são: ADM, ESTOQUISTA")
     private String grupo;
 }

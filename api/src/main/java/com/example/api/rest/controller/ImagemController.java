@@ -5,7 +5,7 @@ import com.example.api.domain.entity.ImagemProduto;
 import com.example.api.domain.entity.Produto;
 import com.example.api.domain.repository.ImagensProduto;
 import com.example.api.domain.repository.Produtos;
-import com.example.api.domain.repository.Users;
+import com.example.api.domain.repository.UserRepository;
 import com.example.api.exception.Response;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.FileSystemResource;

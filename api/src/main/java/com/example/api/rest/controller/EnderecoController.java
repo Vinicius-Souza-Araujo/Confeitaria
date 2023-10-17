@@ -5,7 +5,8 @@ import com.example.api.domain.entity.User;
 import com.example.api.domain.enums.GrupoUser;
 import com.example.api.domain.enums.StatusEndereco;
 import com.example.api.domain.repository.EnderecoRepository;
-import com.example.api.domain.repository.Users;
+import com.example.api.domain.repository.UserRepository;
+import com.example.api.domain.repository.UserRepository;
 import com.example.api.exception.Response;
 import com.example.api.exception.UserNaoEncontradoException;
 import com.example.api.rest.dto.*;
@@ -28,7 +29,7 @@ public class EnderecoController {
 
     private final EnderecoRepository enderecoRepository;
     @Autowired
-    private Users userRepository;
+    private UserRepository userRepository;
 
     private final EnderecoService enderecoService;
 
@@ -96,7 +97,7 @@ public class EnderecoController {
                     return enderecoRepository.save(endereco);
                 }).orElseThrow(() -> new UserNaoEncontradoException());
 
-        return ResponseEntity.status(HttpStatus.OK).body("Usuário atualizado com sucesso.");
+        return ResponseEntity.status(HttpStatus.OK).body("Endereço atualizado com sucesso.");
     }
 
 

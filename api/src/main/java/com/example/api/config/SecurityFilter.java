@@ -1,6 +1,6 @@
 package com.example.api.config;
 
-import com.example.api.domain.repository.Users;
+import com.example.api.domain.repository.UserRepository;
 import com.example.api.service.TokenServiceImpl;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -22,7 +22,7 @@ public class SecurityFilter extends OncePerRequestFilter {
     TokenServiceImpl tokenService;
 
     @Autowired
-    Users userRepository;
+    UserRepository userRepository;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
@@ -33,7 +33,9 @@ public class SecurityFilter extends OncePerRequestFilter {
         if(token != null){
             var login = tokenService.validateToken(token);
             UserDetails user = userRepository.findByEmail(login);
-
+            if( user == null ){
+                System.out.println("USER NULO NO FILTER");
+            }
             var authentication = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities() );
             SecurityContextHolder.getContext().setAuthentication(authentication);
         }
