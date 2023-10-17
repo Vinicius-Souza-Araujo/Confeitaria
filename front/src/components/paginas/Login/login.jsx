@@ -27,7 +27,6 @@ const Login = () => {
                 
                 <p className='titulo_decorativo'>Bem vindo!</p>
                
-                             
                 <figure className='imagens-decorativas'>
                     <div className="estrutura-donut">
                         <img className="donut" src="src\assets\donuts.png" alt="Imagem de donut de creme com cobertura de morango e confeite por cima" />
