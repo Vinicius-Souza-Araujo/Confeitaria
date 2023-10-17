@@ -5,13 +5,11 @@ import com.example.api.domain.entity.User;
 import com.example.api.domain.enums.Generos;
 import com.example.api.domain.enums.GrupoUser;
 import com.example.api.domain.enums.Status;
-import com.example.api.domain.enums.StatusEndereco;
 import com.example.api.domain.repository.EnderecoRepository;
-import com.example.api.domain.repository.Users;
+import com.example.api.domain.repository.UserRepository;
 import com.example.api.exception.Response;
 import com.example.api.exception.UserNaoEncontradoException;
 import com.example.api.rest.dto.*;
-import com.example.api.service.EnderecoService;
 import com.example.api.service.TokenServiceImpl;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +26,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Collections;
 import java.util.List;
 
 @RestController
@@ -47,8 +44,8 @@ public class UserController {
 
     @Autowired
     private EnderecoRepository enderecoRepository;
-    private Users repository;
-    public UserController(Users repository) {
+    private UserRepository repository;
+    public UserController(UserRepository repository) {
         this.repository = repository;
     }
 
@@ -217,12 +214,16 @@ public class UserController {
 
     @GetMapping()
     public List<User> find(User filtro){
-
+        System.out.println(filtro.toString());
         ExampleMatcher matcher = ExampleMatcher.matching()
                 .withIgnoreCase()
                 .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING);
         Example example = Example.of(filtro, matcher);
-        return repository.findAll(example);
+        List<User> lista = repository.findAll(example);
+
+        if( lista == null || lista.isEmpty())
+            System.out.println("LISTA_VAZIA");
+        return lista;
     }
 
 }
