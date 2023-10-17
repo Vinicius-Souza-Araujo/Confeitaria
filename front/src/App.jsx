@@ -11,12 +11,15 @@ import { BackofficeEstoquista } from './components/paginas/Estoquista/Backoffice
 import { ProdutoEstoquista } from './components/paginas/Estoquista/ProdutoEstoquista';
 import { Visualizar } from './components/componetesGenericos/Visualizacao/Visualizar';
 import { VisualizarProd } from './components/componetesGenericos/Visualizacao/VisualizarProd';
+import FormCadastrarCliente from './components/componetesGenericos/Formulários/FormCadastrarCliente/FormCadastrarCliente'
+import FormCadastrarEndereco from './components/componetesGenericos/Formulários/FormCadastrarCliente/FormCadastrarEndereco'
 import './App.css';
 
 function App() {
  
   return (
     <div>
+
       <BrowserRouter>
         <UserStorage>
           <Routes>
@@ -29,6 +32,8 @@ function App() {
             <Route path='/home' element={<Home/>}/>
             <Route path="/visualizar/:id" element={<Visualizar />} />
             <Route path="/visualizarProd/:id" element={<VisualizarProd />} />
+            <Route path="/cadastrarCliente" element={<FormCadastrarCliente></FormCadastrarCliente>}/>
+            <Route path="/cadastrarEndereco" element={<FormCadastrarEndereco></FormCadastrarEndereco>}/>
           </Routes>
         </UserStorage>
       </BrowserRouter> 
