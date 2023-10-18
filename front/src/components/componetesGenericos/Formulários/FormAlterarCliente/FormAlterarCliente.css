@@ -1,0 +1,90 @@
+/* Estilize o container do formulário */
+div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px;
+  }
+  
+  /* Estilize o formulário */
+  form {
+    width: 100%;
+    max-width: 400px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    background-color: #f9f9f9;
+  }
+  
+  /* Estilize os campos de entrada de texto */
+  input[type="text"],
+  input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  /* Estilize o campo de data com a máscara */
+  .IMaskInput {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  /* Estilize o campo de seleção (select) */
+  select {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  /* Estilize o botão "Enviar" e o botão "Sim" no alerta */
+  Button[type="submit"], Button[type="button"] {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  /* Estilize o botão "Não" no alerta */
+  Button[type="button"][variant="outline-success"] {
+    background-color: transparent;
+    color: #007bff;
+    padding: 10px 20px;
+    border: 1px solid #007bff;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  /* Estilize o alerta */
+  .alerta {
+    margin-top: 10px;
+    padding: 10px;
+  }
+  
+  /* Estilize mensagens de erro */
+  .error {
+    color: #ff0000;
+    font-size: 14px;
+    margin-top: 10px;
+  }
+  
+  /* Estilize o botão "Enviar" quando o alerta não estiver visível */
+  Button[type="button"]:not([type="submit"]) {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
