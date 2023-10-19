@@ -19,4 +19,6 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     List<User> findByNome (String nome);
 
     UserDetails findByEmail(String email);
+
+    List<User> findByNomeContainingIgnoreCase(String nome);
 }

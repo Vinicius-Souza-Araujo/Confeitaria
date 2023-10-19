@@ -29,6 +29,8 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+import static java.util.stream.Collectors.toList;
+
 @RestController
 @RequestMapping("/api/users")
 public class UserController {
@@ -213,19 +215,31 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.CREATED).body(new Response(HttpStatus.CREATED, "Usuário criado com sucesso."));
     }
 
+//    @GetMapping()
+//    public List<User> find(User filtro){
+//        System.out.println(filtro.toString());
+//        ExampleMatcher matcher = ExampleMatcher.matching()
+//                .withIgnoreCase()
+//                .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING);
+//
+//        Example example = Example.of(filtro, matcher);
+//        List<User> lista = repository.findAll(example);
+//
+//        if( lista == null || lista.isEmpty())
+//            System.out.println("LISTA_VAZIA");
+//        return lista;
+//    }
+
     @GetMapping()
-    public List<User> find(User filtro){
-        System.out.println(filtro.toString());
-        ExampleMatcher matcher = ExampleMatcher.matching()
-                .withIgnoreCase()
-                .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING);
+    public ResponseEntity<List<FindUsersDTO>> find(@RequestParam(required = false) String nome){
+        List<FindUsersDTO> usuarios;
 
-        Example example = Example.of(filtro, matcher);
-        List<User> lista = repository.findAll(example);
-
-        if( lista == null || lista.isEmpty())
-            System.out.println("LISTA_VAZIA");
-        return lista;
+        if( nome != null && !nome.isEmpty()){
+            usuarios = repository.findByNomeContainingIgnoreCase(nome).stream().map(FindUsersDTO::new).toList();;
+        }else{
+            usuarios = repository.findAll().stream().map(FindUsersDTO::new).toList();
+        }
+        return ResponseEntity.ok(usuarios);
     }
 
 }

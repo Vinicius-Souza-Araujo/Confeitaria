@@ -48,15 +48,6 @@ public class EnderecoController {
         return enderecoRepository.findAll().stream().map(EnderecoDTO::new).toList();
     }
 
-//    @GetMapping("/{id}")
-//    public List<EnderecoDTO> listEnderecosCliente(@PathVariable Integer id){
-//        List<Endereco> enderecos = enderecoRepository.findByUserId(id);
-//            return enderecoRepository.findByUserId(id).stream().map(EnderecoDTO::new).toList();
-////
-////
-////        return enderecoRepository.findAll().stream().map(EnderecoDTO::new).toList();
-//    }
-
 
     @PostMapping("/cadastrar")
     @ResponseStatus(HttpStatus.CREATED)
