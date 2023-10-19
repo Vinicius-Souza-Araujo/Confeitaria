@@ -4,9 +4,9 @@ import { UserContext } from '../../../../UserContext';
 import Error from '../../../../Helper/Error';
 import { PATCH_CLIENTE, PATCH_SENHA } from '../../../../Api';
 import Alert from 'react-bootstrap/Alert';
-import Button from 'react-bootstrap/Button';
-import './FormAlterarCliente.css';
-import { FormCadastrarEndereco } from '../FormCadastrarCliente';
+import { Button } from 'react-bootstrap';
+import FormCadastrarEndereco from "../FormCadastrarCliente/FormCadastrarCliente";
+
 
 export const FormAlterarCliente = (props) => {
   const user = React.useContext(UserContext);
@@ -90,3 +90,4 @@ export const FormAlterarCliente = (props) => {
     </div>
   );
 }
+export default FormAlterarCliente;
