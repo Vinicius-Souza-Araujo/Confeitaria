@@ -74,9 +74,9 @@ async function AlterarSenha(){
                 <input value={nome} onChange={(event) => setNome(event.target.value)} type="text" name="nome" id="nome" placeholder='Digite seu nome' required/>
                 <IMaskInput value={cpfUsuario} onChange={handleCpfChange} mask="000.000.000-00" placeholder="Digite o seu CPF"/>
                 <select value={grupo} onChange={e => setGrupo(e.target.value)}   name="grupo" id="grupo">
-                <option value="" disabled> Selecione uma opção</option>
-                <option value="ADM">Administrador</option>
-                <option value="ESTOQUISTA" >Estoquista</option>
+                  <option value="" disabled> Selecione uma opção</option>
+                  <option value="ADM">Administrador</option>
+                  <option value="ESTOQUISTA" >Estoquista</option>
                 </select>
                 
                 <input value={senha} onChange={(event) => setSenha(event.target.value)} type="password" name="senha" id="senha" placeholder='Informe a senha' required/>            
