@@ -15,10 +15,7 @@ function FormCadastrarCliente() {
     const [cpf, setCpf] = useState('');
     const [dataNasc, setDataNasc] = useState('');
     const [genero, setGenero] = useState('');
-    const [masculino, setMasculino] = useState('');
-    const [feminino, setFeminino] = useState('');
-    const [outro, setOutro] = useState('');
-    const [nf, setNf] = useState('');
+    const [message, setMessage] = useState('');
     const [cep, setCep] = useState('');
     const [logradouro, setLogradouro] = useState('');
     const [numero, setNumero] = useState('');
@@ -66,8 +63,15 @@ function FormCadastrarCliente() {
       });
       
       const response = await fetch(url, options);
-      console.log("retorno cadastrar >>>" + response.status)
-      // navigate('/');
+      console.log("retorno cadastrar >>>" + response.ok)
+
+      if (response.ok){
+          setMessage('Sucesso ao cadastrar usuário.')
+          navigate('/');
+      } else{
+        setMessage('Erro ao cadastar usuário.')
+      }
+    
       
 }
   
@@ -125,6 +129,8 @@ function FormCadastrarCliente() {
       setComplemento(data.complemento)
       setLogradouro(data.logradouro)
       setUf(data.uf.toLowerCase())
+
+
     }
     
 
@@ -267,6 +273,7 @@ function FormCadastrarCliente() {
 
     </fieldset>
       <button type="submit" id="enviar" >enviar</button>
+      {message && <p>{message}</p>}
     </form>
   </div>
   )

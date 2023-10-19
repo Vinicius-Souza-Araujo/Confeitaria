@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import React from 'react';
 import {UserStorage} from './UserContext';
-import {ProtectedRouteAdm} from './Helper/ProtectedRouteAdm';
+import {ProtectedRouteAdm, ProtectedRouteEstoquista} from './Helper/ProtectedRouteAdm';
 import PrincipalAdmin from './components/paginas/PrincipalAdmin/principalAdmin';
 import { Backoffice } from './components/paginas/BackofficeAdmin/Backoffice';
 import Home from './components/paginas/Home/Home';
@@ -19,7 +19,6 @@ function App() {
  
   return (
     <div>
-
       <BrowserRouter>
         <UserStorage>
           <Routes>
@@ -28,7 +27,7 @@ function App() {
             <Route path='/UsuariosAdmin' element={<ProtectedRouteAdm><PrincipalAdmin/></ProtectedRouteAdm>}/>
             <Route path='/ProdutosAdmin' element={<ProtectedRouteAdm><ProdutosAdmin/></ProtectedRouteAdm>}/>
             <Route path='/estoquista' element={<BackofficeEstoquista></BackofficeEstoquista>}/>
-            <Route path='/ProdutoEstoque' element={<ProdutoEstoquista></ProdutoEstoquista>}/>
+            <Route path='/ProdutoEstoque' element={<ProtectedRouteEstoquista><ProdutoEstoquista></ProdutoEstoquista></ProtectedRouteEstoquista>}/>
             <Route path='/home' element={<Home/>}/>
             <Route path="/visualizar/:id" element={<Visualizar />} />
             <Route path="/visualizarProd/:id" element={<VisualizarProd />} />
@@ -40,5 +39,4 @@ function App() {
     </div>
   )
 }
-
 export default App;
