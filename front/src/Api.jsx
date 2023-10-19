@@ -161,6 +161,20 @@ export function PATCH_USER(body, token, id){
     };
 }
 
+export function PATCH_CLIENTE(body, idCliente){
+    return{
+        url:API_URL+'/cliente/atualizar/'+idCliente,
+        options:{ 
+            method:'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ',
+            },
+            body:JSON.stringify(body),
+        }, 
+    };
+}
+
 export function PATCH_SENHA(body, token, id){
     return{
         url:API_URL+'/users/atualizar/senha/'+id,

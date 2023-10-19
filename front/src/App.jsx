@@ -11,8 +11,9 @@ import { BackofficeEstoquista } from './components/paginas/Estoquista/Backoffice
 import { ProdutoEstoquista } from './components/paginas/Estoquista/ProdutoEstoquista';
 import { Visualizar } from './components/componetesGenericos/Visualizacao/Visualizar';
 import { VisualizarProd } from './components/componetesGenericos/Visualizacao/VisualizarProd';
-import FormCadastrarCliente from './components/componetesGenericos/Formulários/FormCadastrarCliente/FormCadastrarCliente'
-import FormCadastrarEndereco from './components/componetesGenericos/Formulários/FormCadastrarCliente/FormCadastrarEndereco'
+import  FormCadastrarCliente from './components/componetesGenericos/Formulários/FormCadastrarCliente/FormCadastrarCliente';
+import  FormCadastrarEndereco  from './components/componetesGenericos/Formulários/FormCadastrarCliente/FormCadastrarEndereco';
+import FormAlterarCliente from './components/componetesGenericos/Formulários/FormAlterarCliente/FormAlterarCliente';
 import './App.css';
 
 function App() {
@@ -33,6 +34,7 @@ function App() {
             <Route path="/visualizarProd/:id" element={<VisualizarProd />} />
             <Route path="/cadastrarCliente" element={<FormCadastrarCliente></FormCadastrarCliente>}/>
             <Route path="/cadastrarEndereco" element={<FormCadastrarEndereco></FormCadastrarEndereco>}/>
+            <Route path="/alterarCliente/:idCliente" element={<FormAlterarCliente/>}/>
           </Routes>
         </UserStorage>
       </BrowserRouter> 
