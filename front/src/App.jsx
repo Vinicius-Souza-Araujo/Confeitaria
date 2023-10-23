@@ -12,7 +12,6 @@ import { ProdutoEstoquista } from './components/paginas/Estoquista/ProdutoEstoqu
 import { Visualizar } from './components/componetesGenericos/Visualizacao/Visualizar';
 import { VisualizarProd } from './components/componetesGenericos/Visualizacao/VisualizarProd';
 import FormCadastrarCliente from './components/componetesGenericos/Formulários/FormCadastrarCliente/FormCadastrarCliente'
-import FormCadastrarEndereco from './components/componetesGenericos/Formulários/FormCadastrarCliente/FormCadastrarEndereco'
 import './App.css';
 
 function App() {
@@ -33,7 +32,6 @@ function App() {
             <Route path="/visualizar/:id" element={<Visualizar />} />
             <Route path="/visualizarProd/:id" element={<VisualizarProd />} />
             <Route path="/cadastrarCliente" element={<FormCadastrarCliente></FormCadastrarCliente>}/>
-            <Route path="/cadastrarEndereco" element={<FormCadastrarEndereco></FormCadastrarEndereco>}/>
           </Routes>
         </UserStorage>
       </BrowserRouter> 

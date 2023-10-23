@@ -203,5 +203,18 @@ export function POST_UPLOAD_IMAGEM(formData, token){
             body: formData,
            },
     };
+
 }
+
+
+export function GET_CEP(cep){
+    return{
+        url: 'https://viacep.com.br/ws/'+cep+'/json/',
+        options: {
+            method: 'GET'
+        }
+    }
+}
+
+
 
