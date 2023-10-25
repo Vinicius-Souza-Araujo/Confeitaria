@@ -9,31 +9,20 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 
 import com.example.api.domain.entity.Produto;
-import com.example.api.domain.entity.User;
 import com.example.api.domain.enums.Status;
 import com.example.api.domain.repository.Produtos;
-import com.example.api.domain.repository.Users;
 import com.example.api.exception.Response;
 import com.example.api.rest.dto.CadastrarProdutoDTO;
 import com.example.api.rest.dto.DadosAtualizacaoProduto;
-import com.example.api.rest.dto.DadosAtualizacaoProduto;
 import jakarta.validation.Valid;
-import org.springframework.data.domain.*;
-import org.springframework.data.querydsl.QPageRequest;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
-import com.example.api.domain.entity.Produto;
-import com.example.api.domain.repository.Produtos;
 import com.example.api.exception.ProdutoNaoEncontradoException;
-import com.example.api.exception.Response;
 import com.example.api.rest.dto.AtualizaQuantidadeProdutoDTO;
-import com.example.api.rest.dto.DadosAtualizacaoProduto;
-
-import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api/produtos/")

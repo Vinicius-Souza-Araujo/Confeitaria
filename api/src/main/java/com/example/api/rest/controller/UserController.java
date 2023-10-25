@@ -7,11 +7,10 @@ import com.example.api.domain.enums.GrupoUser;
 import com.example.api.domain.enums.Status;
 import com.example.api.domain.enums.StatusEndereco;
 import com.example.api.domain.repository.EnderecoRepository;
-import com.example.api.domain.repository.Users;
+import com.example.api.domain.repository.UserRepository;
 import com.example.api.exception.Response;
 import com.example.api.exception.UserNaoEncontradoException;
 import com.example.api.rest.dto.*;
-import com.example.api.service.EnderecoService;
 import com.example.api.service.TokenServiceImpl;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,8 +27,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Collections;
 import java.util.List;
+
+import static java.util.stream.Collectors.toList;
 
 @RestController
 @RequestMapping("/api/users")
@@ -47,8 +47,8 @@ public class UserController {
 
     @Autowired
     private EnderecoRepository enderecoRepository;
-    private Users repository;
-    public UserController(Users repository) {
+    private UserRepository repository;
+    public UserController(UserRepository repository) {
         this.repository = repository;
     }
 
@@ -215,14 +215,31 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.CREATED).body(new Response(HttpStatus.CREATED, "Usuário criado com sucesso."));
     }
 
-    @GetMapping()
-    public List<User> find(User filtro){
+//    @GetMapping()
+//    public List<User> find(User filtro){
+//        System.out.println(filtro.toString());
+//        ExampleMatcher matcher = ExampleMatcher.matching()
+//                .withIgnoreCase()
+//                .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING);
+//
+//        Example example = Example.of(filtro, matcher);
+//        List<User> lista = repository.findAll(example);
+//
+//        if( lista == null || lista.isEmpty())
+//            System.out.println("LISTA_VAZIA");
+//        return lista;
+//    }
 
-        ExampleMatcher matcher = ExampleMatcher.matching()
-                .withIgnoreCase()
-                .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING);
-        Example example = Example.of(filtro, matcher);
-        return repository.findAll(example);
+    @GetMapping()
+    public ResponseEntity<List<FindUsersDTO>> find(@RequestParam(required = false) String nome){
+        List<FindUsersDTO> usuarios;
+
+        if( nome != null && !nome.isEmpty()){
+            usuarios = repository.findByNomeContainingIgnoreCase(nome).stream().map(FindUsersDTO::new).toList();;
+        }else{
+            usuarios = repository.findAll().stream().map(FindUsersDTO::new).toList();
+        }
+        return ResponseEntity.ok(usuarios);
     }
 
 }

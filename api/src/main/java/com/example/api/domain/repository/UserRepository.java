@@ -6,9 +6,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.List;
-import java.util.Optional;
 
-public interface Users extends JpaRepository<User, Integer> {
+public interface UserRepository extends JpaRepository<User, Integer> {
 
     boolean existsByEmail(String email);
 
@@ -20,4 +19,6 @@ public interface Users extends JpaRepository<User, Integer> {
     List<User> findByNome (String nome);
 
     UserDetails findByEmail(String email);
+
+    List<User> findByNomeContainingIgnoreCase(String nome);
 }
