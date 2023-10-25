@@ -2,7 +2,6 @@ import React from 'react';
 import { BotaoAzul, BotaoSummit } from '../../componetesGenericos/botoes/botoes';
 import { UserContext } from '../../../UserContext';
 import Error from '../../../Helper/Error';
-import { useNavigate } from 'react-router-dom';
 import '../Login/login.css';
 
 const Login = () => {
@@ -11,12 +10,13 @@ const Login = () => {
 
      const [email, setEmail] = React.useState('');
      const [senha, setSenha] = React.useState('');
-     const navigate = useNavigate('');
 
 
      async function handleSubmit(event){
-         event.preventDefault();
-         userLogin(email,senha);
+         event.preventDefault(); //Impede o recarregamento da página ao execultar a função.
+
+            userLogin(email,senha);
+
      }
     
   return (
@@ -27,6 +27,7 @@ const Login = () => {
                 
                 <p className='titulo_decorativo'>Bem vindo!</p>
                
+                             
                 <figure className='imagens-decorativas'>
                     <div className="estrutura-donut">
                         <img className="donut" src="src\assets\donuts.png" alt="Imagem de donut de creme com cobertura de morango e confeite por cima" />
@@ -58,14 +59,11 @@ const Login = () => {
                                loading ? <BotaoSummit id="confirmar" disabled texto="Carregando..."></BotaoSummit> :
                                <BotaoSummit id="confirmar" texto="Confirmar"></BotaoSummit>
                             }
-                           
-                              <button onClick={() => navigate('/cadastrarCliente')}>Cadastar</button>
+
                         </div>
 
                     </form >
                     <Error error={error} />
-                  
-
 
                 </div>
                
