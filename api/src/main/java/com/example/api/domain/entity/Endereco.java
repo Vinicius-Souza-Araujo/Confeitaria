@@ -2,6 +2,7 @@ package com.example.api.domain.entity;
 
 
 import com.example.api.domain.enums.StatusEndereco;
+import com.example.api.domain.enums.TipoDeEndereco;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -35,6 +36,10 @@ public class Endereco {
     @Enumerated(EnumType.STRING)
     @Column(name = "status_endereco")
     private StatusEndereco statusEndereco;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "tipo")
+    private TipoDeEndereco tipo;
 
     @ManyToOne
     @JoinColumn(name = "fk_cliente_id", nullable = false)
