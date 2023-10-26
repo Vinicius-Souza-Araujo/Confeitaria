@@ -1,0 +1,39 @@
+CREATE TABLE enderecos (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  logradouro VARCHAR(255) NOT NULL,
+  bairro VARCHAR(255) NOT NULL,
+  complemento VARCHAR(255),
+  localidade VARCHAR(255) NOT NULL,
+  cep VARCHAR(9) NOT NULL,
+  uf VARCHAR(2) NOT NULL,
+  fk_cliente_id int
+);
+
+CREATE TABLE imagens_produto (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  id_produto INT NOT NULL,
+  nome VARCHAR(255) NOT NULL,
+  flag BOOLEAN NOT NULL,
+  FOREIGN KEY (id_produto) REFERENCES produtos(id)
+);
+
+CREATE TABLE produtos (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  nome VARCHAR(255) NOT NULL,
+  status ENUM('ATIVADO', 'DESATIVADO') NOT NULL,
+avaliacao DECIMAL(3,1) NOT NULL,
+quantidade INT NOT NULL,
+valor DECIMAL(10,2) NOT NULL
+);
+
+CREATE TABLE usuarios (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  nome VARCHAR(255) NOT NULL,
+  email VARCHAR(255)UNIQUE NOT NULL,
+  senha VARCHAR(255) NOT NULL,
+  cpf VARCHAR(11)UNIQUE NOT NULL,
+  grupo ENUM("ADM", "ESTOQUISTA", "CLIENTE") NOT NULL,
+status varchar(50) NOT NULL,
+data_nascimento DATE,
+genero ENUM("MASC", "FEM", "OUTROS")
+);
