@@ -14,8 +14,6 @@ import com.example.api.rest.dto.*;
 import com.example.api.service.TokenServiceImpl;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Example;
-import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -28,8 +26,7 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
-
-import static java.util.stream.Collectors.toList;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/users")
@@ -242,4 +239,26 @@ public class UserController {
         return ResponseEntity.ok(usuarios);
     }
 
+
+    @GetMapping("/cliente/{id}")
+    public ResponseEntity<UserDTO> getUserById(@PathVariable Integer id) {
+        Optional<User> userOptional = repository.findById(id);
+
+        if (userOptional.isPresent()) {
+            User user = userOptional.get();
+            if (user.getGrupo() == GrupoUser.CLIENTE) {
+                UserDTO userDTO = new UserDTO();
+                userDTO.setNome(user.getNome());
+                userDTO.setEmail(user.getEmail());
+                userDTO.setCpf(user.getCpf());
+                userDTO.setGenero(user.getGenero().toString());
+                userDTO.setDataNascimento(user.getDataNascimento().toString());
+                return ResponseEntity.ok(userDTO);
+            } else {
+                return ResponseEntity.notFound().build();
+            }
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
 }

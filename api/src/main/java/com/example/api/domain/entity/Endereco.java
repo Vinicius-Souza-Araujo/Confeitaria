@@ -58,13 +58,14 @@ public class Endereco {
         this.uf = uf;
     }
 
-    public Endereco(String cep, String logradouro, String complemento, String bairro, String localidade, String uf, User cliente) {
+    public Endereco(String cep, String logradouro, String complemento, String bairro, String localidade, String uf,TipoDeEndereco tipo ,User cliente) {
         this.cep = cep;
         this.logradouro = logradouro;
         this.complemento = complemento;
         this.bairro = bairro;
         this.localidade = localidade;
         this.uf = uf;
+        this.tipo= tipo;
         this.cliente = cliente;
     }
 
@@ -75,6 +76,7 @@ public class Endereco {
         this.bairro = endereco.getBairro();
         this.localidade = endereco.getLocalidade();
         this.uf = endereco.getUf();
+        this.tipo= endereco.getTipo();
         this.cliente = endereco.getCliente();
     }
 

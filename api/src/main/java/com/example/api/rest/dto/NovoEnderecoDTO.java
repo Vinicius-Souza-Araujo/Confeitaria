@@ -1,5 +1,6 @@
 package com.example.api.rest.dto;
 
+import com.example.api.domain.enums.TipoDeEndereco;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -12,6 +13,8 @@ public class NovoEnderecoDTO {
     String bairro;
     String localidade;
     String uf;
+
+    TipoDeEndereco tipo;
 
     Integer clientId;
 }

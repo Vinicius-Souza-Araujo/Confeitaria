@@ -41,9 +41,9 @@ public class EnderecoController {
 
     // url aceitas = http://localhost:8080/api/endereco?id=5 (volta só o id) ou http://localhost:8080/api/endereco (pega toso enderecos)
     @GetMapping()
-    public List<EnderecoDTO> listEndereco(@RequestParam(required = false) Long id){
-        if (id != null){
-            return enderecoRepository.findById(id).stream().map(EnderecoDTO::new).toList();
+    public List<EnderecoDTO> listEndereco(@RequestParam(required = false) Integer idCliente){
+        if (idCliente != null){
+            return enderecoRepository.findByClienteId(idCliente).stream().map(EnderecoDTO::new).toList();
         }
         return enderecoRepository.findAll().stream().map(EnderecoDTO::new).toList();
     }
@@ -63,6 +63,7 @@ public class EnderecoController {
                 dto.getBairro(),
                 dto.getLocalidade(),
                 dto.getUf(),
+                dto.getTipo(),
                 user
         );
         novoEndereco.setStatusEndereco(StatusEndereco.ATIVADO);

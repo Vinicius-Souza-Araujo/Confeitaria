@@ -39,4 +39,7 @@ public class UserDTO {
 
     private Endereco endereco;
 
+    public UserDTO() {
+
+    }
 }

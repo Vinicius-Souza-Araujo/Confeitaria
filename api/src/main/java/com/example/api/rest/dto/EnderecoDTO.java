@@ -3,6 +3,7 @@ package com.example.api.rest.dto;
 import com.example.api.domain.entity.Endereco;
 import com.example.api.domain.entity.User;
 import com.example.api.domain.enums.StatusEndereco;
+import com.example.api.domain.enums.TipoDeEndereco;
 import jakarta.persistence.*;
 
 public record EnderecoDTO(
@@ -13,6 +14,8 @@ public record EnderecoDTO(
         String bairro,
         String localidade,
         String uf,
+
+        TipoDeEndereco tipo,
         StatusEndereco statusEndereco,
         Integer clienteId
 ) {
@@ -25,6 +28,7 @@ public record EnderecoDTO(
                 endereco.getBairro(),
                 endereco.getLocalidade(),
                 endereco.getUf(),
+                endereco.getTipo(),
                 endereco.getStatusEndereco() ,
         endereco.getCliente().getId());
     }
