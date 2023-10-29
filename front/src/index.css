@@ -91,11 +91,12 @@ h1, h2, h3{
 input{
   display: block;
   background: transparent;
+  width: 50%;
   font-family: 'Inter';
   align-items: center;
-  border: none;
-  border-bottom: solid 1px #FEB4CB;
-  box-shadow: none;  
+  border: solid 1px #FEB4CB;
+  border-radius: 10px;
+  padding: 10px;
 }
 
 button{
@@ -106,12 +107,13 @@ input:focus{
     outline: none;
 }
 
-label, input{
-  margin-bottom: 20px;
+input{
+  margin: 5px;
 }
 
 label{
   font-family: Inter;
+  margin: 5px;
 }
 
 .input_linha{
@@ -150,10 +152,10 @@ label{
 }
 
 select{
-  margin-top: 2px;
-  margin-bottom: 2px;
+  margin: 6px;
+  display: block;
   border: 1px solid #FEB4CB;
   border-radius: 6px;
   padding: 6px;
-  width: 100%;
+  width: 60%;
 }
