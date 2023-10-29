@@ -1,5 +1,6 @@
 import React from 'react'
 import HeaderHome from '../../header/HeaderHome'
+import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../../../UserContext';
 import Cards from '../../componetesGenericos/cards/Cards';
 import { GET_PRODUTOS, GET_PRODUTOS_SEM_FILTRO } from '../../../Api';
@@ -12,6 +13,8 @@ const Home = () => {
     const [filtro, setFiltro] = React.useState(0);
     const [inputBuscarValor, setInputBuscarValor] = React.useState("");
     const [dataProdutos, setDataProdutos] = React.useState([]);
+    const { data } = React.useContext(UserContext);
+    const navigate = useNavigate('');
     const cores = ['#e9c1d1', '#f5e391', '#bae9e7'];
 
 
@@ -62,6 +65,10 @@ const Home = () => {
   return (
     <div >
         <HeaderHome />
+        {data && data.grupo === 'CLIENTE' && (
+            <button className="botao-alterar" onClick={() => navigate('/alterarCliente')}>Alterar</button>
+        )}
+
         <h1 className='titulo-principal'>Produtos</h1>
 
         <div className='box-input-buscar'>
@@ -69,9 +76,6 @@ const Home = () => {
             <button onClick={getProdutosSemFiltro}>Buscar</button>
         </div>
         
-
-        
-
         <div className='div-produtos'>
         {dataProdutos.length === 0 ? (
                 <h1>Nenhum produto encontrado</h1>

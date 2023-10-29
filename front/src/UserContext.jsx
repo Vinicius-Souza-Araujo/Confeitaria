@@ -28,6 +28,8 @@ export const UserStorage = ({children}) => {
                 navigate('/administrador');
             } else if (json.grupo == 'ESTOQUISTA'){
                 navigate('/estoquista');
+            } else{
+                navigate('/home');
             }
            
         } catch(err){

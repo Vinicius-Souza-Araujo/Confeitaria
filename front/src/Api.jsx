@@ -90,6 +90,21 @@ export function POST_USER(body, token){
     };
 }
 
+
+export function POST_CLIENTE(body){
+    return{
+        url:API_URL+'/users/cadastrarCliente',
+        options:{ 
+            method:'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body:JSON.stringify(body),
+        } 
+    };
+}
+
+
 export function POST_PRODUTO(body, token){
     return{
         url:API_URL+'/produtos/cadastrar',
@@ -140,6 +155,19 @@ export function PATCH_USER(body, token, id){
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': 'Bearer ' + token,
+            },
+            body:JSON.stringify(body),
+        }, 
+    };
+}
+
+export function PATCH_CLIENTE(body, idCliente){
+    return{
+        url:API_URL+'/users/atualizarCliente'+idCliente,
+        options:{ 
+            method:'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
             },
             body:JSON.stringify(body),
         }, 
@@ -205,6 +233,8 @@ export function POST_UPLOAD_IMAGEM(formData, token){
     };
 
 }
+
+
 
 
 export function GET_CEP(cep){
