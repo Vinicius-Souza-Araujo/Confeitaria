@@ -13,5 +13,6 @@ public class LoginResponseDTO {
     private String token;
     private String email;
     private GrupoUser grupo;
+    private Integer id;
 
 }
