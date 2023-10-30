@@ -132,7 +132,7 @@ public class UserController {
         }
 
         var token = tokenService.generateToken((User)auth.getPrincipal());
-        return ResponseEntity.ok( new LoginResponseDTO(token, user.getEmail(), user.getGrupo()));
+        return ResponseEntity.ok( new LoginResponseDTO(token, user.getEmail(), user.getGrupo(), user.getId()));
     }
 
     @PostMapping("/cadastrar")
