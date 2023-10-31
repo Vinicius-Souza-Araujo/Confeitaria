@@ -1,5 +1,6 @@
 package com.example.api.domain.entity;
 
+import com.example.api.domain.enums.StatusPedido;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -12,7 +13,7 @@ import java.time.LocalDate;
 @Setter
 @Entity
 @Table(name = "pedidos")
-public class Pedidos {
+public class Pedido {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,8 +25,9 @@ public class Pedidos {
     @Column(name = "valor_total", precision = 10, scale = 2, columnDefinition = "DECIMAL(10, 2) default 0.00")
     private BigDecimal valorTotal;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "status", length = 255)
-    private String status;
+    private StatusPedido statusPedido;
 
     @Column(name = "data_pedido")
     private LocalDate dataPedido;

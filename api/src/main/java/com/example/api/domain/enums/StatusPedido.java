@@ -1,6 +1,6 @@
 package com.example.api.domain.enums;
 
-public enum StatusPagamento {
+public enum StatusPedido {
     AGUARDANDO,
     CONCLUIDO,
     CANCELADO
