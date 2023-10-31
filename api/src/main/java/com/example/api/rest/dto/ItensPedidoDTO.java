@@ -8,4 +8,8 @@ import lombok.Setter;
 @Setter
 public class ItensPedidoDTO {
 
+    private Integer idProduto;
+
+    private int quantidade;
+
 }

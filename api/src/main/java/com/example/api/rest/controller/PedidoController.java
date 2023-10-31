@@ -1,8 +1,11 @@
 package com.example.api.rest.controller;
 
 import com.example.api.domain.entity.Pedido;
+import com.example.api.domain.entity.Produto;
 import com.example.api.domain.entity.User;
 import com.example.api.domain.enums.StatusPedido;
+import com.example.api.domain.repository.ItensPedidoRepository;
+import com.example.api.domain.repository.Produtos;
 import com.example.api.domain.repository.UserRepository;
 import com.example.api.rest.dto.ItensPedidoDTO;
 import com.example.api.rest.dto.PedidoComItensDTO;
@@ -10,6 +13,7 @@ import com.example.api.service.PedidoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,13 +35,20 @@ public class PedidoController {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private ItensPedidoRepository itensPedidoRepository;
+
     private final PedidoService pedidoService;
+
+    @Autowired
+    private Produtos produtoRepository;
 
     @Autowired
     public PedidoController(PedidoService pedidosService) {
         this.pedidoService = pedidosService;
     }
 
+    @Transactional(rollbackFor = Exception.class)
     @PostMapping("/cadastrar")
     public ResponseEntity<String> cadastrarPedido(@RequestBody PedidoComItensDTO pedidoComItensDTO) {
 
@@ -56,22 +67,27 @@ public class PedidoController {
 
         pedidoService.cadastrarPedido(pedido);
 
+        pedido.getId();
 
-//        List<ItensPedido> itensPedidoList = new ArrayList<>();
-//
-//        for (ItensPedidoDTO itensPedidoDTO : pedidoComItensDTO.getItens()) {
-//            ItensPedido itemPedido = new ItensPedido();
-//            itemPedido.setProduto(itensPedidoDTO.getProduto());
-//            itemPedido.setQuantidade(itensPedidoDTO.getQuantidade());
-//
-//            itemPedido.setPedido(pedido); // Associe o item ao pedido.
-//            itensPedidoList.add(itemPedido);
-//        }
-//
-//        pedido.setItensPedido(itensPedidoList);
-//
-//        // Chame o serviço para salvar o pedido com os itens.
-//        pedidoService.cadastrarPedido(pedido);
+
+        List<ItensPedido> itensPedidoList = new ArrayList<>();
+
+        for (ItensPedidoDTO itensPedidoDTO : pedidoComItensDTO.getItens()) {
+            ItensPedido itemPedido = new ItensPedido();
+
+            Produto produto = produtoRepository.getById(itensPedidoDTO.getIdProduto());
+
+            itemPedido.setProduto(produto);
+
+            itemPedido.setQuantidade(itensPedidoDTO.getQuantidade());
+
+            itemPedido.setPedido(pedido);
+
+            itensPedidoList.add(itemPedido);
+        }
+
+        itensPedidoRepository.saveAll(itensPedidoList);
+
 
         return ResponseEntity.status(HttpStatus.CREATED).body("Pedido cadastrado com sucesso.");
     }
