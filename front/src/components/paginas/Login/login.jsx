@@ -17,6 +17,7 @@ const Login = () => {
      async function handleSubmit(event){
          event.preventDefault();
          userLogin(email,senha);
+         console.log(email, senha);
      }
     
   return (

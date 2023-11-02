@@ -14,6 +14,7 @@ import { VisualizarProd } from './components/componetesGenericos/Visualizacao/Vi
 import  FormCadastrarCliente from './components/componetesGenericos/Formulários/FormCadastrarCliente/FormCadastrarCliente';
 import FormAlterarClient from './components/componetesGenericos/Formulários/FormAlterarCliente/FormAlterarClient';
 import './App.css';
+import { Pagamento } from './components/componetesGenericos/pagamento/pagamento';
 
 function App() {
  
@@ -32,6 +33,7 @@ function App() {
             <Route path="/visualizar/:id" element={<Visualizar />} />
             <Route path="/visualizarProd/:id" element={<VisualizarProd />} />
             <Route path="/cadastrarCliente" element={<FormCadastrarCliente></FormCadastrarCliente>}/>
+            <Route path='/pagamento' element={<Pagamento></Pagamento>}/> 
             <Route path='/alterarCliente' element={<FormAlterarClient></FormAlterarClient>}/>
           </Routes>
         </UserStorage>
