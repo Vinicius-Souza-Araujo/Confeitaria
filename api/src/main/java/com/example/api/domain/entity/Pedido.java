@@ -3,12 +3,15 @@ package com.example.api.domain.entity;
 import com.example.api.domain.enums.StatusPedido;
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
 
+@NoArgsConstructor
 @Getter
 @Setter
 @Entity
@@ -19,7 +22,7 @@ public class Pedido {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "numero_pedido")
+    @Column(name = "numero_pedido", columnDefinition = "SERIAL")
     private Integer numeroPedido;
 
     @Column(name = "valor_total", precision = 10, scale = 2, columnDefinition = "DECIMAL(10, 2) default 0.00")
