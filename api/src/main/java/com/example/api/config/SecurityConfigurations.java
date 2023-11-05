@@ -45,6 +45,9 @@ public class SecurityConfigurations {
                         .requestMatchers(HttpMethod.GET,"/api/users/enderecoCliente").permitAll()
                         .requestMatchers(HttpMethod.GET,"/api/produtos/**").permitAll()
 
+                        .requestMatchers(HttpMethod.POST,"/api/pedidos/cadastrar").permitAll()
+                        .requestMatchers(HttpMethod.GET,"/api/pedidos/historico/*").permitAll()
+
                         .requestMatchers(HttpMethod.GET,"/api/endereco/enderecosCliente/**").permitAll()
                         .requestMatchers(HttpMethod.GET,"/api/endereco").permitAll()
                         .requestMatchers(HttpMethod.GET,"/api/endereco/**").permitAll()
