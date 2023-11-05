@@ -85,6 +85,15 @@ export function GET_CLIENTE(id){
     };
 }
 
+export function GET_ENDERENCO(id){
+    return{
+        url:API_URL+'/endereco?idCliente='+id,
+        options:{
+            method: 'GET'
+        }
+    }
+}
+
 export function POST_USER(body, token){
     return{
         url:API_URL+'/users/cadastrar',
@@ -243,8 +252,6 @@ export function POST_UPLOAD_IMAGEM(formData, token){
     };
 
 }
-
-
 
 
 export function GET_CEP(cep){

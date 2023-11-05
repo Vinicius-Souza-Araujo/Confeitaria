@@ -1,7 +1,9 @@
 import React from 'react'
 import { useEffect, useState, useContext } from 'react';
 import { UserContext } from '../../../../UserContext';
+import { Link } from 'react-router-dom';
 import { GET_CLIENTE, PATCH_CLIENTE } from '../../../../Api';
+import { Endereco } from '../../Endereco/Endereco';
 import '../FormAlterarCliente/formClient.css'
 
 const FormAlterarClient = () => {  
@@ -108,7 +110,8 @@ const FormAlterarClient = () => {
                 
                 {!validarSenha&& <p>As senhas não coincidem.</p>}
                 
-                <button>Atualizar endereço</button>
+                <Link to="/alterarEnderenco"><button>Atualizar endereço</button></Link>
+
             
                 <button onClick={alterarCliente} type="submit">Alterar</button>
                 
