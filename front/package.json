@@ -15,6 +15,7 @@
     "@mui/icons-material": "^5.14.9",
     "@mui/material": "^5.14.9",
     "@mui/styled-engine-sc": "^5.14.8",
+    "@react-pdf/renderer": "^3.1.14",
     "bootstrap": "^5.3.1",
     "cpf-cnpj-validator": "^1.0.3",
     "filepond": "^4.30.4",
