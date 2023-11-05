@@ -39,7 +39,7 @@ export const ProdutoEstoquista = () => {
 
 
     async function getProdutos_sem_filtro(){
-        const {url, options} = GET_PRODUTOS_SEM_FILTRO(user.data.token, itemBusca);
+        const {url, options} = GET_PRODUTOS(user.data.token, itemBusca);
         const response = await fetch(url, options);
         
         if (response.ok) {
