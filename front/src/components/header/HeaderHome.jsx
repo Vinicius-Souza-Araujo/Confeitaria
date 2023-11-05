@@ -1,15 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../../UserContext';
 import './Header.css';
 
 const HeaderHome = () => {
     const { userLogout } = React.useContext(UserContext);
     const { data, login } = React.useContext(UserContext);
+    const navigate = useNavigate('');
 
     function handleLogout() {
         userLogout();
-        
     }
 
   return (
@@ -29,6 +30,12 @@ const HeaderHome = () => {
                 <img src="src\assets\sair.svg" alt='Sair' />
             </button>
             )}
+            {data && data.grupo === 'CLIENTE' && (
+              <button className="botao-alterar" onClick={() => navigate('/alterarCliente')}>
+                <img src="src\assets\configuracao.png" alt="Alterar" />
+              </button>
+        )}
+            
         </div>
         
       </nav>
