@@ -65,10 +65,7 @@ const Home = () => {
   return (
     <div >
         <HeaderHome />
-        {data && data.grupo === 'CLIENTE' && (
-            <button className="botao-alterar" onClick={() => navigate('/alterarCliente')}>Alterar</button>
-        )}
-
+        
         <h1 className='titulo-principal'>Produtos</h1>
 
         <div className='box-input-buscar'>

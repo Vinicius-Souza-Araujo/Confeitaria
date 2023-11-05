@@ -1,0 +1,18 @@
+.form-endereco{
+    display: flex;
+    margin: 20px;
+    flex-direction: row;
+    align-items: center;
+    padding: 40px;
+    border-radius: 20px;
+    justify-content: space-between;
+    background-color: #A9DEE2;
+}
+
+.titulo-enderenco{
+    color: #3d6d70;
+}
+
+.body{
+    margin: 20px;
+}
