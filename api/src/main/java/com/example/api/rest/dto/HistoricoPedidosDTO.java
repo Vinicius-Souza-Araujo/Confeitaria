@@ -12,8 +12,6 @@ public record HistoricoPedidosDTO(
 
         Long id,
 
-        Integer numeroPedido,
-
         BigDecimal valorTotal,
 
         StatusPedido statusPedido,
@@ -25,7 +23,6 @@ public record HistoricoPedidosDTO(
         public HistoricoPedidosDTO (Pedido pedido){
                 this(
                         pedido.getId(),
-                        pedido.getNumeroPedido(),
                         pedido.getValorTotal(),
                         pedido.getStatusPedido(),
                         pedido.getDataPedido()

@@ -2,14 +2,14 @@ package com.example.api.domain.entity;
 
 
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
 @Data
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "forma_pagamento")
 public class FormaPagamento {
 
@@ -27,4 +27,15 @@ public class FormaPagamento {
 
     @Column(name = "parcelas")
     private Integer parcelas;
+
+//    public FormaPagamento(FormaDePagamentoDTO forma){
+//        this(forma.getId(),
+//                forma.getCartao(),
+//                forma.getBoleto(),
+//                forma.getParcelas()
+//        );
+//    }
+
+
+
 }

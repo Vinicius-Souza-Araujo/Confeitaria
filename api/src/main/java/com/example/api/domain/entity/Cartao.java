@@ -1,11 +1,14 @@
 package com.example.api.domain.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.sql.Date;
-
+@NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
 @Entity
@@ -28,6 +31,16 @@ public class Cartao {
     private Date dataVencimento;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "usuario_id")
     private User user;
+
+    public Cartao(Long numeroCartao, Integer codigoVerificador, String nomeCompleto, Date dataVencimento){
+       this.numeroCartao = numeroCartao;
+       this.codigoVerificador = codigoVerificador;
+       this.nomeCompleto = nomeCompleto;
+       this.dataVencimento = dataVencimento;
+    };
+
+
+
 }
