@@ -76,6 +76,24 @@ export function GET_USERS(token, filtro){
     };
 }
 
+export function GET_CLIENTE(id){
+    return{
+        url:API_URL+'/users/cliente/'+id,
+        options:{ 
+            method:'GET'
+        }, 
+    };
+}
+
+export function GET_ENDERENCO(id){
+    return{
+        url:API_URL+'/endereco?idCliente='+id,
+        options:{
+            method: 'GET'
+        }
+    }
+}
+
 export function POST_USER(body, token){
     return{
         url:API_URL+'/users/cadastrar',
@@ -119,6 +137,20 @@ export function POST_PRODUTO(body, token){
     };
 }
 
+
+export function PATCH_CLIENTE(body, id){
+    return{
+        url: API_URL+'/users/atualizarCliente/'+id,
+        options:{
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body:JSON.stringify(body),
+        }
+    }
+}
+
 export function PATCH_STATUS(body, token, id){
     return{
         url:API_URL+'/users/atualizar/status/'+id,
@@ -155,19 +187,6 @@ export function PATCH_USER(body, token, id){
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': 'Bearer ' + token,
-            },
-            body:JSON.stringify(body),
-        }, 
-    };
-}
-
-export function PATCH_CLIENTE(body, idCliente){
-    return{
-        url:API_URL+'/users/atualizarCliente'+idCliente,
-        options:{ 
-            method:'PATCH',
-            headers: {
-                'Content-Type': 'application/json',
             },
             body:JSON.stringify(body),
         }, 
@@ -235,8 +254,6 @@ export function POST_UPLOAD_IMAGEM(formData, token){
 }
 
 
-
-
 export function GET_CEP(cep){
     return{
         url: 'https://viacep.com.br/ws/'+cep+'/json/',
@@ -245,6 +262,5 @@ export function GET_CEP(cep){
         }
     }
 }
-
 
 

@@ -13,7 +13,9 @@ import { Visualizar } from './components/componetesGenericos/Visualizacao/Visual
 import { VisualizarProd } from './components/componetesGenericos/Visualizacao/VisualizarProd';
 import  FormCadastrarCliente from './components/componetesGenericos/Formulários/FormCadastrarCliente/FormCadastrarCliente';
 import FormAlterarClient from './components/componetesGenericos/Formulários/FormAlterarCliente/FormAlterarClient';
+import { Endereco } from './components/componetesGenericos/Endereco/Endereco';
 import './App.css';
+import { Pagamento } from './components/componetesGenericos/pagamento/pagamento';
 
 function App() {
  
@@ -32,7 +34,10 @@ function App() {
             <Route path="/visualizar/:id" element={<Visualizar />} />
             <Route path="/visualizarProd/:id" element={<VisualizarProd />} />
             <Route path="/cadastrarCliente" element={<FormCadastrarCliente></FormCadastrarCliente>}/>
+            <Route path='/pagamento' element={<Pagamento></Pagamento>}/> 
             <Route path='/alterarCliente' element={<FormAlterarClient></FormAlterarClient>}/>
+            <Route path='/alterarCliente' element={<ProtectedRouteCliente><FormAlterarClient></FormAlterarClient></ProtectedRouteCliente>}/>
+            <Route path='/alterarEnderenco' element={<ProtectedRouteCliente><Endereco></Endereco></ProtectedRouteCliente>}/>
           </Routes>
         </UserStorage>
       </BrowserRouter> 
