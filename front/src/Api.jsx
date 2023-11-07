@@ -263,4 +263,12 @@ export function GET_CEP(cep){
     }
 }
 
-
+export function GET_PEDIDOS(id){
+    return{
+        
+        url: API_URL+'/pedidos/historico/'+id,
+        options:{
+            method:'GET'
+        }
+    }
+}

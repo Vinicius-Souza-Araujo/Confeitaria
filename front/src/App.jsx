@@ -16,6 +16,7 @@ import FormAlterarClient from './components/componetesGenericos/Formulários/For
 import { Endereco } from './components/componetesGenericos/Endereco/Endereco';
 import './App.css';
 import { Pagamento } from './components/componetesGenericos/pagamento/pagamento';
+import GerenciamentoPedidos from './components/componetesGenericos/Formulários/FormPedidos/GerenciamentoPedidos';
 
 function App() {
  
@@ -38,6 +39,7 @@ function App() {
             <Route path='/alterarCliente' element={<FormAlterarClient></FormAlterarClient>}/>
             <Route path='/alterarCliente' element={<ProtectedRouteCliente><FormAlterarClient></FormAlterarClient></ProtectedRouteCliente>}/>
             <Route path='/alterarEnderenco' element={<ProtectedRouteCliente><Endereco></Endereco></ProtectedRouteCliente>}/>
+            <Route path='/pedidos' element={<ProtectedRouteCliente><GerenciamentoPedidos></GerenciamentoPedidos></ProtectedRouteCliente>}/>
           </Routes>
         </UserStorage>
       </BrowserRouter> 

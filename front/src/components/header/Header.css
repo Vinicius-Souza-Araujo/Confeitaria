@@ -2,7 +2,6 @@
     box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.1);
     width: 100%;
     background: white;
-    
   }
   
   .nav {
@@ -13,12 +12,9 @@
     padding: 0 2rem;
   }
 
-
   .botao-alterar{
     background: transparent;
   }
-  
-  
   
   .login {
     color: #333;
@@ -42,5 +38,20 @@
   .button{
     background: #fff;
     cursor: pointer;
+    position: relative;
   }
   
+  .caption {
+    position: absolute;
+    top: 45px; /* Distância da legenda */
+    left: 0;
+    right: 0;
+    text-align: center;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    color: black;
+  }
+  
+  .button:hover .caption {
+    opacity: 1;
+  }

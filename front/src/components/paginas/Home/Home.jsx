@@ -9,7 +9,7 @@ import './Home.css';
 
 
 const Home = () => {
-   
+
     const [filtro, setFiltro] = React.useState(0);
     const [inputBuscarValor, setInputBuscarValor] = React.useState("");
     const [dataProdutos, setDataProdutos] = React.useState([]);
@@ -19,7 +19,7 @@ const Home = () => {
 
 
     React.useEffect(() => {
-      getProdutos();
+        getProdutos();
     }, [filtro]);
 
     async function getProdutos() {
@@ -28,7 +28,7 @@ const Home = () => {
 
         if (response.ok) {
             const responseData = await response.json();
-            const produtos = responseData.content; 
+            const produtos = responseData.content;
             setDataProdutos(produtos);
         } else {
             console.error('Erro ao obter dados dos produtos');
@@ -42,58 +42,58 @@ const Home = () => {
 
         if (response.ok) {
             const responseData = await response.json();
-            const produtos = responseData.content; 
+            const produtos = responseData.content;
             setDataProdutos(produtos);
         } else {
             console.error('Erro ao obter dados dos produtos');
         }
     }
 
-    
+
     const aumentarFiltro = () => {
-        
+
         setFiltro(filtro + 1);
-    
+
     };
 
-    
+
     const diminuirFiltro = () => {
-        
-            setFiltro(filtro - 1);
-       
+
+        setFiltro(filtro - 1);
+
     };
-  return (
-    <div >
-        <HeaderHome />
-        
-        <h1 className='titulo-principal'>Produtos</h1>
+    return (
+        <div >
+            <HeaderHome />
+   
+            <h1 className='titulo-principal'>Produtos</h1>
 
-        <div className='box-input-buscar'>
-            <input onChange={(event) => setInputBuscarValor(event.target.value)} className='input-buscar' placeholder='Buscar...'/>
-            <button onClick={getProdutosSemFiltro}>Buscar</button>
-        </div>
-        
-        <div className='div-produtos'>
-        {dataProdutos.length === 0 ? (
-                <h1>Nenhum produto encontrado</h1>
-            ) :(
-        dataProdutos.map((conteudo, index) => {
-          const imagemTrue = conteudo.imagens.find((imagem) => imagem.flag === false);
-          const imgNome = imagemTrue ? imagemTrue.nome : '';
-          const backgroundColor = cores[index % cores.length];
-          return (
-            <Cards cor={backgroundColor} key={conteudo.id} id={conteudo.id} titulo={conteudo.nome} imgNome={imgNome} />
-          );
-        })
-        )}
-        </div>
+            <div className='box-input-buscar'>
+                <input onChange={(event) => setInputBuscarValor(event.target.value)} className='input-buscar' placeholder='Buscar...' />
+                <button onClick={getProdutosSemFiltro}>Buscar</button>
+            </div>
 
-        <div className='buttons-de-paginacao'>
-        {filtro != 0 ? <button className='botao-anterior' onClick={diminuirFiltro}>Anterior</button> : <button className='botao-anterior' disabled onClick={diminuirFiltro}>Anterior</button>}
-        {dataProdutos.length === 10 ? <button className='botao-proximo' onClick={aumentarFiltro}>Próximo</button> : <button className='botao-proximo' disabled onClick={aumentarFiltro}>Próximo</button>}
+            <div className='div-produtos'>
+                {dataProdutos.length === 0 ? (
+                    <h1>Nenhum produto encontrado</h1>
+                ) : (
+                    dataProdutos.map((conteudo, index) => {
+                        const imagemTrue = conteudo.imagens.find((imagem) => imagem.flag === false);
+                        const imgNome = imagemTrue ? imagemTrue.nome : '';
+                        const backgroundColor = cores[index % cores.length];
+                        return (
+                            <Cards cor={backgroundColor} key={conteudo.id} id={conteudo.id} titulo={conteudo.nome} imgNome={imgNome} />
+                        );
+                    })
+                )}
+            </div>
+
+            <div className='buttons-de-paginacao'>
+                {filtro != 0 ? <button className='botao-anterior' onClick={diminuirFiltro}>Anterior</button> : <button className='botao-anterior' disabled onClick={diminuirFiltro}>Anterior</button>}
+                {dataProdutos.length === 10 ? <button className='botao-proximo' onClick={aumentarFiltro}>Próximo</button> : <button className='botao-proximo' disabled onClick={aumentarFiltro}>Próximo</button>}
+            </div>
         </div>
-    </div>
-  )
+    )
 }
 
 export default Home
