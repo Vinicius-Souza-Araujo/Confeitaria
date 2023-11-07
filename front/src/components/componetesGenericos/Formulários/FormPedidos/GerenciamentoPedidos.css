@@ -1,0 +1,88 @@
+#gerenciamento-pedidos {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #5C6996;
+  color: #f2f2f2;
+  height: 100vh;
+}
+
+#gerenciamento-pedidos .titulo-principal {
+  font-size: 2rem;
+  color: #f2f2f2;
+  margin: 20px;
+}
+
+#gerenciamento-pedidos .nome-cliente {
+  font-size: 1rem;
+  color: #f2f2f2;
+  margin: 10px;
+}
+
+#gerenciamento-pedidos .box-input-buscar {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+#gerenciamento-pedidos .input-buscar {
+  color: #f2f2f2;
+  padding: 10px;
+  border: none;
+  background-color: #283358;
+  color: #f2f2f2;
+}
+
+#gerenciamento-pedidos .botaoAzul{
+  background-color: #D1D5FA;
+  color: #5C6996;
+}
+
+#gerenciamento-pedidos .input-buscar::placeholder {
+  color: grey;
+}
+
+#gerenciamento-pedidos button {
+  background-color: #5C6996;
+  color: #f2f2f2;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  max-width: 100px;
+}
+
+#gerenciamento-pedidos .pedido-card {
+  border: 3px solid  #FEB4CB;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  margin: 10px;
+  padding: 10px;
+  border-radius: 10px;
+  min-width: 400px;
+}
+
+#gerenciamento-pedidos .pedido-info {
+  display: flex;
+  flex-direction: column;
+}
+
+#gerenciamento-pedidos .pedido-info p {
+  padding: auto;
+  color: #283358;
+}
+
+#gerenciamento-pedidos .pedido-detalhes {
+  background-color: #ffebf2;
+  padding: 10px;
+  border-radius: 5px;
+  margin-top: 10px;
+  color: #283358;
+}
+
+@media screen and (max-width: 700px) {
+  #gerenciamento-pedidos .pedido-card {
+    width: 100%;
+  }
+}
