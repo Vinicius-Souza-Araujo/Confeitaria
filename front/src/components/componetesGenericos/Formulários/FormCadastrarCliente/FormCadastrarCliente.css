@@ -1,0 +1,26 @@
+.estrutura-alt-client {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Divide a tela em duas colunas */
+    gap: 0px; /* Espaçamento entre as colunas */
+    align-items: flex-start;
+
+    align-content: start;
+  }
+  
+  .imagem-client-alt {
+    grid-column: 1; /* Coluna esquerda */
+    align-self: stretch; 
+  }
+  
+  .leite {
+    max-width: 100%;
+    height: 100%;
+    object-fit: cover; /* Redimensiona a imagem para preencher o espaço */
+  }
+  
+  form {
+    grid-column: 2; /* Coluna direita */
+    text-align: left;
+    align-items: flex-start;
+  }
+ 

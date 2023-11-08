@@ -157,5 +157,5 @@ select{
   border: 1px solid #FEB4CB;
   border-radius: 6px;
   padding: 6px;
-  width: 60%;
+  width: auto;
 }

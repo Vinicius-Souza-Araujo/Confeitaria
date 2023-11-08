@@ -34,12 +34,12 @@ const GerenciamentoPedidos = () => {
 
     const toggleDetalhes = (pedido) => {
         if (detalhesPedido === pedido) {
-          setDetalhesPedido(null); // Fecha os detalhes se já estiverem abertos.
+            setDetalhesPedido(null); // Fecha os detalhes se já estiverem abertos.
         } else {
-          setDetalhesPedido(pedido); // Abre os detalhes.
+            setDetalhesPedido(pedido); // Abre os detalhes.
         }
-      }
-    
+    }
+
     return (
 
         <div id="gerenciamento-pedidos" className="gerenciamento-pedidos">
@@ -47,10 +47,10 @@ const GerenciamentoPedidos = () => {
             <h1 className='titulo-principal'>Meus Pedidos</h1>
             <h2 className='nome-cliente'>Cliente: {data.email}</h2>
 
-            <div className='box-input-buscar'>
+            <label className='box-input-buscar'>
                 <input onChange={(event) => setFiltro(event.target.value)} className='input-buscar' placeholder='Buscar...' />
                 <button className='botaoAzul' onClick={handleBuscar}>Buscar</button>
-            </div>
+            </label>
 
             {pedidos.map((pedido, index) => (
                 <div className="pedido-card" key={index}>
@@ -60,14 +60,15 @@ const GerenciamentoPedidos = () => {
                         <p>Valor total: {pedido.valorTotal}</p>
 
                         <button onClick={() => toggleDetalhes(pedido)}>Detalhes</button>
-
-                        {detalhesPedido === pedido && (
-                            <div className="pedido-detalhes">
-                                <p>Status: {pedido.statusPedido}</p>
-                                <p>Endereço de entrega:</p>
-                                <p>Forma de pagamento:</p>
-                            </div>
-                        )}
+                        <div>
+                            {detalhesPedido === pedido && (
+                                <div className="pedido-detalhes">
+                                    <p>Status: {pedido.statusPedido}</p>
+                                    <p>Endereço de entrega:</p>
+                                    <p>Forma de pagamento:</p>
+                                </div>
+                            )}
+                        </div>
                     </div>
                 </div>
             ))}
