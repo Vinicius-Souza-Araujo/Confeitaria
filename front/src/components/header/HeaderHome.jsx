@@ -22,24 +22,28 @@ const HeaderHome = () => {
         </Link>
 
         <div>
-          <img src="src\assets\carrinho.png" alt='Carrinho' />
 
-          {data.grupo === 'CLIENTE' && (
-            <button onClick={() => { navigate('/pedidos') }} className='button'>
-              <img src="src/assets/pedidos.png" alt='Meus pedidos' style={{ width: '25px', height: '25px'}}/>
-              <span className='caption'>Meus pedidos</span>
-            </button>
-          )}
-
-          {login && (
+          <button className="botao-alterar" onClick={() => navigate('/carrinho')}>
+            <img src="src\assets\carrinho.png" alt='Carrinho' />
+          </button>
+           
+            {login && (
             <button onClick={handleLogout} className='button'>
-              <img src="src\assets\sair.svg" alt='Sair' />
+                <img src="src\assets\sair.svg" alt='Sair' />
             </button>
           )}
 
           {data && data.grupo === 'CLIENTE' && (
             <button className="botao-alterar" onClick={() => navigate('/alterarCliente')}>
               <img src="src\assets\configuracao.png" alt="Alterar" />
+            </button>
+          )}
+
+
+          {data.grupo === 'CLIENTE' && (
+            <button onClick={() => { navigate('/pedidos') }} className='button'>
+              <img src="src/assets/pedidos.png" alt='Meus pedidos' style={{ width: '25px', height: '25px'}}/>
+              <span className='caption'>Meus pedidos</span>
             </button>
           )}
 

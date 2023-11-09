@@ -13,6 +13,7 @@ const FormAlterarClient = () => {
     const [senha, setSenha] = useState('')
     const [repetirSenha, setRepetirSenha] = useState('')
     const [validarSenha, setValidarSenha] = useState(true);
+    const [mensagem, setMensagem] = useState('');
     const user = useContext(UserContext);
     
     useEffect(() => {  
@@ -45,6 +46,8 @@ const FormAlterarClient = () => {
         }, user.data.id);
 
         const response = await fetch(url, options)
+
+
         console.log(response)
     }
 
@@ -63,7 +66,7 @@ const FormAlterarClient = () => {
             <img 
                 className="sorvete" 
                 src="src\assets\sorvete.svg" 
-                alt="Imagem de uma casquinha com sorvete de laranja" 
+                alt="Imagem de uma casquinha com sorvete de laranja"
             />
         </div>
 
@@ -110,10 +113,8 @@ const FormAlterarClient = () => {
                 
                 {!validarSenha&& <p>As senhas não coincidem.</p>}
                 
-                <Link to="/alterarEnderenco"><button>Atualizar endereço</button></Link>
-
-            
-                <button onClick={alterarCliente} type="submit">Alterar</button>
+                <Link to="/alterarEnderenco"><button className='botaoAzul'>Atualizar endereço</button></Link>            
+                <button className='botaoAzul'onClick={alterarCliente} type="submit">Alterar dados pessoais</button>
                 
             </form>
         </div>

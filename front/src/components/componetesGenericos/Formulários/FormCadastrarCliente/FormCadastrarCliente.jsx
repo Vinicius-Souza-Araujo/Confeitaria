@@ -151,7 +151,7 @@ function FormCadastrarCliente() {
         <form onSubmit={handleEnviar}>
           <fieldset>
 
-            <legend><h2>Dados Cliente</h2></legend>
+            <legend><h5>Dados Cliente</h5></legend>
 
             <label htmlFor="nome">NomeCompleto</label>
 
@@ -183,11 +183,13 @@ function FormCadastrarCliente() {
             <label htmlFor="senha">Senha</label>
             <input type="password"
               id="senha" value={senha}
+              placeholder='Digite sua senha'
               onChange={handlePasswordChange} required />
 
             <label htmlFor="repetirSenha">Repetir Senha</label>
             <input type="password" id="repetirSenha" value={confirmarSenha}
               onChange={handleConfirmPasswordChange}
+              placeholder='Digite sua senha novamente'
               onBlur={validadorSenha} required />
             {!validarSenha && <p>As senhas não coincidem.</p>}
 
@@ -208,7 +210,7 @@ function FormCadastrarCliente() {
           </fieldset>
 
           <fieldset>
-            <legend><h2>Dados Endereço Faturamento</h2></legend>
+            <legend><h5>Dados Endereço Faturamento</h5></legend>
             <label htmlFor="cep">CEP</label>
             <InputMask
               mask="99999-999"

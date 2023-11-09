@@ -3,13 +3,21 @@
     grid-template-columns: 1fr 1fr; /* Divide a tela em duas colunas */
     gap: 0px; /* Espaçamento entre as colunas */
     align-items: flex-start;
-
+    overflow-y: scroll;
+    max-height: 100vh;
+   
     align-content: start;
+    margin-top: 5px
   }
   
   .imagem-client-alt {
     grid-column: 1; /* Coluna esquerda */
     align-self: stretch; 
+  }
+
+  .imagem-client-alt img{
+
+    z-index: 99;
   }
   
   .leite {
@@ -23,4 +31,25 @@
     text-align: left;
     align-items: flex-start;
   }
+  fieldset{
+    margin-top: 1rem;
+  }
+  legend h5{
+    margin-top: 0.5rem;
+    color: rgb(102, 102, 102);
+  }
  
+  /* alterando a cor do scroll */
+  .estrutura-alt-client::-webkit-scrollbar {
+    width: 12px;               /* width of the entire scrollbar */
+  }
+  
+  .estrutura-alt-client::-webkit-scrollbar-track {
+    background: rgb(255, 255, 255);        /* color of the tracking area */
+  }
+  
+  .estrutura-alt-client::-webkit-scrollbar-thumb {
+    background-color: #f8d8d6;    /* color of the scroll thumb */
+    border-radius: 20px;       /* roundness of the scroll thumb */
+    
+  }
