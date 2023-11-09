@@ -1,8 +1,10 @@
 package com.example.api.service;
 
+import com.example.api.domain.entity.Boleto;
 import com.example.api.domain.entity.Cartao;
 import com.example.api.domain.entity.FormaPagamento;
 import com.example.api.domain.entity.Pedido;
+import com.example.api.domain.repository.BoletoRepository;
 import com.example.api.domain.repository.CartaoRepository;
 import com.example.api.domain.repository.FormaPagamentoRepository;
 import com.example.api.domain.repository.PedidoRepository;
@@ -18,6 +20,9 @@ public class PedidoService {
 
     @Autowired
     private CartaoRepository cartaoRepository;
+
+    @Autowired
+    private BoletoRepository boletoRepository;
 
     @Autowired
     private FormaPagamentoRepository formaPagamentoRepository;
@@ -39,6 +44,8 @@ public class PedidoService {
     public ResponseEntity<String> adicionandoFormaPagamento(Integer pedidoId, FormaPagamento formaPagamento){
         Pedido pedido = pedidoRepository.findById(pedidoId).orElse(null);
 
+        FormaPagamento pagamento = new FormaPagamento();
+
         if (pedido == null) {
             return ResponseEntity.notFound().build();
         }
@@ -49,7 +56,6 @@ public class PedidoService {
             cartao.setUser(pedido.getUsuario());
             cartaoRepository.save(cartao);
 
-            FormaPagamento pagamento = new FormaPagamento();
             pagamento.setCartao(cartao);
             pagamento.setParcelas(formaPagamento.getParcelas());
 
@@ -58,8 +64,20 @@ public class PedidoService {
             pedido.setFormaPagamento(pagamento);
             pedidoRepository.save(pedido);
 
-            return ResponseEntity.ok("Forma de pagamento atrelada com sucesso.");
-        }else {
+            return ResponseEntity.ok("Cartão atrelada com sucesso.");
+        } else if (formaPagamento.getBoleto() != null) {
+            Boleto boleto = formaPagamento.getBoleto();
+            boletoRepository.save(boleto);
+            pagamento.setBoleto(boleto);
+
+            formaPagamentoRepository.save(pagamento);
+
+            pedido.setFormaPagamento(pagamento);
+            pedidoRepository.save(pedido);
+
+            return ResponseEntity.ok("Boleto atrelado com sucesso.");
+
+        } else {
             return ResponseEntity.badRequest().build();
         }
     }

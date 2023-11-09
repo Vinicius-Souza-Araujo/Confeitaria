@@ -101,44 +101,6 @@ public class PedidoController {
         List<HistoricoPedidosDTO> historico;
         return historico = pedidoService.getPedidosCliente(clienteId).stream().map(HistoricoPedidosDTO::new).toList();
     }
-//    @Transactional
-//    @PostMapping("/atrelarPagamento/{pedidoId}")
-//    public ResponseEntity<String> atrelarFormaPagamento(
-//            @PathVariable Integer pedidoId,
-//            @RequestBody FormaDePagamentoDTO formaPagamento) {
-//
-//        Pedido pedido = pedidoRepository.findById(pedidoId).orElse(null);
-//
-//        if (pedido == null) {
-//            return ResponseEntity.notFound().build();
-//        }
-//
-//        // Verifica o tipo de forma de pagamento
-//        if (formaPagamento.getCartao() != null) {
-//            Cartao cartao = formaPagamento.getCartao();
-//
-//            cartao.setUser(pedido.getUsuario());
-//
-//            formaPagamento.setCartao(cartao);
-//        } else if (formaPagamento.getBoleto() != null) {
-//            Boleto boleto = formaPagamento.getBoleto();
-//            // Você pode configurar o boleto, se necessário
-//            formaPagamento.setBoleto(boleto);
-//        } else {
-//            return ResponseEntity.badRequest().body("Forma de pagamento inválida.");
-//        }
-//
-//        FormaPagamento forma = new FormaPagamento(formaPagamento);
-//
-//        pedido.setFormaPagamento(forma);
-//        pedidoRepository.save(pedido);
-//
-//        return ResponseEntity.ok("Forma de pagamento atrelada com sucesso.");
-//    }
-
-//    @PostMapping("pagamengo/{num_pedido}")
-//    public ResponseEntity<> atrelandoPagamento(){
-//    }
 
     @Transactional
     @PostMapping("/atrelarPagamento/{pedidoId}")
