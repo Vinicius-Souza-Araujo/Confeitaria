@@ -1,18 +1,43 @@
 .form-endereco{
-    display: flex;
-    margin: 20px;
-    flex-direction: row;
-    align-items: center;
-    padding: 40px;
-    border-radius: 20px;
-    justify-content: space-between;
-    background-color: #A9DEE2;
+    border: #E283A1 solid 1px;
+    margin: 10px;
+    padding: 15px;
+    border-radius: 10px;
+    
 }
 
 .titulo-enderenco{
-    color: #3d6d70;
+    color: #ae6c81;
 }
 
-.body{
+.estrutura-alt-enderenco{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    overflow: hidden;
+    background-color: #FDECEB;
+}
+
+.estrutura-enderenco{
     margin: 20px;
 }
+
+.leite {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 50%; 
+    height: 100vh; 
+    z-index: -1; 
+  }
+  
+  .estrutura-enderenco {
+    overflow-y: auto; 
+    background-color: #FDECEB;
+    padding: 20px; 
+    height: 100vh; 
+  }
+  
+
+
+

@@ -8,11 +8,12 @@ import '../FormAlterarCliente/formClient.css'
 
 const FormAlterarClient = () => {  
     const [nome, setNome] = useState('')
-    const [dataNasc, setDataNasc] = useState('')
+    const [dataNasc, setDataNasc] = useState()
     const [genero, setGenero] = useState('')
     const [senha, setSenha] = useState('')
     const [repetirSenha, setRepetirSenha] = useState('')
     const [validarSenha, setValidarSenha] = useState(true);
+    const [mensagem, setMensagem] = useState('');
     const user = useContext(UserContext);
     
     useEffect(() => {  
@@ -45,6 +46,8 @@ const FormAlterarClient = () => {
         }, user.data.id);
 
         const response = await fetch(url, options)
+
+
         console.log(response)
     }
 
@@ -63,7 +66,7 @@ const FormAlterarClient = () => {
             <img 
                 className="sorvete" 
                 src="src\assets\sorvete.svg" 
-                alt="Imagem de uma casquinha com sorvete de laranja" 
+                alt="Imagem de uma casquinha com sorvete de laranja"
             />
         </div>
 
@@ -81,8 +84,8 @@ const FormAlterarClient = () => {
                     value={nome}
                 />
 
-                <label onChange={(event) => setDataNasc(event.target.value)} htmlFor="dataNasc">Data De Nascimento</label>
-                <input type="date" id="dataNasc" value={dataNasc} />
+                <label htmlFor="dataNasc">Data De Nascimento</label>
+                <input onChange={(event) => {setDataNasc(event.target.value)}} type="date" id="dataNasc" value={dataNasc} />
 
                 <label htmlFor="genero"> Gênero </label>
 
@@ -110,10 +113,8 @@ const FormAlterarClient = () => {
                 
                 {!validarSenha&& <p>As senhas não coincidem.</p>}
                 
-                <Link to="/alterarEnderenco"><button>Atualizar endereço</button></Link>
-
-            
-                <button onClick={alterarCliente} type="submit">Alterar</button>
+                <Link to="/alterarEnderenco"><button className='botaoAzul'>Atualizar endereço</button></Link>            
+                <button className='botaoAzul'onClick={alterarCliente} type="submit">Alterar dados pessoais</button>
                 
             </form>
         </div>

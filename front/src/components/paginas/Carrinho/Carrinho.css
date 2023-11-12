@@ -1,0 +1,111 @@
+.img-logo-carrinho{
+    display: flex;
+    justify-content: center;
+    margin: 10px;
+}
+
+.informe-cep-car{
+    display: flex;
+    align-items: center;
+}
+
+
+.card-item-pedidos{
+    margin: 20px;
+    background-color: #ffff;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.card-item-pedidos{
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.resultados-cep{
+    display: flex;
+    background-color: #ffff;
+    padding: 20px;
+}
+
+.body-carrinho{
+    background-color: #F4F4F4;
+    margin: 0;
+    height: 100vh;
+}
+
+.texto-valores{
+    display: flex;
+    gap: 10px;
+}
+
+.botao-remover-itens{
+    color: #E283A1;
+    background: transparent;
+    border-color: #E283A1;
+}
+.continuar-compra{
+    color: #E283A1;
+    background: transparent;
+    border-color: #E283A1;
+}
+
+.texto-valores{
+    display: flex;
+    justify-content: space-between;
+}
+
+
+
+.sub-div-pagamento{
+    display: flex;
+}
+
+
+.dados-textuais-item{
+    display: flex;
+    gap: 30px;
+    align-items: center;
+}
+
+.botoes-pagamento{
+    display: flex;
+    flex-direction: column;
+}
+
+.estrutura-itens{
+    width: 50%;
+    height: 50%;
+}
+
+.resumo-pedido{
+    background-color: #ffff;
+    margin: 20px;
+    padding: 40px;
+    width: 80%;
+    height: 80%;
+}
+
+.itens-carrinho{
+    width: 100%;
+}
+
+
+.estrutura-carrinho-base{
+    display: flex;
+    justify-content: space-evenly;
+    padding: 5;
+    margin: 60px;
+}
+
+.produtos-carrinho{
+    margin: 0px;
+    gap: 30px;
+}
+
+
+.remover-todos-itens{
+    margin-left: 80px;   
+}

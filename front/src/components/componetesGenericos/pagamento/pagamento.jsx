@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import InputMask from 'react-input-mask';
-
+import './pagamento.css'
 
 export const Pagamento = () => {
   const [metodo, setMetodo] = useState('');
@@ -57,12 +57,12 @@ export const Pagamento = () => {
     <p>Você pode efetuar o pagamento via boleto ou cartão de crédito em até 12x sem juros</p>
 
     <label htmlFor="forma">Selecione uma forma de pagamento</label>
-    <label htmlFor="boleto">Boleto</label>
+    <label htmlFor="boleto">Boleto</label> 
     <input
           type="radio"
           id="boleto"
           value="boleto"
-          checked={metodo=== 'boleto'}
+          checked={metodo === 'boleto'}
           onChange={handleMetodoPagamento}
           onClick={gerarQRCode}
         required />
@@ -76,29 +76,29 @@ export const Pagamento = () => {
           onChange={handleMetodoPagamento}
         required />
 
-{metodo=== 'boleto' && (
+{metodo === 'boleto' && (
         <div>
           <h1>Validar pedido final</h1>         
-  <p>Seu boleto já está disponível. Você pode realizar o pagamento copiando o código de barras abaixo. O boleto será enviado via e-mail cadastrado em nosso sistema</p>
+          <p>Seu boleto já está disponível. Você pode realizar o pagamento copiando o código de barras abaixo. O boleto será enviado via e-mail cadastrado em nosso sistema</p>
 
-  <label>Código de barras:</label>
-      <p >{barcode}</p>
+          <label>Código de barras:</label>
+          <p>{barcode}</p>
     
         </div>
       )}
 
-{metodo=== 'cartao' && (
+{metodo === 'cartao' && (
         <div>
           <h1>Preencha os dados do seu cartão de crédito</h1>
           <label htmlFor="bandeira">Bandeira do cartão</label>
           <select name="bandeira" id="bandeira" value={bandeira} 
             onChange={(event)=>setBandeira(event.target.value)} required>
               <option value="" disabled selected>Selecione uma opção</option>
-            <option value="Hipercard">Hipercard</option>
-            <option value="American Express">American Express</option>
-            <option value="Elo">Elo</option>
-            <option value="Visa">Visa</option>
-            <option value="Mastercard">Mastercard</option>
+              <option value="Hipercard">Hipercard</option>
+              <option value="American Express">American Express</option>
+              <option value="Elo">Elo</option>
+              <option value="Visa">Visa</option>
+              <option value="Mastercard">Mastercard</option>
             </select>
 
             <label htmlFor="numero">Número do cartão</label>

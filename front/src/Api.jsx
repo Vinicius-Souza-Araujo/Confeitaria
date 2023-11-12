@@ -45,6 +45,16 @@ export function GET_PRODUTOS_ATIVADOS(){
     }
 }
 
+
+export function GET_VALOR_FRETE(cep){
+    return{
+        url: API_URL+'/calculo-frete/cepOrigem/'+cep+'/valorFrete',
+        options:{
+            method: 'GET'
+        }
+    }
+}
+
 export function GET_PRODUTOS_ID(id){
     return{
         url: API_URL+'/produtos/?page&id='+id,
@@ -108,6 +118,32 @@ export function POST_USER(body, token){
     };
 }
 
+export function POST_ENDERENCO(body){
+    return{
+        url: API_URL+'/endereco/cadastrar',
+        options:{
+            method: 'POST',
+            headers:{
+                'Content-Type': 'application/json'
+            },
+            body:JSON.stringify(body)
+        }
+    }
+}
+
+export function POST_PEDIDO(body){
+    return{
+        url: API_URL+'/pedidos/cadastrar',
+        options:{
+            method: 'POST',
+            headers:{
+                'Content-Type': 'application/json'
+            },
+            body:JSON.stringify(body)
+        }
+    }
+}
+
 
 export function POST_CLIENTE(body){
     return{
@@ -159,6 +195,20 @@ export function PATCH_STATUS(body, token, id){
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': 'Bearer ' + token,
+            },
+            body:JSON.stringify(body),
+        }, 
+    };
+}
+
+
+export function PATCH_STATUS_ENDERENCO(body, id){
+    return{
+        url:API_URL+'/endereco/atualizar/'+id,
+        options:{ 
+            method:'PATCH',
+            headers: {
+                'Content-Type': 'application/json'
             },
             body:JSON.stringify(body),
         }, 
