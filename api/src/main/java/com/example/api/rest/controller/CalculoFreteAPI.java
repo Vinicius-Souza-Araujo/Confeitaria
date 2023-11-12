@@ -25,7 +25,7 @@ public class CalculoFreteAPI {
             @PathVariable("valorFrete") String valorFrete) {
 
         cepOrigem = "06413080";
-        valorFrete = "3";
+        valorFrete = "0.5";
         Double valorFreteInt = Double.parseDouble(valorFrete);
         Double valorFrete2 = valorFreteInt*1.5;
         Double valorFrete3 = valorFreteInt*2;

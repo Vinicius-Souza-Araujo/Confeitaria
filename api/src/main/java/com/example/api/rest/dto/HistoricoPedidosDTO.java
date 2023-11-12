@@ -16,7 +16,9 @@ public record HistoricoPedidosDTO(
 
         StatusPedido statusPedido,
 
-        LocalDate dataPedido
+        LocalDate dataPedido,
+
+        Integer numeroPedido
 
 ) {
 
@@ -25,7 +27,8 @@ public record HistoricoPedidosDTO(
                         pedido.getId(),
                         pedido.getValorTotal(),
                         pedido.getStatusPedido(),
-                        pedido.getDataPedido()
+                        pedido.getDataPedido(),
+                        pedido.getNumeroPedido()
                         );
         }
 }

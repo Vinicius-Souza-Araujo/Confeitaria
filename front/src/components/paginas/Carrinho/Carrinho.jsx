@@ -14,33 +14,57 @@ const Carrinho = () => {
   const user = React.useContext(UserContext);
   const [cep, setCep] = useState('');
   const [frete, setFrete] = useState(0);
-  const [qta, setQTA] = useState(1);
-  const [contador, setContador] = useState(1);
   const [tipoEntrega, setTipoEntrega] = useState('')
   const { cartState, clearCart, dispatch } = useCart();
+  const { teste, setTeste } = useState('');
   const [id, setId] = useState();
-  const [subTotal, setSubTotal] = useState(cartState.totalValor);
-  const [total, setTotal] = useState(cartState.totalValor);
-  const [validarQTA, setValidarQTA] = useState(false)
+  const [subTotal, setSubTotal] = useState(parseFloat(cartState.newTotalValor));
+  const [total, setTotal] = useState(parseFloat(cartState.newTotalValor));
   const url_img = "http://localhost:8080/api/imagens/acessar/";
   
   
   async function geradoPedido() {
-    const {url, options} = POST_PEDIDO({
-      idCliente: user.id,
-      itens: [
-        
-      ]
+
+    const itensDoCarrinho = cartState.cartItems.map((item) => {
+      return {
+        idProduto: item.id,
+        quantidade: item.quantidade,
+      };
     });
 
+    const Bodyjson = {
+      idCliente: user.data.id,
+      itens: itensDoCarrinho
+    }
+
+    const {url, options} = POST_PEDIDO(Bodyjson);
+
     const response = await fetch(url, options)
+    console.log(response)
 
   }
 
   useEffect(() => {
     get_enderenco();
+    incrementar();
   }, []);
 
+  useEffect(() => {
+    setSubTotal(getTotal());
+    setTotal(parseFloat(getTotal()) + parseFloat(frete));
+    console.log(total)
+    console.log(frete)
+  }, [cartState, frete]);
+  
+  
+
+  const getTotal = () => {
+    return cartState.cartItems.reduce((total, item) => {
+      return  ((parseFloat(item.totalItem) * parseFloat(item.quantidade)) + parseFloat(total) || 0);
+    }, 0);
+  };
+  
+  
 
   async function get_enderenco() {
 
@@ -57,25 +81,30 @@ const Carrinho = () => {
   }
   }
 
-  const incrementar = (index, dispatch) => {
+  async function incrementar(index) {
     const updatedCart = [...cartState.cartItems];
     updatedCart[index].quantidade += 1;
     dispatch({ type: 'SET_CART', payload: updatedCart });
-  };
+  }
   
   
-  const decrementar = (index) => {
+  async function decrementar(index) {
     const updatedCart = [...cartState.cartItems];
     if (updatedCart[index].quantidade > 0) {
       updatedCart[index].quantidade -= 1;
       dispatch({ type: 'SET_CART', payload: updatedCart });
     }
+  }
+  
+
+  const handleRemoveItem = (itemId) => {
+    dispatch({ type: 'REMOVE_FROM_CART', payload: { id: itemId } });
   };
   
 
 
   async function calcularFrete() {
-
+    console.log(cartState)
     const { url, options } = GET_VALOR_FRETE(cep);
   
     const response = await fetch(url, options);
@@ -161,9 +190,9 @@ const Carrinho = () => {
           </div>
         </div>
         <div>
-          <button onClick={() => decrementar(index)}>{'<'}</button>
-          {item.quantidade} {/* Exibe a quantidade individual do item */}
-          <button onClick={() => incrementar(index, dispatch)}>{'>'}</button>
+          <button className='continuar-compra' onClick={() => decrementar(index)}>{'<'}</button>{item.quantidade}
+          <button className='continuar-compra' onClick={() => incrementar(index, dispatch) }>{'>'}</button>
+          <button className='continuar-compra' onClick={() => {handleRemoveItem(item.id)}}>Remover item</button>
         </div>
       </div>
     );
@@ -176,27 +205,28 @@ const Carrinho = () => {
 
         <div className='resumo-pedido'>
                   <h4>Resumo</h4>  
+
                   <div className='texto-valores'>
                       <div className='categoria-resumo'>
-                          <p>Frete</p>
-                          <p>Subtotal</p>
+                        <p>Frete</p>
+                        <p>Subtotal</p>
                       </div>
-
                       <div className='categoria-resumo'>
-                          <p>
-                            {frete.toLocaleString('pt-BR', {
+                        <p>
+                          {frete.toLocaleString('pt-BR', {
                             style: 'currency',
                             currency: 'BRL',
                           })}
-                          </p>
-                        
-                          <p>{subTotal.toLocaleString('pt-BR', {
-                          style: 'currency',
-                          currency: 'BRL',
-                        })}</p>
+                        </p>
+                        <p>
+                          {subTotal.toLocaleString('pt-BR', {
+                            style: 'currency',
+                            currency: 'BRL',
+                          })}
+                        </p>
+                    </div>
+</div>
 
-                      </div>
-                  </div>
                   <hr/>
 
                   <div className='total'>
@@ -302,8 +332,18 @@ const Carrinho = () => {
                         </div>
                       )}
                 </div>
+        </div>
 
-        </div>     
+        {teste ? (
+            <div>
+            
+            </div>
+          ) : (
+            <div>
+            
+            </div>
+        )}
+ 
       </div>
     </div>
   );

@@ -14,6 +14,7 @@ const GerenciamentoPedidos = () => {
 
     useEffect(() => {
         getPedidos();
+        console.log(pedidos)
     }, []);
 
     async function getPedidos() {

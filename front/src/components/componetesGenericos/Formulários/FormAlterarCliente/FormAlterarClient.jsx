@@ -8,7 +8,7 @@ import '../FormAlterarCliente/formClient.css'
 
 const FormAlterarClient = () => {  
     const [nome, setNome] = useState('')
-    const [dataNasc, setDataNasc] = useState('')
+    const [dataNasc, setDataNasc] = useState()
     const [genero, setGenero] = useState('')
     const [senha, setSenha] = useState('')
     const [repetirSenha, setRepetirSenha] = useState('')
@@ -84,8 +84,8 @@ const FormAlterarClient = () => {
                     value={nome}
                 />
 
-                <label onChange={(event) => setDataNasc(event.target.value)} htmlFor="dataNasc">Data De Nascimento</label>
-                <input type="date" id="dataNasc" value={dataNasc} />
+                <label htmlFor="dataNasc">Data De Nascimento</label>
+                <input onChange={(event) => {setDataNasc(event.target.value)}} type="date" id="dataNasc" value={dataNasc} />
 
                 <label htmlFor="genero"> Gênero </label>
 
