@@ -10,11 +10,11 @@ const FormAlterarClient = () => {
     const [nome, setNome] = useState('')
     const [dataNasc, setDataNasc] = useState()
     const [genero, setGenero] = useState('')
-    const [senha, setSenha] = useState('')
-    const [repetirSenha, setRepetirSenha] = useState('')
     const [validarSenha, setValidarSenha] = useState(true);
     const [mensagem, setMensagem] = useState('');
     const user = useContext(UserContext);
+    const [senha, setSenha] = useState('')
+    const [repetirSenha, setRepetirSenha] = useState('')
     
     useEffect(() => {  
        get_cliente()
@@ -26,6 +26,7 @@ const FormAlterarClient = () => {
         
         if (response.ok) {
             const data = await response.json();
+            console.log(data)
             setNome(data.nome)
             setGenero(data.genero)
             setDataNasc(data.dataNascimento)

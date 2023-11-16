@@ -10,28 +10,38 @@ const initialState = {
 
 const cartReducer = (state, action) => {
   switch (action.type) {
-    case 'ADD_TO_CART':
-      const produtoExistente = state.cartItems.findIndex((item) => item.id === action.payload.id);
+// ...
 
-      if (produtoExistente !== -1) {
-        const updateItem = [...state.cartItems];
-        updateItem[produtoExistente].quantidade += 1;
-        updateItem[produtoExistente].totalItem = updateItem[produtoExistente].quantidade * updateItem[produtoExistente].valor;
-        
-        const newTotalValor = updateItem.reduce((total, item) => total + item.totalItem, 0);
-        
-        return {
-          ...state,
-          cartItems: updateItem,
-          totalValor: newTotalValor,
-        };
-      } else {
-        return {
-          ...state,
-          cartItems: [...state.cartItems, { ...action.payload, quantidade: 1, totalItem: action.payload.valor }],
-          totalValor: state.totalValor + action.payload.valor,
-        };
-      }
+case 'ADD_TO_CART':
+  const existingProductIndex = state.cartItems.findIndex((item) => item.id === action.payload.id);
+
+  if (existingProductIndex !== -1) {
+    // Produto já existe no carrinho
+    const updatedCart = state.cartItems.map((item, index) =>
+      index === existingProductIndex
+        ? { ...item, quantidade: item.quantidade + 1, totalItem: (item.quantidade + 1) * item.valor }
+        : item
+    );
+
+    const newTotalValor = updatedCart.reduce((total, item) => total + item.totalItem, 0);
+
+    return {
+      ...state,
+      cartItems: updatedCart,
+      totalValor: newTotalValor,
+    };
+  } else {
+    // Produto ainda não está no carrinho
+    return {
+      ...state,
+      cartItems: [
+        ...state.cartItems,
+        { ...action.payload, quantidade: 1, totalItem: action.payload.valor },
+      ],
+      totalValor: state.totalValor + action.payload.valor,
+    };
+  }
+
 
     case 'REMOVE_FROM_CART':
         const itemIndex = state.cartItems.findIndex((item) => item.id === action.payload.id);
@@ -40,12 +50,12 @@ const cartReducer = (state, action) => {
           const updatedCart = [...state.cartItems];
           const removedItem = updatedCart.splice(itemIndex, 1)[0];
 
-          const newTotalValor = state.totalValor - removedItem.totalItem;
+          const novoValor = state.totalValor - removedItem.totalItem;
 
           return {
             ...state,
             cartItems: updatedCart,
-            totalValor: newTotalValor,
+            totalValor: novoValor,
           };
         } else {
           return state; 

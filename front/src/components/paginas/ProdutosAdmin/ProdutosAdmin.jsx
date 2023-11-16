@@ -41,7 +41,7 @@ export const ProdutosAdmin = () => {
 
 
     async function getProdutos_sem_filtro(){
-        const {url, options} = GET_PRODUTOS_SEM_FILTRO(user.data.token, itemBusca);
+        const {url, options} = GET_PRODUTOS_SEM_FILTRO(itemBusca);
         const response = await fetch(url, options);
         
         if (response.ok) {
