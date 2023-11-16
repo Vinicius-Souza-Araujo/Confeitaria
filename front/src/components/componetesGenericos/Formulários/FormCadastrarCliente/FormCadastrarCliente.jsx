@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import InputMask from 'react-input-mask';
 import { GET_CEP } from '../../../../Api';
 import { POST_CLIENTE } from '../../../../Api';
 import { useNavigate } from 'react-router-dom';
 import './FormCadastrarCliente.css';
+import { IMaskInput } from "react-imask";
 
 function FormCadastrarCliente() {
 
@@ -32,7 +32,7 @@ function FormCadastrarCliente() {
 
     console.log(
       {
-        nome: nome,
+        nome: nome,        
         cpf: cpf,
         email: email,
         dataNascimento: dataNasc,
@@ -71,7 +71,7 @@ function FormCadastrarCliente() {
       setMessage('Sucesso ao cadastrar usuário.')
       navigate('/');
     } else {
-      setMessage('Erro ao cadastar usuário.')
+      setMessage('Erro ao cadastrar usuário.')
     }
 
 
@@ -80,7 +80,7 @@ function FormCadastrarCliente() {
   const validarNome = (input) => {
     const words = input.split(' ');
 
-    if (words.length === 2 && words.every(word => word.length >= 3)) {
+    if (words.length >= 2 && words.every(word => word.length >= 3)) {
       setIsValid(true);
     } else {
       setIsValid(false);
@@ -112,9 +112,10 @@ function FormCadastrarCliente() {
   };
 
   const handleCPFChange = (event) => {
-    setCpf(event.target.value.replace(/\D/g, ''));
+    const cpfValue = event.target.value.replace(/\D/g, '');
+    setCpf(cpfValue);
   };
-
+  
   const handleCepChange = (e) => {
     setCep(e.target.value);
   };
@@ -158,16 +159,18 @@ function FormCadastrarCliente() {
             <input type="text"
               id="nome"
               value={nome}
-              onChange={handleInputChange} placeholder="Digite seu nome completo"
+              onChange={handleInputChange} 
+              placeholder="Digite seu nome completo"
               required
             />
 
-            {!isValid && <p> O nome completo deve conter duas palavras com no mínimo 3 letras cada. </p>}
+            {!isValid && <p> O nome completo deve conter duas palavras ou mais com no mínimo 3 letras cada. </p>}
 
-            <select name="genero" id="genero" onChange={(event) => setGenero(event.target.value)} required>
-              <option value="" disabled selected>Selecione uma opção</option>
-              <option value="MASC">MASC</option>
-              <option value="FEM">FEM</option>
+            <label htmlFor="genero">Genero</label>
+            <select defaultValue="" name="genero" id="genero" onChange={(event) => setGenero(event.target.value)} required>
+              <option value="" disabled >Selecione uma opção</option>
+              <option value="MASC">MASCULINO</option>
+              <option value="FEM">FEMININO</option>
               <option value="OUTROS">OUTROS</option>
             </select>
 
@@ -176,25 +179,26 @@ function FormCadastrarCliente() {
             <input type="email"
               value={email}
               id="email"
-              placeholder="digite seu email"
+              placeholder="Digite seu email"
               onChange={(event) => setEmail(event.target.value)}
               required />
 
             <label htmlFor="senha">Senha</label>
             <input type="password"
               id="senha" value={senha}
-              placeholder='Digite sua senha'
+              placeholder="Digite sua senha"
               onChange={handlePasswordChange} required />
 
             <label htmlFor="repetirSenha">Repetir Senha</label>
             <input type="password" id="repetirSenha" value={confirmarSenha}
               onChange={handleConfirmPasswordChange}
-              placeholder='Digite sua senha novamente'
+              placeholder="Digite sua senha novamente"
               onBlur={validadorSenha} required />
             {!validarSenha && <p>As senhas não coincidem.</p>}
 
             <label htmlFor="cpf">CPF</label>
-            <InputMask
+            <IMaskInput
+mask="000.000.000-00" 
               value={cpf}
               id="cpf"
               onChange={handleCPFChange}
@@ -202,8 +206,12 @@ function FormCadastrarCliente() {
               required />
 
             <label htmlFor="dataNasc">Data De Nascimento</label>
-            <input type="date" id="dataNasc" value={dataNasc}
-              onChange={(event) => setDataNasc(event.target.value)} required />
+            <input type="date" 
+            id="dataNasc" 
+            value={dataNasc}
+            placeholder="Insira sua data de nascimento"
+              onChange={(event) => setDataNasc(event.target.value)} 
+              required />
 
 
 
@@ -212,11 +220,11 @@ function FormCadastrarCliente() {
           <fieldset>
             <legend><h5>Dados Endereço Faturamento</h5></legend>
             <label htmlFor="cep">CEP</label>
-            <InputMask
-              mask="99999-999"
+            <IMaskInput 
+              mask="00000-000"
               id="cep"
               value={cep}
-              placeholder="digite seu cep"
+              placeholder="Digite seu CEP"
               onChange={handleCepChange}
               required
             />
@@ -230,29 +238,43 @@ function FormCadastrarCliente() {
               id="logradouro"
               value={logradouro}
               onChange={(event) => setLogradouro(event.target.value)}
-              placeholder="digite o nome da rua"
+              placeholder="Digite o nome da rua"
               required
             />
 
             <label htmlFor="numero">Numero</label>
-            <input type="number" id="numero" value={numero} onChange={(event) => setNumero(event.target.value)} placeholder="insira o número da casa ou prédio" required />
+            <input type="number" 
+            id="numero" 
+            value={numero} 
+            onChange={(event) => setNumero(event.target.value)} 
+            placeholder="Insira o número da casa ou prédio" 
+            required />
 
             <label htmlFor="complemento">Complemento</label>
             <input type="text"
               id="complemento"
               value={complemento}
               onChange={(event) => setComplemento(event.target.value)}
-              placeholder="digite o bloco e número do apartamento, ou algum ponto de referência"
+              placeholder="Digite o bloco e número do apartamento, ou algum ponto de referência"
             />
 
             <label htmlFor="bairro">Bairro</label>
-            <input type="text" id="bairro" value={bairro} onChange={(event) => setBairro(event.target.value)} placeholder="digite o nome do bairro" required />
+            <input type="text" 
+            id="bairro" 
+            value={bairro} 
+            onChange={(event) => setBairro(event.target.value)} 
+            placeholder="Digite o nome do bairro" 
+            required />
 
             <label htmlFor="cidade">Cidade</label>
-            <input type="text" id="cidade" value={cidade} onChange={(event) => setCidade(event.target.value)} placeholder="digite o nome da sua cidade" required />
+            <input type="text" 
+            id="cidade" 
+            value={cidade} 
+            onChange={(event) => setCidade(event.target.value)} 
+            placeholder="Digite o nome da sua cidade" 
+            required />
 
             <label htmlFor="uf">UF</label>
-
             <select name="uf" id="uf" value={uf}
               onChange={(event) => setUf(event.target.value)} required>
               <option value="ac">AC</option>
@@ -285,7 +307,7 @@ function FormCadastrarCliente() {
             </select>
 
           </fieldset>
-          <button type="submit" id="enviar" >enviar</button>
+          <button type="submit" id="enviar" onSubmit={handleEnviar} >enviar</button>
           {message && <p>{message}</p>}
         </form>
       </div>
