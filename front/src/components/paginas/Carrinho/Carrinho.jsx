@@ -18,8 +18,8 @@ const Carrinho = () => {
   const { cartState, clearCart, dispatch } = useCart();
   const { teste, setTeste } = useState('');
   const [id, setId] = useState();
-  const [subTotal, setSubTotal] = useState(parseFloat(cartState.newTotalValor));
-  const [total, setTotal] = useState(parseFloat(cartState.newTotalValor));
+  const [subTotal, setSubTotal] = useState(parseFloat(cartState.totalValor));
+  const [total, setTotal] = useState(parseFloat(cartState.totalValor));
   const url_img = "http://localhost:8080/api/imagens/acessar/";
   
   
@@ -49,20 +49,12 @@ const Carrinho = () => {
     incrementar();
   }, []);
 
+
   useEffect(() => {
-    setSubTotal(getTotal());
-    setTotal(parseFloat(getTotal()) + parseFloat(frete));
-    console.log(total)
-    console.log(frete)
+    console.log("Isso é o total: " + cartState.totalValor)
+    setTotal(parseFloat(cartState.totalValor) + parseFloat(frete));
   }, [cartState, frete]);
   
-  
-
-  const getTotal = () => {
-    return cartState.cartItems.reduce((total, item) => {
-      return  ((parseFloat(item.totalItem) * parseFloat(item.quantidade)) + parseFloat(total) || 0);
-    }, 0);
-  };
   
   
 
@@ -145,10 +137,11 @@ const Carrinho = () => {
   }
 
   const handleRemoveAllItems = () => {
-    clearCart();
-    setTotal(frete)
-    setSubTotal(0)
-  };
+  clearCart();
+  setTotal(parseFloat(frete));
+  setSubTotal(0);
+};
+
 
 
   return (
