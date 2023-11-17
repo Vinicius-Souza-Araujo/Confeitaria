@@ -18,6 +18,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.Random;
 
 @RestController
@@ -58,7 +59,7 @@ public class PedidoController {
 
         Integer aleatorio = random.nextInt(10000);
 
-        pedido.setStatusPedido(StatusPedido.AGUARDANDO);
+        pedido.setStatusPedido(StatusPedido.AGUARDANDO_PAGAMENTO);
         pedido.setDataPedido(LocalDate.now());
 
         pedido.setNumeroPedido(aleatorio);
@@ -108,6 +109,25 @@ public class PedidoController {
         try{
             return pedidoService.adicionandoFormaPagamento(pedidoId, formaPagamento);
         }catch (Exception e){
+            return ResponseEntity.internalServerError().build();
+        }
+    }
+
+    @PatchMapping("/atualizarStatus/{pedidoId}")
+    public ResponseEntity<String> atualizarStatusPedido(@PathVariable Integer pedidoId, @RequestBody AtulizacaoStatusPedidoDTO statusPedido) {
+        try {
+            Optional<Pedido> optionalPedido = pedidoRepository.findById(pedidoId);
+
+            if (optionalPedido.isPresent()) {
+                Pedido pedido = optionalPedido.get();
+                pedido.setStatusPedido(statusPedido.getStatusPedido());
+                pedidoRepository.save(pedido);
+
+                return ResponseEntity.ok("Status do pedido atualizado com sucesso.");
+            } else {
+                return ResponseEntity.notFound().build();
+            }
+        } catch (Exception e) {
             return ResponseEntity.internalServerError().build();
         }
     }
