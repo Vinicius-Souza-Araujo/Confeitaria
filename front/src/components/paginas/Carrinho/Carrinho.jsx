@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { GET_CEP, GET_VALOR_FRETE, GET_PRODUTOS_ID, POST_PEDIDO, GET_ENDERENCO } from '../../../Api';
+import { GET_CEP, GET_VALOR_FRETE, POST_PEDIDO, GET_ENDERENCO } from '../../../Api';
 import { useCart } from '../../componetesGenericos/ItemCarrinho/CartContext';
 import { UserContext } from '../../../UserContext';
 import { useNavigate, Link } from 'react-router-dom';
@@ -51,7 +51,6 @@ const Carrinho = () => {
 
 
   useEffect(() => {
-    console.log("Isso é o total: " + cartState.totalValor)
     setTotal(parseFloat(cartState.totalValor) + parseFloat(frete));
   }, [cartState, frete]);
   
@@ -61,15 +60,15 @@ const Carrinho = () => {
   async function get_enderenco() {
 
     if (user.data.id != ''){
-    const { url, options } = GET_ENDERENCO(user.data.id);
-    const response = await fetch(url, options);
-  
-    if (response.ok) {
-      const data = await response.json();
-      setEnderecoEntregaLogin(data);
-    } else {
-      console.error('Erro ao procurar dados do cliente');
-    }
+        const { url, options } = GET_ENDERENCO(user.data.id);
+        const response = await fetch(url, options);
+      
+        if (response.ok) {
+          const data = await response.json();
+          setEnderecoEntregaLogin(data);
+        } else {
+          console.error('Erro ao procurar dados do cliente');
+        }
   }
   }
 
