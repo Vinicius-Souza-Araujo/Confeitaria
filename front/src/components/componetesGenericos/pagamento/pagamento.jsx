@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import InputMask from 'react-input-mask';
+import { IMaskInput } from "react-imask";
 import './pagamento.css'
 
 export const Pagamento = () => {
@@ -91,9 +91,9 @@ export const Pagamento = () => {
         <div>
           <h1>Preencha os dados do seu cartão de crédito</h1>
           <label htmlFor="bandeira">Bandeira do cartão</label>
-          <select name="bandeira" id="bandeira" value={bandeira} 
+          <select defaultValue="" name="bandeira" id="bandeira" value={bandeira} 
             onChange={(event)=>setBandeira(event.target.value)} required>
-              <option value="" disabled selected>Selecione uma opção</option>
+              <option value="" disabled >Selecione uma opção</option>
               <option value="Hipercard">Hipercard</option>
               <option value="American Express">American Express</option>
               <option value="Elo">Elo</option>
@@ -102,9 +102,8 @@ export const Pagamento = () => {
             </select>
 
             <label htmlFor="numero">Número do cartão</label>
-            <InputMask
-            mask="9999 9999 9999 9999" 
-            maskChar={null} 
+            <IMaskInput 
+            mask="0000 0000 0000 0000"
             value={numero} 
             onChange={(event)=>setNumero(event.target.value)}
         type="text" 
@@ -115,8 +114,7 @@ export const Pagamento = () => {
       
 
       <label htmlFor="codigoVerificador">Código verificador</label>
-      <input 
-      type="text" 
+      <input       type="text" 
       id="codigoVerificador" 
             value={codigoVerificador} 
             maxLength={3}            
@@ -134,9 +132,8 @@ export const Pagamento = () => {
         />
 
 <label htmlFor="vencimento">        Data de Vencimento (MM/AA)      </label>
-<InputMask
-        mask="99/99"
-        maskChar="_"
+<IMaskInput 
+mask="00/00"
    id="vencimento"
    value={vencimento}
         onChange={handleExpiryChange}
