@@ -50,3 +50,13 @@ select * from usuarios;
 select * from produtos;
 select * from imagens_produto;
 select * from enderecos;
+
+
+ALTER TABLE pedidos
+ADD COLUMN endereco_id int(11); -- Adicionando a coluna de id de endereço na tabela pedidos
+
+ALTER TABLE pedidos
+ADD CONSTRAINT fk_endereco_id 
+FOREIGN KEY (endereco_id) REFERENCES enderecos(id); -- Estabelecendo a relação com a tabela enderecos
+
+ALTER TABLE cartao MODIFY COLUMN data_vencimento VARCHAR(7) NOT NULL;

@@ -1,5 +1,6 @@
 package com.example.api.rest.dto;
 
+import com.example.api.domain.entity.Endereco;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -16,4 +17,6 @@ public class PedidoComItensDTO {
     private String status;
 
     private List<ItensPedidoDTO> itens;
+
+    private Long IdEndereco;
 }

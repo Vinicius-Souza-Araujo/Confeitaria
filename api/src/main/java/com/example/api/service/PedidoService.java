@@ -35,8 +35,16 @@ public class PedidoService {
     }
 
     public List<Pedido> getPedidosCliente(Integer clienteId) {
-        return pedidoRepository.getPedidosCliente(clienteId);
+        try{
+            return pedidoRepository.getPedidosCliente(clienteId);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
+    public List<Pedido> getTodosPedidosCliente() {
+            return pedidoRepository.findAll();
+    }
+
     public void cadastrarPedido(Pedido pedido) {
         pedidoRepository.save(pedido);
     }

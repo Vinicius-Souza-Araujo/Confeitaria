@@ -10,12 +10,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
-import com.example.api.service.PedidoService;
 
 import java.math.BigDecimal;
-import java.text.Normalizer;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -33,6 +30,9 @@ public class PedidoController {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private EnderecoRepository enderecoRepository;
 
     @Autowired
     private PedidoRepository pedidoRepository;
@@ -70,6 +70,10 @@ public class PedidoController {
 
         pedido.setUsuario(cliente);
 
+        Endereco endereco = enderecoRepository.getById(pedidoComItensDTO.getIdEndereco());
+
+        pedido.setEndereco(endereco);
+
         pedidoService.cadastrarPedido(pedido);
 
         pedido.getId();
@@ -97,10 +101,24 @@ public class PedidoController {
         return ResponseEntity.status(HttpStatus.CREATED).body("Pedido cadastrado com sucesso.");
     }
 
+//    @GetMapping("/historico/{clienteId}")
+//    public List<HistoricoPedidosDTO> historicoPedidos (@PathVariable Integer clienteId){
+//        List<HistoricoPedidosDTO> historico;
+//        return historico = pedidoService.getPedidosCliente(clienteId).stream().map(HistoricoPedidosDTO::new).toList();
+//    }
+
     @GetMapping("/historico/{clienteId}")
-    public List<HistoricoPedidosDTO> historicoPedidos (@PathVariable Integer clienteId){
+    public ResponseEntity<List<HistoricoPedidosDTO>> historicoPedidos(@PathVariable Integer clienteId){
         List<HistoricoPedidosDTO> historico;
-        return historico = pedidoService.getPedidosCliente(clienteId).stream().map(HistoricoPedidosDTO::new).toList();
+            historico = pedidoService.getPedidosCliente(clienteId).stream().map(HistoricoPedidosDTO::new).toList();
+        return ResponseEntity.ok(historico);
+    }
+
+    @GetMapping("/historico")
+    public ResponseEntity<List<HistoricoPedidosDTO>> historicoTodosPedidos(){
+        List<HistoricoPedidosDTO> historico;
+        historico = pedidoService.getTodosPedidosCliente().stream().map(HistoricoPedidosDTO::new).toList();
+        return ResponseEntity.ok(historico);
     }
 
     @Transactional
