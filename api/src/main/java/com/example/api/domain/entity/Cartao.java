@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.sql.Date;
+import java.time.YearMonth;
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -28,13 +30,13 @@ public class Cartao {
     private String nomeCompleto;
 
     @Column(name = "data_vencimento", nullable = false)
-    private Date dataVencimento;
+    private String dataVencimento;
 
     @ManyToOne
     @JoinColumn(name = "usuario_id")
     private User user;
 
-    public Cartao(Long numeroCartao, Integer codigoVerificador, String nomeCompleto, Date dataVencimento){
+    public Cartao(Long numeroCartao, Integer codigoVerificador, String nomeCompleto, String dataVencimento){
        this.numeroCartao = numeroCartao;
        this.codigoVerificador = codigoVerificador;
        this.nomeCompleto = nomeCompleto;

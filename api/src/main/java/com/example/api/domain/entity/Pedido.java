@@ -36,6 +36,14 @@ public class Pedido {
     private LocalDate dataPedido;
 
     @ManyToOne
+    @JoinColumn(name = "endereco_id")
+    private Endereco endereco;
+//
+//    @ManyToOne
+//    @JoinColumn(name = "endereco_entrega", referencedColumnName = "id", insertable = false, updatable = false)
+//    private Endereco enderecoEntrega;
+
+    @ManyToOne
     @JoinColumn(name = "usuario_id")
     private User usuario;
 

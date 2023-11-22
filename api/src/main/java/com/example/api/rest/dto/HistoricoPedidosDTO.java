@@ -1,12 +1,16 @@
 package com.example.api.rest.dto;
 
+import com.example.api.domain.entity.Endereco;
 import com.example.api.domain.entity.FormaPagamento;
 import com.example.api.domain.entity.Pedido;
 import com.example.api.domain.entity.User;
 import com.example.api.domain.enums.StatusPedido;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+
 
 public record HistoricoPedidosDTO(
 
@@ -18,8 +22,11 @@ public record HistoricoPedidosDTO(
 
         LocalDate dataPedido,
 
-        Integer numeroPedido
+        Integer numeroPedido,
 
+        Long idFormaPagamento,
+
+        Long idEndereco
 ) {
 
         public HistoricoPedidosDTO (Pedido pedido){
@@ -28,7 +35,9 @@ public record HistoricoPedidosDTO(
                         pedido.getValorTotal(),
                         pedido.getStatusPedido(),
                         pedido.getDataPedido(),
-                        pedido.getNumeroPedido()
+                        pedido.getNumeroPedido(),
+                        pedido.getFormaPagamento().getId(),
+                        pedido.getEndereco().getId()
                         );
         }
 }

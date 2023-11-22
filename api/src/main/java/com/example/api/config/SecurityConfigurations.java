@@ -48,6 +48,7 @@ public class SecurityConfigurations {
 
                         .requestMatchers(HttpMethod.POST,"/api/pedidos/cadastrar").permitAll()
                         .requestMatchers(HttpMethod.POST,"/api/pedidos/atrelarPagamento/*").permitAll()
+                        .requestMatchers(HttpMethod.GET,"/api/pedidos/historico").permitAll()
                         .requestMatchers(HttpMethod.GET,"/api/pedidos/historico/*").permitAll()
                         .requestMatchers(HttpMethod.PATCH,"/api/pedidos/atualizarStatus/*").permitAll()
 
