@@ -3,10 +3,7 @@ import { GET_CEP, GET_VALOR_FRETE, POST_PEDIDO, GET_ENDERENCO } from '../../../A
 import { useCart } from '../../componetesGenericos/ItemCarrinho/CartContext';
 import { UserContext } from '../../../UserContext';
 import { useNavigate, Link } from 'react-router-dom';
-
-
 import './Carrinho.css';
-import { useContext } from 'react';
 
 const Carrinho = () => {
   const [enderecoEntrega, setEnderecoEntrega] = useState([]);
@@ -16,10 +13,9 @@ const Carrinho = () => {
   const [frete, setFrete] = useState(0);
   const [tipoEntrega, setTipoEntrega] = useState('')
   const { cartState, clearCart, dispatch } = useCart();
-  const { teste, setTeste } = useState('');
-  const [id, setId] = useState();
   const [subTotal, setSubTotal] = useState(parseFloat(cartState.totalValor));
   const [total, setTotal] = useState(parseFloat(cartState.totalValor));
+  const navigate = useNavigate('')
   const url_img = "http://localhost:8080/api/imagens/acessar/";
   
   
@@ -34,14 +30,17 @@ const Carrinho = () => {
 
     const Bodyjson = {
       idCliente: user.data.id,
-      itens: itensDoCarrinho
+      itens: itensDoCarrinho,
+      status: 'AGUARDANDO_PAGAMENTO'
     }
 
+    
     const {url, options} = POST_PEDIDO(Bodyjson);
 
     const response = await fetch(url, options)
-    console.log(response)
-
+    const responseBody = await response.text();
+    const idPedidoFinal = (responseBody.match(/Pedido ID: (\d+)/))[1]
+    navigate(`/pagamento/${idPedidoFinal}`);
   }
 
   useEffect(() => {
@@ -95,7 +94,6 @@ const Carrinho = () => {
 
 
   async function calcularFrete() {
-    console.log(cartState)
     const { url, options } = GET_VALOR_FRETE(cep);
   
     const response = await fetch(url, options);
@@ -233,10 +231,7 @@ const Carrinho = () => {
                     {user.data.grupo === 'CLIENTE' ? (
                           <div>
                             <div>
-                                <Link to='/pagamento'>
-                                  <button onClick={geradoPedido} className='botaoAzul'>Pagamento</button>
-                                </Link>
-
+                              <button onClick={geradoPedido} className='botaoAzul'>Pagamento</button>
                                 <Link to='/home'>
                                   <button className='continuar-compra'>Continua comprado</button>
                                 </Link>
@@ -326,16 +321,6 @@ const Carrinho = () => {
                 </div>
         </div>
 
-        {teste ? (
-            <div>
-            
-            </div>
-          ) : (
-            <div>
-            
-            </div>
-        )}
- 
       </div>
     </div>
   );

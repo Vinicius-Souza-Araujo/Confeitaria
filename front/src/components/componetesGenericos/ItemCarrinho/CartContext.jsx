@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useReducer } from 'react';
+import React, { createContext, useContext, useEffect, useReducer } from 'react';
 
 const CartContext = createContext();
 
@@ -73,22 +73,33 @@ case 'ADD_TO_CART':
 };
 
 
+const CartProvider = ({ children }) => {
+  const [cartState, dispatch] = useReducer(cartReducer, { cartItems: [], totalValor: 0 });
 
+  useEffect(() => {
+    const savedCart = JSON.parse(localStorage.getItem('cart'));
+    if (savedCart) {
+      dispatch({ type: 'SET_CART', payload: savedCart });
+    }
+  }, []);
 
-export const CartProvider = ({ children }) => {
-  const [cartState, dispatch] = useReducer(cartReducer, initialState);
-
-  const clearCart = () => {
-    dispatch({ type: 'CLEAR_CART' });
-  };
+  useEffect(() => {
+    localStorage.setItem('cart', JSON.stringify(cartState));
+  }, [cartState]);
 
   return (
-    <CartContext.Provider value={{ cartState, dispatch, clearCart }}>
+    <CartContext.Provider value={{ cartState, dispatch }}>
       {children}
     </CartContext.Provider>
   );
 };
 
-export const useCart = () => {
-  return useContext(CartContext);
+const useCart = () => {
+  const context = useContext(CartContext);
+  if (!context) {
+    throw new Error('useCart must be used within a CartProvider');
+  }
+  return context;
 };
+
+export { CartProvider, useCart };

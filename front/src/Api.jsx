@@ -187,6 +187,19 @@ export function PATCH_CLIENTE(body, id){
     }
 }
 
+export function PATCH_STATUS_PEDIDO(body, idPedido){
+    return{
+        url: API_URL+'/pedidos/atualizarStatus/'+idPedido,
+        options:{
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body:JSON.stringify(body),
+        }
+    }
+}
+
 export function PATCH_STATUS(body, token, id){
     return{
         url:API_URL+'/users/atualizar/status/'+id,
@@ -202,9 +215,9 @@ export function PATCH_STATUS(body, token, id){
 }
 
 
-export function PATCH_STATUS_ENDERENCO(body, id){
+export function PATCH_STATUS_ENDERENCO(body, idPedido){
     return{
-        url:API_URL+'/endereco/atualizar/'+id,
+        url:API_URL+'/endereco/atualizar/'+idPedido,
         options:{ 
             method:'PATCH',
             headers: {
@@ -221,6 +234,19 @@ export function PATCH_ESTOQUE(body, id){
         url:API_URL+'/produtos/atualizarEstoque/'+id,
         options:{ 
             method:'PATCH',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body:JSON.stringify(body),
+        }, 
+    };
+}
+
+export function POST_PAGAMENTO(body, idPedido){
+    return{
+        url:API_URL+'/pedidos/atrelarPagamento/'+idPedido,
+        options:{ 
+            method:'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -317,6 +343,16 @@ export function GET_PEDIDOS(id){
     return{
         
         url: API_URL+'/pedidos/historico/'+id,
+        options:{
+            method:'GET'
+        }
+    }
+}
+
+export function GET_PEDIDOS_SEM_FILTRO(){
+    return{
+        
+        url: API_URL+'/pedidos/historico/',
         options:{
             method:'GET'
         }

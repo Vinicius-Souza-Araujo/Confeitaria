@@ -11,9 +11,6 @@ export const Endereco = () => {
   const [status, setStatus] = useState()
   const [novoEndereco, setNovoEndereco] = useState({ logradouro: '', numero: '', bairro: '', cep: '', localidade: '', uf: '', complemento: ''});
 
-  useEffect(() => {
-    get_enderenco();
-  }, []);
 
   async function get_enderenco() {
     const { url, options } = GET_ENDERENCO(user.data.id);

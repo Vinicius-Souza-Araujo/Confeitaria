@@ -76,8 +76,7 @@ public class PedidoController {
 
         pedidoService.cadastrarPedido(pedido);
 
-        pedido.getId();
-
+        Long pedidoId = pedido.getId();
 
         List<ItensPedido> itensPedidoList = new ArrayList<>();
 
@@ -98,7 +97,7 @@ public class PedidoController {
         itensPedidoRepository.saveAll(itensPedidoList);
 
 
-        return ResponseEntity.status(HttpStatus.CREATED).body("Pedido cadastrado com sucesso.");
+        return ResponseEntity.status(HttpStatus.CREATED).body("Pedido cadastrado com sucesso. Pedido ID: " + pedidoId);
     }
 
 //    @GetMapping("/historico/{clienteId}")
