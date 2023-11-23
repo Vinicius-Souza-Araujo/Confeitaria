@@ -109,3 +109,59 @@
 .remover-todos-itens{
     margin-left: 80px;   
 }
+
+.estrutura-resumo{
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+}
+
+.item-resumo{
+    display: flex;
+    gap: 30px;
+}
+
+  
+  .item-resumo .sub-titulo-resumo {
+    flex-grow: 1;
+    text-align: left;
+    margin-right: 10px; 
+  }
+  
+  .titulo-resumo{
+    text-align: center;
+    margin: 20px;
+    color: #E283A1;
+  }
+
+  .botaoRosa-resumo{
+    background-color: #FEB4CB;
+    color: #a8556f;
+    margin: 40px;
+  }
+
+  .dados-textuais-item-resumo{
+    display: flex;
+    gap: 20px;
+    align-items: stretch;
+  }
+
+  .icon-confirme{
+    width: 40px;
+  }
+
+ .estrutura-confir{
+    display: flex;
+    flex-direction: row;
+ }
+
+ .body-confirmado{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+    gap: 10px;
+ }
+
+

@@ -7,6 +7,7 @@ import './Carrinho.css';
 
 const Carrinho = () => {
   const [enderecoEntrega, setEnderecoEntrega] = useState([]);
+  const [idEnderenco, setIdEnderenco] = useState('')
   const [enderecoEntregaLogin, setEnderecoEntregaLogin] = useState([]);
   const user = React.useContext(UserContext);
   const [cep, setCep] = useState('');
@@ -31,9 +32,11 @@ const Carrinho = () => {
     const Bodyjson = {
       idCliente: user.data.id,
       itens: itensDoCarrinho,
-      status: 'AGUARDANDO_PAGAMENTO'
+      status: 'AGUARDANDO_PAGAMENTO',
+      idEndereco: enderecoEntrega.id
     }
 
+    console.log(Bodyjson)
     
     const {url, options} = POST_PEDIDO(Bodyjson);
 
@@ -92,7 +95,6 @@ const Carrinho = () => {
   };
   
 
-
   async function calcularFrete() {
     const { url, options } = GET_VALOR_FRETE(cep);
   
@@ -101,7 +103,7 @@ const Carrinho = () => {
   
     if (response.ok) {
       let novoFrete = 0;
-  
+      
       if (tipoEntrega === 'entrega-rapida') {
         novoFrete = parseFloat(data.valorFrete) * 1.5;
       } else if (tipoEntrega === 'entrega-correios') {
@@ -109,15 +111,13 @@ const Carrinho = () => {
       } else {
         novoFrete = parseFloat(data.valorFrete);
       }
-  
       setFrete(novoFrete);
-  
-      const totalComFrete = parseFloat(subTotal) + novoFrete;
-      setTotal(totalComFrete);
+      dispatch({ type: 'CALCULAR_FRETE', payload: novoFrete });
     } else {
       console.error(response);
     }
   }
+  
   
   async function getCEP(cep) {
     const { url, options } = GET_CEP(cep);
@@ -246,7 +246,9 @@ const Carrinho = () => {
                               }}                              
                               >
                                 <option value="">Selecione uma opção</option>
-                                {enderecoEntregaLogin.map((item, index) => (
+                                {enderecoEntregaLogin.map((item, index) => 
+                                
+                                (
                                   <option key={index + 1} value={index + 1}>
                                     Entrega {index + 1}
                                   </option>
