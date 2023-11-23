@@ -52,6 +52,8 @@ public class SecurityConfigurations {
                         .requestMatchers(HttpMethod.GET,"/api/pedidos/historico/*").permitAll()
                         .requestMatchers(HttpMethod.PATCH,"/api/pedidos/atualizarStatus/*").permitAll()
 
+                        .requestMatchers(HttpMethod.GET,"/api/formaPagamento/buscar/*").permitAll()
+
                         .requestMatchers(HttpMethod.GET,"/api/endereco/enderecosCliente/**").permitAll()
                         .requestMatchers(HttpMethod.GET,"/api/endereco").permitAll()
                         .requestMatchers(HttpMethod.GET,"/api/endereco/**").permitAll()
