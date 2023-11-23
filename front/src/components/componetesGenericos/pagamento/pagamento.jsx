@@ -20,10 +20,14 @@ export const Pagamento = (props) => {
   const { cartState, clearCart, dispatch } = useCart();
   const [total, setTotal] = useState(cartState.totalValor);
   const [dataAtual, setDataAtual] = useState(new Date());
+  const navigate = useNavigate('')
   const { idPedido } = useParams();
 
 
   async function enviadoPagamento(){
+    dispatch({ type: 'SET_METODO_PAGAMENTO', payload: metodo });
+
+
     if (metodo === 'boleto'){
 
       const dataFutura = new Date(dataAtual);
@@ -45,13 +49,16 @@ export const Pagamento = (props) => {
     
       const {url, options} = POST_PAGAMENTO(bodyBoleto, idPedido);
       const response = await fetch(url, options)
-      console.log(response)
+
+      if(response.ok){
+        navigate('/resumoPedido')
+      }
 
     } else if (metodo === 'cartao'){
       
       const bodyCartao ={
         cartao:{
-          numeroBoleto: numero,
+          numeroCartao: parseInt(numero),
           codigoVerificador: codigoVerificador,
           nomeCompleto: titular,
           dataVencimento: vencimento
@@ -61,7 +68,10 @@ export const Pagamento = (props) => {
 
       const {url, options} = POST_PAGAMENTO(bodyCartao, idPedido);
       const response = await fetch(url, options)
-      console.log(response)
+      
+      if(response.ok){
+        navigate('/resumoPedido')
+      }
 
     } else{
         console.log('Forma de pagamento incorreto')
