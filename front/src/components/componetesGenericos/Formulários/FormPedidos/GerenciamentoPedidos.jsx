@@ -2,7 +2,8 @@ import React from 'react';
 import './GerenciamentoPedidos.css';
 import { useState, useEffect, useContext } from 'react';
 import { UserContext } from '../../../../UserContext';
-import { GET_PEDIDOS } from '../../../../Api';
+import { GET_PEDIDOS, GET_FORMA_PAGAMENTO } from '../../../../Api';
+
 
 const GerenciamentoPedidos = () => {
 
@@ -10,20 +11,34 @@ const GerenciamentoPedidos = () => {
     const [filtro, setFiltro] = useState('');
     const user = useContext(UserContext);
     const [detalhesPedido, setDetalhesPedido] = useState(null);
+    const [formaPagamento, setFormaPagamento] = useState([]);
     const { data } = React.useContext(UserContext);
 
     useEffect(() => {
         getPedidos();
-        console.log(pedidos)
     }, []);
 
     async function getPedidos() {
         const { url, options } = GET_PEDIDOS(user.data.id);
         const response = await fetch(url, options);
+        console.log(response)
         const pedidos = await response.json();
-        console.log(pedidos);
         setPedidos(pedidos);
     }
+
+    const renderizarFormaPagamento = (formaPagamento) => {
+        if (!formaPagamento) {
+          return "Nenhuma informação de pagamento disponível";
+        }
+      
+        if (formaPagamento.cartao) {
+          return `Cartão`;
+        } else if (formaPagamento.boleto) {
+          return `Boleto`;
+        }
+      
+        return "Método de pagamento desconhecido";
+      };
 
     const handleBuscar = () => {
         const pedidosFiltrados = pedidos.filter((pedido) =>
@@ -39,6 +54,13 @@ const GerenciamentoPedidos = () => {
         } else {
             setDetalhesPedido(pedido); // Abre os detalhes.
         }
+    }
+
+    async function pagamento (id){
+        const { url, options } = GET_FORMA_PAGAMENTO(id);
+        const response = await fetch(url, options);
+        const pagamento = await response.json();
+        return pagamento
     }
 
     return (
@@ -58,15 +80,22 @@ const GerenciamentoPedidos = () => {
                     <div className="pedido-info">
                         <p>Número do pedido: {pedido.numeroPedido}</p>
                         <p>Data: {pedido.dataPedido}</p>
-                        <p>Valor total: {pedido.valorTotal}</p>
+                        Total: {(pedido.valorTotal || 0).toLocaleString('pt-BR', {
+                        style: 'currency',
+                        currency: 'BRL',
+                })}
 
                         <button onClick={() => toggleDetalhes(pedido)}>Detalhes</button>
                         <div>
                             {detalhesPedido === pedido && (
                                 <div className="pedido-detalhes">
                                     <p>Status: {pedido.statusPedido}</p>
-                                    <p>Endereço de entrega:</p>
-                                    <p>Forma de pagamento:</p>
+                                    <p>Endereço de entrega:
+                                    </p>
+                                    <p>Tipo: {pedido.endereco.tipo}</p>
+                                    <p>{pedido.endereco.logradouro}, {pedido.endereco.bairro} - {pedido.endereco.cep}</p>
+                                    <p>{pedido.endereco.localidade}</p>
+                                    <p>Forma de pagamento: {renderizarFormaPagamento(pedido.formaPagamento)}</p>
                                 </div>
                             )}
                         </div>

@@ -108,8 +108,26 @@ public class PedidoController {
 
     @GetMapping("/historico/{clienteId}")
     public ResponseEntity<List<HistoricoPedidosDTO>> historicoPedidos(@PathVariable Integer clienteId){
-        List<HistoricoPedidosDTO> historico;
-            historico = pedidoService.getPedidosCliente(clienteId).stream().map(HistoricoPedidosDTO::new).toList();
+        List<HistoricoPedidosDTO> historico = new ArrayList<>();
+        List<Pedido> listaPedidos = pedidoService.getPedidosCliente(clienteId);
+
+        for (int i = 0; i < listaPedidos.size(); i++) {
+            Pedido pedido = listaPedidos.get(i);
+
+            Endereco endereco = enderecoRepository.findById(pedido.getEndereco().getId()).orElse(null);
+            Endereco endereco1 = new Endereco();
+            endereco1.setCep(endereco.getCep());
+            endereco1.setLogradouro(endereco.getLogradouro());
+            endereco1.setBairro(endereco.getBairro());
+            endereco1.setLocalidade(endereco.getLocalidade());
+            endereco1.setTipo(endereco.getTipo());
+            HistoricoPedidosDTO historicoPedido = new HistoricoPedidosDTO(pedido.getId(),pedido.getValorTotal(),pedido.getStatusPedido(),pedido.getDataPedido(),pedido.getNumeroPedido(), pedido.getFormaPagamento());
+            historicoPedido.setEndereco(endereco1);
+
+
+
+            historico.add(historicoPedido);
+        }
         return ResponseEntity.ok(historico);
     }
 
