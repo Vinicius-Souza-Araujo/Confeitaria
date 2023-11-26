@@ -17,8 +17,9 @@ export const BackofficeEstoquista = () => {
       
       if (botao === 'produtos'){
         navigate('/ProdutoEstoque');
-      } 
-      
+      } else if (botao === 'pedidos'){
+        navigate('/pedidosEstoquista')
+      }
     }
 
     React.useEffect(() => {  
@@ -50,7 +51,11 @@ export const BackofficeEstoquista = () => {
               <img className='icon-back' src="src\assets\novo-produto.svg"/>
               Produtos 
            </button>
-    
+          
+           <button className='botao-back' onClick={() => handleClick('pedidos')}> 
+              <img className='icon-back' src="src\assets\icon-pedidos.svg"/>
+              Pedidos 
+           </button>
         </div>
     </div>
         

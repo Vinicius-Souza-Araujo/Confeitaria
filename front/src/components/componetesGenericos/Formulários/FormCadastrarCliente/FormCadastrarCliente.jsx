@@ -60,7 +60,8 @@ function FormCadastrarCliente() {
         complemento: complemento,
         bairro: bairro,
         localidade: cidade,
-        uf: uf
+        uf: uf,
+        tipo: 'FATURAMENTO'
       }
     });
 

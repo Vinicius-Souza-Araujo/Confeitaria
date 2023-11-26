@@ -28,13 +28,7 @@ public class FormaPagamento {
     @Column(name = "parcelas")
     private Integer parcelas;
 
-//    public FormaPagamento(FormaDePagamentoDTO forma){
-//        this(forma.getId(),
-//                forma.getCartao(),
-//                forma.getBoleto(),
-//                forma.getParcelas()
-//        );
-//    }
+
 
 
 

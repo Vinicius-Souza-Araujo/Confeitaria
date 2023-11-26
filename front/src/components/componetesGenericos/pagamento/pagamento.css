@@ -1,0 +1,67 @@
+.box-pag{
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    height: 100vh;
+    font-weight: 500 !important;
+   
+}
+
+.form-cartao h5{
+    margin-top: 2rem;
+    
+}
+.form-boleto h4{
+    margin-top: 2rem;
+}
+.inner-pag{
+    margin-top: 8rem;
+    place-self: center;
+    max-width: 40%;
+    max-height: 80%;
+    padding: 2.5rem 2rem;
+    border-radius: 0.8rem;
+    background-color: #f7f7f7;
+    overflow-y: scroll;
+    
+
+
+}
+.inner-pag h2 img{
+    height: 100%;
+}
+
+.box-button{
+    display: flex;
+    width: 100%;
+    height: 30%;
+    justify-content: end;
+}
+#botao-pag{
+    align-self: end;
+    background-color: #FEB4CB;
+    transition: 0.3s;
+    padding: 1.3rem 2rem;
+    text-transform: uppercase;
+}
+
+#botao-pag:hover{
+    transform: scale(1.1);
+    background-color:#e8a2b8; 
+}
+
+
+
+.inner-pag::-webkit-scrollbar {
+    width: 12px;              
+  }
+  
+  .inner-pag::-webkit-scrollbar-track {
+    background: rgb(227, 227, 227);        
+  }
+  
+  .inner-pag::-webkit-scrollbar-thumb {
+    background-color: #FEB4CB;    
+    border-radius: 20px;       
+  }
+
