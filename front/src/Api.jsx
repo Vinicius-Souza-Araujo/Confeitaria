@@ -352,7 +352,17 @@ export function GET_PEDIDOS(id){
 export function GET_PEDIDOS_SEM_FILTRO(){
     return{
         
-        url: API_URL+'/pedidos/historico/',
+        url:'http://localhost:8080/api/pedidos/historico',
+        options:{
+            method:'GET'
+        }
+    }
+}
+
+export function GET_FORMA_PAGAMENTO(id){
+    return{
+        
+        url: API_URL+'/formaPagamento/buscar/'+id,
         options:{
             method:'GET'
         }
