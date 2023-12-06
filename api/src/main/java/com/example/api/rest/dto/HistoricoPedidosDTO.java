@@ -1,15 +1,13 @@
 package com.example.api.rest.dto;
 
-import com.example.api.domain.entity.Endereco;
-import com.example.api.domain.entity.FormaPagamento;
-import com.example.api.domain.entity.Pedido;
-import com.example.api.domain.entity.User;
+import com.example.api.domain.entity.*;
 import com.example.api.domain.enums.StatusPedido;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
 
 @Getter
 @Setter
@@ -27,7 +25,15 @@ public class HistoricoPedidosDTO{
 
         private Endereco endereco;
 
-        private FormaPagamento formaPagamento;
+        private Long formaPagamentoid;
+
+        private Cartao cartao;
+
+        private Integer parcelas;
+
+        private Boleto boleto;
+
+        private List<ItensDoPedidoDTO> itensPedidos;
 
         public HistoricoPedidosDTO(Long id, BigDecimal valorTotal, StatusPedido statusPedido, LocalDate dataPedido, Integer numeroPedido) {
                 this.id = id;
@@ -37,13 +43,14 @@ public class HistoricoPedidosDTO{
                 this.numeroPedido = numeroPedido;
         }
 
-        public HistoricoPedidosDTO(Long id, BigDecimal valorTotal, StatusPedido statusPedido, LocalDate dataPedido, Integer numeroPedido, FormaPagamento formaPagamento) {
+        public HistoricoPedidosDTO(Long id, BigDecimal valorTotal, StatusPedido statusPedido, LocalDate dataPedido, Integer numeroPedido, Long formaPagamentoId) {
                 this.id = id;
                 this.valorTotal = valorTotal;
                 this.statusPedido = statusPedido;
                 this.dataPedido = dataPedido;
                 this.numeroPedido = numeroPedido;
-                this.formaPagamento = formaPagamento;
+                this.formaPagamentoid = formaPagamentoId;
+
         }
 
         public HistoricoPedidosDTO (Pedido pedido){

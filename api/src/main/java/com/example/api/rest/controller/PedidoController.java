@@ -115,17 +115,36 @@ public class PedidoController {
             Pedido pedido = listaPedidos.get(i);
 
             Endereco endereco = enderecoRepository.findById(pedido.getEndereco().getId()).orElse(null);
+            List<ItensDoPedidoDTO> itensPedidos = itensPedidoRepository.findItensByPedidoId(pedido.getId()).stream().map(ItensDoPedidoDTO::new).toList();
+
             Endereco endereco1 = new Endereco();
             endereco1.setCep(endereco.getCep());
             endereco1.setLogradouro(endereco.getLogradouro());
             endereco1.setBairro(endereco.getBairro());
             endereco1.setLocalidade(endereco.getLocalidade());
             endereco1.setTipo(endereco.getTipo());
-            HistoricoPedidosDTO historicoPedido = new HistoricoPedidosDTO(pedido.getId(),pedido.getValorTotal(),pedido.getStatusPedido(),pedido.getDataPedido(),pedido.getNumeroPedido(), pedido.getFormaPagamento());
+
+            HistoricoPedidosDTO historicoPedido = new HistoricoPedidosDTO(pedido.getId(),pedido.getValorTotal(),pedido.getStatusPedido(),pedido.getDataPedido(),pedido.getNumeroPedido(),pedido.getFormaPagamento().getId());
+
+            FormaPagamentoDTO formaPagamentodto = new FormaPagamentoDTO(formaPagamentoRepository.findById(historicoPedido.getFormaPagamentoid()).orElse(null));
+            if(formaPagamentodto.getCartao()!= null){
+                Cartao cartao = new Cartao();
+                cartao.setId(formaPagamentodto.getCartao().getId());
+                cartao.setNumeroCartao(formaPagamentodto.getCartao().getNumeroCartao());
+                cartao.setDataVencimento(formaPagamentodto.getCartao().getDataVencimento());
+                cartao.setCodigoVerificador(formaPagamentodto.getCartao().getCodigoVerificador());
+                cartao.setNomeCompleto(formaPagamentodto.getCartao().getNomeCompleto());
+
+                historicoPedido.setCartao(cartao);
+                historicoPedido.setParcelas(formaPagamentodto.getParcelas());
+            }else if(formaPagamentodto.getBoleto() != null){
+                historicoPedido.setBoleto(formaPagamentodto.getBoleto());
+            }
             historicoPedido.setEndereco(endereco1);
+            historicoPedido.setItensPedidos(itensPedidos);
 
 
-
+//            historicoPedido.setItensPedidos(itensPedidos);
             historico.add(historicoPedido);
         }
         return ResponseEntity.ok(historico);
