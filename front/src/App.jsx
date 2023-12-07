@@ -20,6 +20,7 @@ import { CartProvider } from './components/componetesGenericos/ItemCarrinho/Cart
 import { PedidosEstoquista } from './components/paginas/Estoquista/PedidosEstoquista.Jsx';
 import { AlterarStatusPedido } from './components/paginas/Estoquista/AlterarStatusPedido';
 import { Confirmacao } from './components/paginas/Carrinho/Confirmacao';
+import { DetalhesPedidos } from './components/paginas/Estoquista/DetalhesPedidos';
 import './App.css';
 import { Pagamento } from './components/componetesGenericos/pagamento/pagamento';
 import GerenciamentoPedidos from './components/componetesGenericos/Formulários/FormPedidos/GerenciamentoPedidos';
@@ -52,6 +53,7 @@ function App() {
               <Route path='/alterarEnderenco' element={<ProtectedRouteCliente><Endereco></Endereco></ProtectedRouteCliente>}/>
               <Route path='/alterarStatusPedido' element={<ProtectedRouteEstoquista><AlterarStatusPedido></AlterarStatusPedido></ProtectedRouteEstoquista>}/>
               <Route path='/confirmacaoPedido' element={<ProtectedRouteCliente><Confirmacao/></ProtectedRouteCliente>}/>
+              <Route path='/detalhesPedidos' element={<ProtectedRouteEstoquista><DetalhesPedidos /></ProtectedRouteEstoquista>}/>
               <Route path='/carrinho' element={<Carrinho />}/>
               <Route path='/resumoPedido' element={<ResumoPedido/>}/>
             </Routes>

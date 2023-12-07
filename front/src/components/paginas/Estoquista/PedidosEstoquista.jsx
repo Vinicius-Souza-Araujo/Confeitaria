@@ -2,6 +2,7 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { GET_PEDIDOS_SEM_FILTRO, PATCH_STATUS_PEDIDO } from "../../../Api";
+import Header from '../../header/Header';
 import "./Estoquista.css";
 
 export const PedidosEstoquista = () => {
@@ -44,28 +45,19 @@ export const PedidosEstoquista = () => {
     const response = await fetch(url, options);
     setExibirStatus(false);
     console.log(response);
+    getPedidos();
+
   }
 
   const handleAlterar = (e) => {
     setNovoStatus(e.target.value);
   };
 
-  const renderizarFormaPagamento = (formaPagamento) => {
-    if (!formaPagamento) {
-      return "Nenhuma informação de pagamento disponível";
-    }
 
-    if (formaPagamento.cartao) {
-      return `Cartão`;
-    } else if (formaPagamento.boleto) {
-      return `Boleto`;
-    }
-
-    return "Método de pagamento desconhecido";
-  };
 
   return (
     <div>
+       <Header />
       <h1 className="titulo_rosa">Pedidos</h1>
       <div className="estrutura-tab-PA">
         <table>
@@ -75,15 +67,14 @@ export const PedidosEstoquista = () => {
               <th>N° PEDIDO</th>
               <th>FORMA DE PAGAMENTO</th>
               <th>STATUS</th>
+              <th>ESCOLHA O STATUS</th>
               <th>ALTERAR</th>
-              <th>ESCOLHA OPÇÃO</th>
               <th>DETALHES</th>
             </tr>
           </thead>
 
           <tbody>
-            {pedidos.map((pedido, index) => {
-              const novoPedido = pedido;
+            {pedidos.map((pedido) => {
               return (
                 <tr key={pedido.id}>
                   <td>{pedido.id}</td>
@@ -102,91 +93,49 @@ export const PedidosEstoquista = () => {
                         !pedido.formaPagamento.boleto)) &&
                       "N/A"}
                   </td>
-                  
-                  <td>{pedido.statusPedido}</td>
-                  <td>
-                    <button onClick={() => setExibirStatus((prev) => ({ ...prev, [pedido.id]: true }))}>Alterar pedido</button>
-                  </td>
-                  <td>
-                        <label htmlFor="novoStatus">
-                          Selecione novo status
-                        </label>
-                        <select
-                          name="novoStatus"
-                          id="novoStatus"
-                          onChange={(e) => handleAlterar(e)}
-                        >
-                          <option value="" disabled>
-                            {" "}
-                            Selecione uma opção{" "}
-                          </option>
-                          <option value="AGUARDANDO_PAGAMENTO">
-                            Aguardando Pagamento
-                          </option>
-                          <option value="REJEITADO">Rejeitado</option>
-                          <option value="SUCESSO">Sucesso</option>
-                          <option value="AGUARDANDO_RETIRADA">
-                            Aguardando retirada
-                          </option>
-                          <option value="EM_TRANSITO">Em trânsito</option>
-                          <option value="ENTREGUE">Entregue</option>
-                        </select>
 
-                        {/* <button
-                          className="botaoRosa"
-                          onClick={() => alterarStatus(pedido.id)}
-                        >
-                          Confirmar
-                        </button> */}
-                  </td>
-                 
-                    {/* <Link
-                      to={{
-                        pathname: "/alterarStatusPedido",
-                        state: { novoPedido },
-                      }}
-                    >
-                      <button className="botaoAzul">Alterar</button>
-                    </Link> */}
-                  
+                  <td>{pedido.statusPedido}</td>
+
                   <td>
-                    <button className="botaoRosa">Detalhes</button>
+                    <div className="novoStatusPedido">
+                      <label htmlFor="novoStatus">Selecione novo status</label>
+                      <select
+                        name="novoStatus"
+                        id="novoStatus"
+                        onChange={(e) => handleAlterar(e)}
+                      >
+                        <option value="" disabled>
+                          {" "}
+                          Selecione uma opção{" "}
+                        </option>
+                        <option value="AGUARDANDO_PAGAMENTO">
+                          Aguardando Pagamento
+                        </option>
+                        <option value="REJEITADO">Rejeitado</option>
+                        <option value="SUCESSO">Sucesso</option>
+                        <option value="AGUARDANDO_RETIRADA">
+                          Aguardando retirada
+                        </option>
+                        <option value="EM_TRANSITO">Em trânsito</option>
+                        <option value="ENTREGUE">Entregue</option>
+                      </select>
+                    </div>
+                  </td>
+                  <td>
+                    <button className="botaoAzul" onClick={() => alterarStatus(pedido.id)}>
+                      Alterar pedido
+                    </button>
+                  </td>
+                  <td>
+                    <Link to='/detalhesPedidos'>
+                        <button className="botaoRosa">Detalhes</button>
+                    </Link>
                   </td>
                 </tr>
               );
             })}
           </tbody>
         </table>
-
-        {/* {pedidos.map((pedido, index) => (
-          <div key={index} className='card-pedido-estoquista'>
-            <h5>N° {pedido.numeroPedido} </h5>
-            <p>Status: {pedido.statusPedido}</p>
-
-            <p>Forma de pagamento: </p>
-
-            <button onClick={() => setExibirStatus((prev) => ({ ...prev, [pedido.id]: true }))}>
-              Alterar pedido
-            </button>
-
-            {exibirStatus[pedido.id] && (
-              <div>
-                <label htmlFor="novoStatus">Selecione novo status</label>
-                <select name="novoStatus" id="novoStatus" onChange={(e) => handleAlterar(e)}>
-                  <option value="" disabled> Selecione uma opção </option>
-                  <option value="AGUARDANDO_PAGAMENTO">Aguardando Pagamento</option>
-                  <option value="REJEITADO">Rejeitado</option>
-                  <option value="SUCESSO">Sucesso</option>
-                  <option value="AGUARDANDO_RETIRADA">Aguardando retirada</option>
-                  <option value="EM_TRANSITO">Em trânsito</option>
-                  <option value="ENTREGUE">Entregue</option>
-                </select>
-
-                <button className='botaoRosa' onClick={() => alterarStatus(pedido.id)}>Confirmar</button>
-              </div>
-            )}
-          </div>
-        ))}  */}
       </div>
     </div>
   );

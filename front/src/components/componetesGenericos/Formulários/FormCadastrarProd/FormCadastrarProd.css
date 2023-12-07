@@ -1,0 +1,13 @@
+.form{
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+    justify-content: center;
+    align-items: center;
+    
+   
+   }
+   
+   .botaoSummit{
+      width:200px;
+   }

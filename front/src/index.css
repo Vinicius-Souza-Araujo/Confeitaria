@@ -97,7 +97,6 @@ h1, h2, h3{
 input{
   display: block;
   background: transparent;
-  width: 50%;
   font-family: 'Inter';
   align-items: center;
   border: solid 1px #FEB4CB;
@@ -164,5 +163,4 @@ select{
   border: 1px solid #FEB4CB;
   border-radius: 6px;
   padding: 6px;
-  width: auto;
 }
