@@ -1,55 +1,60 @@
-#gerenciamento-pedidos {
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+
+.gerenciamento-pedidos {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: 'Inter';
+}
+
+.gerenciamento-pedidos .titulo-principal {
+  font-size: 24px;
+  margin-bottom: 10px;
+  font-family: 'Inter';
+}
+
+.gerenciamento-pedidos .nome-cliente {
+  font-size: 16px;
+  margin-bottom: 20px;
+  font-family: 'Inter';
+}
+
+.gerenciamento-pedidos .box-input-buscar {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background-color: #FDECEB;
-  color: black;
-  height: 100vh;
+  margin-bottom: 20px;
 }
 
-#gerenciamento-pedidos .nome-cliente {
-  font-size: 1rem;
-  color: black;
-  margin: 10px;
+.gerenciamento-pedidos .input-buscar {
+  flex-grow: 1;
+  padding: 8px;
+  font-size: 14px;
 }
 
-#gerenciamento-pedidos button {
-  background-color: #5C6996;
-  color: #f2f2f2;
-  border: none;
-  cursor: pointer;
-  width: 100px;
-}
-
-#gerenciamento-pedidos .pedido-card {
-  border: 1px solid  #FEB4CB;
-  display: flex;
-  flex-direction: column;
-  justify-content: right;
-  background-color: #D1D5FA;
-  margin: 10px;
-  padding: 10px;
+.gerenciamento-pedidos .pedido-card {
+  border: 1px solid #ccc;
   border-radius: 10px;
-  min-width: 500px;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-#gerenciamento-pedidos .pedido-info {
-  display: flex;
-  flex-direction: column;
-}
-
-#gerenciamento-pedidos .pedido-detalhes {
-  background-color: white;
+  margin-bottom: 20px;
   padding: 10px;
-  border-radius: 5px;
-  margin: 5px;
-  color: #283358;
 }
 
-@media screen and (max-width: 700px) {
-  #gerenciamento-pedidos .pedido-card {
-    width: 100%;
-  }
+.gerenciamento-pedidos .pedido-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.gerenciamento-pedidos .pedido-detalhes{
+  margin-top: 10px;
+  padding: 10px;
+  background-color: #f8f9fa;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  gap: 10px;
+  overflow-y: auto;
+  max-height: 250px;
+}
+
+.gerenciamento-pedidos .pedido-cards-container {
+  overflow-y: auto;
+  height: 450px;
 }
