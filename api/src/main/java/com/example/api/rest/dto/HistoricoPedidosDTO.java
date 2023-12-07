@@ -35,6 +35,8 @@ public class HistoricoPedidosDTO{
 
         private List<ItensDoPedidoDTO> itensPedidos;
 
+        private BigDecimal frete;
+
         public HistoricoPedidosDTO(Long id, BigDecimal valorTotal, StatusPedido statusPedido, LocalDate dataPedido, Integer numeroPedido) {
                 this.id = id;
                 this.valorTotal = valorTotal;

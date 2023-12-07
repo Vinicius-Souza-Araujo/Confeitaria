@@ -4,6 +4,7 @@ import com.example.api.domain.entity.Endereco;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Getter
@@ -19,4 +20,6 @@ public class PedidoComItensDTO {
     private List<ItensPedidoDTO> itens;
 
     private Long IdEndereco;
+
+    private BigDecimal frete;
 }

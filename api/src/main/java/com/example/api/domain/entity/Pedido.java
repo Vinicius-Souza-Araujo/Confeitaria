@@ -46,4 +46,7 @@ public class Pedido {
     @ManyToOne
     @JoinColumn(name = "forma_pagamento_id")
     private FormaPagamento formaPagamento;
+
+    @Column(name = "frete", precision = 10, scale = 2, columnDefinition = "DECIMAL(10, 2) default 0.00")
+    private BigDecimal frete;
 }
