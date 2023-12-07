@@ -14,3 +14,10 @@
     padding: 2rem;
     width: 350px;
 }
+
+.novoStatusPedido{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
