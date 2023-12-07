@@ -1,109 +1,128 @@
-import React from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import './GerenciamentoPedidos.css';
-import { useState, useEffect, useContext } from 'react';
 import { UserContext } from '../../../../UserContext';
-import { GET_PEDIDOS, GET_FORMA_PAGAMENTO } from '../../../../Api';
-
+import { GET_PEDIDOS } from '../../../../Api';
 
 const GerenciamentoPedidos = () => {
-
     const [pedidos, setPedidos] = useState([]);
     const [filtro, setFiltro] = useState('');
     const user = useContext(UserContext);
     const [detalhesPedido, setDetalhesPedido] = useState(null);
-    const [formaPagamento, setFormaPagamento] = useState([]);
     const { data } = React.useContext(UserContext);
 
     useEffect(() => {
         getPedidos();
     }, []);
 
+    function formatarData(data) {
+        console.log(data)
+        const dataObj = new Date(data);
+        const dia = data.slice(-2);
+        const mes = String(dataObj.getMonth() + 1).padStart(2, '0');
+        const ano = dataObj.getFullYear();
+  
+        return `${dia}/${mes}/${ano}`;
+      }
+      
+      
+
     async function getPedidos() {
         const { url, options } = GET_PEDIDOS(user.data.id);
         const response = await fetch(url, options);
-        console.log(response)
         const pedidos = await response.json();
         setPedidos(pedidos);
     }
 
-    const renderizarFormaPagamento = (formaPagamento) => {
-        if (!formaPagamento) {
-          return "Nenhuma informação de pagamento disponível";
-        }
-      
-        if (formaPagamento.cartao) {
-          return `Cartão`;
-        } else if (formaPagamento.boleto) {
-          return `Boleto`;
-        }
-      
-        return "Método de pagamento desconhecido";
-      };
-
     const handleBuscar = () => {
         const pedidosFiltrados = pedidos.filter((pedido) =>
-            pedido.numero_pedido.toString().includes(filtro) ||
-            pedido.data_pedido.includes(filtro)
+            pedido.numeroPedido.toString().includes(filtro) ||
+            pedido.dataPedido.includes(filtro)
         );
         setPedidos(pedidosFiltrados);
-    }
+    };
 
     const toggleDetalhes = (pedido) => {
+        console.log( pedido)
         if (detalhesPedido === pedido) {
-            setDetalhesPedido(null); // Fecha os detalhes se já estiverem abertos.
+            setDetalhesPedido(null);
         } else {
-            setDetalhesPedido(pedido); // Abre os detalhes.
+            setDetalhesPedido(pedido);
         }
-    }
-
-    async function pagamento (id){
-        const { url, options } = GET_FORMA_PAGAMENTO(id);
-        const response = await fetch(url, options);
-        const pagamento = await response.json();
-        return pagamento
-    }
+    };
 
     return (
-
         <div id="gerenciamento-pedidos" className="gerenciamento-pedidos">
-
             <h1 className='titulo-principal'>Meus Pedidos</h1>
             <h2 className='nome-cliente'>Cliente: {data.email}</h2>
 
             <label className='box-input-buscar'>
                 <input onChange={(event) => setFiltro(event.target.value)} className='input-buscar' placeholder='Buscar...' />
-                <button className='botaoAzul' onClick={handleBuscar}>Buscar</button>
+                <button className='botaoSummit' onClick={handleBuscar}>Buscar</button>
             </label>
 
-            {pedidos.map((pedido, index) => (
-                <div className="pedido-card" key={index}>
-                    <div className="pedido-info">
-                        <p>Número do pedido: {pedido.numeroPedido}</p>
-                        <p>Data: {pedido.dataPedido}</p>
-                        Total: {(pedido.valorTotal || 0).toLocaleString('pt-BR', {
-                        style: 'currency',
-                        currency: 'BRL',
-                })}
+            <div className='pedido-cards-container'>
+                {pedidos.map((pedido, index) => (
+                    <div className="pedido-card" key={index}>
 
-                        <button onClick={() => toggleDetalhes(pedido)}>Detalhes</button>
-                        <div>
-                            {detalhesPedido === pedido && (
-                                <div className="pedido-detalhes">
-                                    <p>Status: {pedido.statusPedido}</p>
-                                    <p>Endereço de entrega:
-                                    </p>
-                                    <p>Tipo: {pedido.endereco.tipo}</p>
-                                    <p>{pedido.endereco.logradouro}, {pedido.endereco.bairro} - {pedido.endereco.cep}</p>
-                                    <p>{pedido.endereco.localidade}</p>
-                                    <p>Forma de pagamento: {renderizarFormaPagamento(pedido.formaPagamento)}</p>
-                                </div>
-                            )}
+                        <div className="pedido-info">
+                            <p>Número do pedido: {pedido.numeroPedido}</p>
+                            <p>Data: {formatarData(pedido.dataPedido)}</p>
+                            <p>Valor Total: {(pedido.valorTotal || 0).toLocaleString('pt-BR', {
+                                                style: 'currency',
+                                                currency: 'BRL',
+                                })}
+                            </p>
+                            <button className='botaoAzul' onClick={() => toggleDetalhes(pedido)}>Detalhes</button>
                         </div>
-                    </div>
-                </div>
-            ))}
-        </div>
 
+                        {detalhesPedido === pedido && (
+                            <div className="pedido-detalhes">
+                                <div>
+                                <p>Status do Pedido: {pedido.statusPedido}</p>
+                                <p>-------------------------------------------------</p>
+                                </div>
+                                <div>
+                                <p>Endereço de Entrega:</p>
+                                <p>CEP: {pedido.endereco.cep}</p>
+                                <p>Logradouro: {pedido.endereco.logradouro}</p>
+                                <p>-------------------------------------------------</p>
+                                </div>
+                                <div>
+                                <p>Forma de Pagamento:</p>
+                                {pedido.formaPagamento.cartao && (
+                                    <p>Cartão: {pedido.formaPagamento.cartao}</p>
+                                )}
+                                {pedido.formaPagamento.boleto && (
+                                    <div>
+                                    <p>Boleto</p>
+                                    <p>Código de Barras: {pedido.formaPagamento.boleto.numeroBoleto}</p>
+                                    </div>
+                                )}
+                                {pedido.formaPagamento.parcelas && (
+                                    <p>Parcelas: {pedido.formaPagamento.parcelas}</p>
+                                )}
+                               
+                                <p>-------------------------------------------------</p>
+                                </div>
+                                <div>
+                                <p>ID do Pedido: {pedido.id}</p>
+                                <p>Número do Pedido: {pedido.numeroPedido}</p>
+                                <p>Data do Pedido: {formatarData(pedido.dataPedido)}</p>
+                                <p>Valor Total: {(pedido.valorTotal || 0).toLocaleString('pt-BR', {
+                                                style: 'currency',
+                                                currency: 'BRL',
+                                })}
+                                </p>
+                                <p>-------------------------------------------------</p>
+                                </div>
+                            </div>
+                        )}
+
+
+                    </div>
+                ))}
+            </div>
+        </div>
     );
 };
 

@@ -75,7 +75,7 @@ function Form() {
 
   return (
     <div className='formulario-form'>
-        <form onSubmit={handleSummit}>
+        <form className='form' onSubmit={handleSummit}>
             <input value={nome} onChange={(event) => setNome(event.target.value)} type="text" name="nome" id="nome" placeholder='Digite seu nome' required/>
             <input value={email} onChange={(event) => setEmail(event.target.value)} type="email" name="email" id="email" placeholder='Digite seu email' required/>
             <IMaskInput value={cpfUsuario} onChange={handleCpfChange} mask="000.000.000-00" placeholder="Digite o seu CPF"/>

@@ -70,7 +70,7 @@ async function AlterarSenha(){
 
   return (
     <div>
-        <form onSubmit={handleSummit}>
+        <form className='form' onSubmit={handleSummit}>
                 <input value={nome} onChange={(event) => setNome(event.target.value)} type="text" name="nome" id="nome" placeholder='Digite seu nome' required/>
                 <IMaskInput value={cpfUsuario} onChange={handleCpfChange} mask="000.000.000-00" placeholder="Digite o seu CPF"/>
                 <select value={grupo} onChange={e => setGrupo(e.target.value)}   name="grupo" id="grupo">
