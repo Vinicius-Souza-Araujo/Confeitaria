@@ -24,38 +24,50 @@ const Home = () => {
 
     async function getProdutos() {
         const { url, options } = GET_PRODUTOS(filtro);
-        const response = await fetch(url, options);
-
-        if (response.ok) {
-            const responseData = await response.json();
-            const produtos = responseData.content;
-            setDataProdutos(produtos);
-        } else {
-            console.error('Erro ao obter dados dos produtos');
+        try {
+            const response = await fetch(url, options);
+    
+            if (response.ok) {
+                const responseData = await response.json();
+                const produtos = responseData.content;
+    
+                // Filtra os produtos com status "DESATIVADO"
+                const produtosAtivos = produtos.filter(produto => produto.status.toUpperCase() !== 'DESATIVADO');
+    
+                setDataProdutos(produtosAtivos);
+            } else {
+                console.error('Erro ao obter dados dos produtos:', response.status, response.statusText);
+            }
+        } catch (error) {
+            console.error('Erro na requisição dos produtos:', error);
         }
     }
-
 
     async function getProdutosSemFiltro() {
         const { url, options } = GET_PRODUTOS_SEM_FILTRO(inputBuscarValor);
-        const response = await fetch(url, options);
-
-        if (response.ok) {
-            const responseData = await response.json();
-            const produtos = responseData.content;
-            setDataProdutos(produtos);
-        } else {
-            console.error('Erro ao obter dados dos produtos');
+        try {
+            const response = await fetch(url, options);
+    
+            if (response.ok) {
+                const responseData = await response.json();
+                const produtos = responseData.content;
+    
+                // Filtra os produtos com status "DESATIVADO"
+                const produtosAtivos = produtos.filter(produto => produto.status.toUpperCase() !== 'DESATIVADO');
+    
+                setDataProdutos(produtosAtivos);
+            } else {
+                console.error('Erro ao obter dados dos produtos:', response.status, response.statusText);
+            }
+        } catch (error) {
+            console.error('Erro na requisição dos produtos:', error);
         }
     }
-
 
     const aumentarFiltro = () => {
 
         setFiltro(filtro + 1);
-
     };
-
 
     const diminuirFiltro = () => {
 
@@ -65,7 +77,7 @@ const Home = () => {
     return (
         <div >
             <HeaderHome />
-   
+
             <h1 className='titulo-principal'>Produtos</h1>
 
             <div className='box-input-buscar'>

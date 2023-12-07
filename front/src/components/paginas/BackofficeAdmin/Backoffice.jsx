@@ -60,10 +60,10 @@ export const Backoffice = () => {
               <img className='icon-back' src="src\assets\novo-produto.svg"/>
               Produtos 
            </button>
-           <button className='botao-back' onClick={() => handleClick('pedidos')}> 
+           {/* <button className='botao-back' onClick={() => handleClick('pedidos')}> 
               <img className='icon-back' src="src\assets\icon-pedidos.svg"/>
               Pedidos 
-           </button>
+           </button> */}
         </div>
     </div>
         

@@ -25,7 +25,6 @@ const Header = () => {
             <img src="src\assets\sair.svg" alt='Sair' />
         </button>
         {data.grupo === 'CLIENTE' && (<button onClick={() => { navigate('/pedidos') }}>Pedidos</button>)}
-            <h1 className='titulo-principal'>Produtos</h1>
       </nav>
     </header>
   )

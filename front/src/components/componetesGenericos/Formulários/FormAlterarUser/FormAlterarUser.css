@@ -1,5 +1,5 @@
 
-.form{
+   .form{
     display: flex;
     flex-direction: column;
     width: 400px;
@@ -12,3 +12,4 @@
    .botaoSummit{
       width:200px;
    }
+  
